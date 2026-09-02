@@ -477,6 +477,7 @@ const HeroPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) =>
       <Field label="Full Name" {...f("name")} />
       <Field label="Short Name (shown in hero heading)" {...f("shortName")} />
       <Field label="Bio / Tagline" {...f("bio")} multiline rows={3} />
+      <Field label="Résumé Headline — printed under your name in the PDF" {...f("resumeHeadline")} />
       <Field label="LinkedIn URL" {...f("linkedinUrl")} />
       <Field label="GitHub URL" {...f("githubUrl")} />
       <Field label="Email" {...f("email")} />

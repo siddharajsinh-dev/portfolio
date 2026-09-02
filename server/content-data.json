@@ -51,7 +51,8 @@
       "PostgreSQL"
     ],
     "heroImagePosition": "50% 18%",
-    "heroImageZoom": 1
+    "heroImageZoom": 1,
+    "resumeHeadline": "Lead Software Engineer · React & Next.js"
   },
   "about": {
     "paragraphs": [

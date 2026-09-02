@@ -336,6 +336,7 @@ export interface ResumeData {
     roles: string[];
     bio: string;
     email: string;
+    resumeHeadline?: string;
     heroImage: string;
     heroImagePosition?: string;
     heroImageZoom?: number;
@@ -385,6 +386,9 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
   const { site, hero, contact, skills, experience, education, projects } = data;
   // Content may carry {{years}} and friends, same as the site.
   const career = deriveCareer(data);
+  // The printed headline is its own field: the typewriter roles on the site
+  // are written to be punchy, which is not what belongs under a name here.
+  const headline = hero.resumeHeadline?.trim() || hero.roles?.[0] || "";
   const fullName = site?.fullName ?? hero?.name ?? "Resume";
   const linkedinShort = hero.linkedinUrl?.replace("https://www.linkedin.com/in/", "linkedin.com/in/") ?? hero.linkedinUrl ?? "";
   const githubShort   = hero.githubUrl?.replace("https://github.com/", "github.com/") ?? hero.githubUrl ?? "";
@@ -404,7 +408,7 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
           ) : null}
 
           <Text style={s.sbName}>{fullName}</Text>
-          <Text style={s.sbTitle}>{hero.roles[0]}</Text>
+          <Text style={s.sbTitle}>{resolveCareerTokens(headline, career)}</Text>
           <View style={s.sbRule} />
 
           {/* Contact */}
