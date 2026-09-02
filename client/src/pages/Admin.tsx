@@ -384,6 +384,62 @@ const SitePanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) =>
 };
 
 /* ── Sub-panel: Hero ─────────────────────────────────────────────── */
+/* ── Hero image framing (crop focus + zoom, live circular preview) ── */
+const HeroImageFraming = ({ url, position, zoom, onChange }: {
+  url: string; position: string; zoom: number;
+  onChange: (position: string, zoom: number) => void;
+}) => {
+  const [x, y] = (() => {
+    const parts = position.trim().split(/\s+/);
+    return [parseFloat(parts[0]) || 50, parseFloat(parts[1] ?? parts[0]) || 50];
+  })();
+  const set = (nx: number, ny: number, nz: number) => onChange(`${nx}% ${ny}%`, nz);
+
+  if (!url) return null;
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+      <p className="text-sm text-muted-foreground mb-3">
+        Framing — drag the sliders until your face sits nicely inside the circle
+      </p>
+      <div className="flex items-center gap-5 flex-wrap">
+        <div style={{
+          width: 120, height: 120, borderRadius: "50%", overflow: "hidden",
+          background: "#07071a", flexShrink: 0,
+          border: "2px solid rgba(124,58,237,0.6)",
+        }}>
+          <img src={url} alt="Hero framing preview"
+            style={{
+              width: "100%", height: "100%", objectFit: "cover",
+              objectPosition: `${x}% ${y}%`,
+              transform: `scale(${zoom})`, transformOrigin: `${x}% ${y}%`,
+            }} />
+        </div>
+        <div className="flex-1 min-w-[220px] space-y-3">
+          <div>
+            <label className="block text-xs text-muted-foreground mb-1">Horizontal — {x}%</label>
+            <input type="range" min={0} max={100} step={1} value={x} className="w-full"
+              onChange={(e) => set(Number(e.target.value), y, zoom)} />
+          </div>
+          <div>
+            <label className="block text-xs text-muted-foreground mb-1">Vertical — {y}% (lower this if your head is cut off)</label>
+            <input type="range" min={0} max={100} step={1} value={y} className="w-full"
+              onChange={(e) => set(x, Number(e.target.value), zoom)} />
+          </div>
+          <div>
+            <label className="block text-xs text-muted-foreground mb-1">Zoom — {zoom.toFixed(2)}x</label>
+            <input type="range" min={1} max={2} step={0.05} value={zoom} className="w-full"
+              onChange={(e) => set(x, y, Number(e.target.value))} />
+          </div>
+          <button type="button" onClick={() => set(50, 25, 1)}
+            className="text-xs text-muted-foreground hover:text-foreground underline transition">
+            Reset to default
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HeroPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) => {
   const [form, setForm] = useState({ ...data });
   const [rolesText, setRolesText]   = useState((data.roles   ?? []).join("\n"));
@@ -451,6 +507,11 @@ const HeroPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) =>
         <p className="text-xs font-mono text-muted-foreground">// images</p>
         <ImageUpload label="Profile / Hero Image (large photo in hero section)"
           currentUrl={form.heroImage ?? ""} onUploaded={(url) => setForm({ ...form, heroImage: url })} />
+        <HeroImageFraming
+          url={form.heroImage ?? ""}
+          position={form.heroImagePosition ?? "50% 25%"}
+          zoom={Number(form.heroImageZoom) || 1}
+          onChange={(position, zoom) => setForm({ ...form, heroImagePosition: position, heroImageZoom: zoom })} />
         <ImageUpload label="Logo Image (small icon in header navbar)"
           currentUrl={form.logoImage ?? ""} onUploaded={(url) => setForm({ ...form, logoImage: url })} />
       </div>

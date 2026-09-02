@@ -2,7 +2,24 @@
   "permissions": {
     "allow": [
       "Bash(npm install *)",
-      "PowerShell(Get-ChildItem -Path \"d:\\\\Data\\\\ResumePortfolio\" -Recurse -Directory | Select-Object -ExpandProperty FullName | ForEach-Object { $_ } | Select-Object -First 50)"
+      "PowerShell(Get-ChildItem -Path \"d:\\\\Data\\\\ResumePortfolio\" -Recurse -Directory | Select-Object -ExpandProperty FullName | ForEach-Object { $_ } | Select-Object -First 50)",
+      "PowerShell(Get-ChildItem -Path \"d:\\\\Data\\\\ResumePortfolio\" -MaxDepth 1 -Force | Where-Object { -not $_.Name.StartsWith\\('.'\\) } | Select-Object Name, @{Name='Type'; Expression={if \\($_.PSIsContainer\\) { 'Dir' } else { 'File' }}} | Sort-Object Name)",
+      "PowerShell(ls \"d:\\\\Data\\\\ResumePortfolio\" | Where-Object { -not $_.Name.StartsWith\\('.'\\) })",
+      "Bash(npm run *)",
+      "Bash(Get-ChildItem -Path \"d:\\\\Data\\\\ResumePortfolio\" -Recurse -Depth 2)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(head -50)",
+      "Bash(powershell -Command \"Get-Content package.json\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path client/src/components -Filter *[Rr]esume* -Recurse\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path d:\\\\Data\\\\ResumePortfolio\\\\client\\\\assets\\\\doc -Recurse\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path d:\\\\Data\\\\ResumePortfolio\\\\client\\\\src -Filter App* -Recurse\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path d:\\\\Data\\\\ResumePortfolio\\\\client\\\\src\\\\pages -Recurse | Select-Object Name\")",
+      "Bash(npm list *)",
+      "Bash(node -e \"const r = require\\('./node_modules/@react-pdf/renderer/package.json'\\); console.log\\('version:', r.version, 'main:', r.main ?? r.exports?.['.']?.import ?? 'esm'\\)\")",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.scripts\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('d:/Data/ResumePortfolio/server/content-data.json', 'utf-8'\\)\\); console.log\\('valid JSON'\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(git -C d:/Data/ResumePortfolio status server/content-data.json)"
     ]
   }
 }

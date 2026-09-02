@@ -266,7 +266,8 @@ const StatItem = ({ value, label }: { value: string; label: string }) => {
 /* ══════════════════════════════════════════════════════════════
    3-D TILT PHOTO
    ══════════════════════════════════════════════════════════════ */
-const TiltPhoto = ({ src, alt }: { src: string; alt: string }) => {
+const TiltPhoto = ({ src, alt, position = "50% 25%", zoom = 1 }:
+  { src: string; alt: string; position?: string; zoom?: number }) => {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const rx = useSpring(useTransform(my, [-0.5, 0.5], [14, -14]), { stiffness: 280, damping: 22 });
@@ -310,7 +311,8 @@ const TiltPhoto = ({ src, alt }: { src: string; alt: string }) => {
             style={{
               width:  "clamp(220px, 28vw, 380px)",
               height: "clamp(220px, 28vw, 380px)",
-              objectFit: "cover", objectPosition: "center",
+              objectFit: "cover", objectPosition: position,
+              transform: `scale(${zoom})`, transformOrigin: position,
             }}
           />
         </div>
@@ -572,7 +574,8 @@ const HeroSection = ({ content }: Props) => {
                 </div>
               </motion.div>
 
-              <TiltPhoto src={heroImage} alt={content?.site?.fullName ?? hero?.name ?? "Profile Photo"} />
+              <TiltPhoto src={heroImage} alt={content?.site?.fullName ?? hero?.name ?? "Profile Photo"}
+                position={hero?.heroImagePosition || "50% 25%"} zoom={Number(hero?.heroImageZoom) || 1} />
             </div>
           </motion.div>
         </div>

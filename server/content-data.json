@@ -35,7 +35,7 @@
     "linkedinUrl": "https://www.linkedin.com/in/siddharajsinh-chauhan-410741199",
     "githubUrl": "https://github.com/Sid7005",
     "email": "siddharajkc294000@gmail.com",
-    "heroImage": "/uploads/8234483546bc0f8f-1778830396154.png",
+    "heroImage": "/uploads/04ae6990ba713781-1788333932589.png",
     "logoImage": "/assets-static/images/sid-avatar.png",
     "techBadges": [
       "TypeScript",
@@ -49,7 +49,9 @@
       "TypeScript",
       "Node.js",
       "PostgreSQL"
-    ]
+    ],
+    "heroImagePosition": "50% 18%",
+    "heroImageZoom": 1
   },
   "about": {
     "paragraphs": [
@@ -274,9 +276,18 @@
     ],
     "alsoComfortableWith": "Bootstrap, jQuery, C#, Entity Framework, ASP.NET MVC, Razor Pages, REST / GraphQL, Stripe / Authorize.net, Google Maps API, Jest, Mocha",
     "languages": [
-      { "name": "English",  "level": "Professional Working" },
-      { "name": "Gujarati", "level": "Native" },
-      { "name": "Hindi",    "level": "Conversational" }
+      {
+        "name": "English",
+        "level": "Professional Working"
+      },
+      {
+        "name": "Gujarati",
+        "level": "Native"
+      },
+      {
+        "name": "Hindi",
+        "level": "Conversational"
+      }
     ]
   },
   "experienceMeta": {
