@@ -17,10 +17,10 @@
       "Node.js Engineer",
       "TypeScript Enthusiast"
     ],
-    "bio": "4+ years crafting scalable, high-performance web applications with React, TypeScript, and Node.js. I turn complex problems into clean, elegant solutions.",
+    "bio": "{{years}}+ years crafting scalable, high-performance web applications with React, TypeScript, and Node.js. I turn complex problems into clean, elegant solutions.",
     "stats": [
       {
-        "value": "4+",
+        "value": "{{years}}+",
         "label": "Years Exp"
       },
       {
@@ -28,7 +28,7 @@
         "label": "Projects"
       },
       {
-        "value": "2",
+        "value": "{{companies}}",
         "label": "Companies"
       }
     ],
@@ -55,16 +55,16 @@
   },
   "about": {
     "paragraphs": [
-      "I'm a Full-Stack Web Developer with 4+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
+      "I'm a Full-Stack Web Developer with {{years}}+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
       "React and TypeScript are my primary tools of choice. I've spent the last few years building complex SPAs, optimizing performance, integrating payment gateways like Stripe, and shipping features that real users rely on every day.",
       "Outside of coding, I enjoy hiking, playing cricket, reading tech blogs, and contributing to open-source. I thrive in collaborative Agile environments and I'm always excited to take on new challenges."
     ],
-    "subheading": "Full-Stack Developer based in Ahmedabad, India — building production-grade web apps since 2020.",
+    "subheading": "Full-Stack Developer based in Ahmedabad, India — building production-grade web apps since {{since}}.",
     "stats": [
       {
-        "value": "4+",
+        "value": "{{years}}+",
         "label": "Years of Experience",
-        "sub": "Since 2020"
+        "sub": "Since {{since}}"
       },
       {
         "value": "10+",
@@ -72,9 +72,9 @@
         "sub": "Live in production"
       },
       {
-        "value": "2",
+        "value": "{{companies}}",
         "label": "Companies",
-        "sub": "ZealousWeb & Aark"
+        "sub": "{{companyList}}"
       },
       {
         "value": "8.3",
@@ -99,7 +99,8 @@
         "title": "Performance",
         "desc": "Bundle splitting, lazy loading, and caching strategies for fast UX"
       }
-    ]
+    ],
+    "careerStart": "2021-11"
   },
   "contact": {
     "location": "Ahmedabad, India",

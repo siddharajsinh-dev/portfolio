@@ -10,6 +10,7 @@ import { useResumeDownload } from "@/hooks/useResumeDownload";
 import { Download, ArrowRight, Github, Linkedin, Mail, Sparkles, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "../../assets/images/ImportedPhoto.760428188.70688.jpeg";
+import { deriveCareer, resolveCareerTokens, resolveStat } from "@/lib/career";
 
 const DEFAULT_ROLES = [
   "React & Next.js Expert",
@@ -19,9 +20,9 @@ const DEFAULT_ROLES = [
 ];
 
 const DEFAULT_STATS = [
-  { value: "4+", label: "Years Exp"  },
-  { value: "10+", label: "Projects"  },
-  { value: "2",   label: "Companies" },
+  { value: "{{years}}+",    label: "Years Exp"  },
+  { value: "10+",           label: "Projects"  },
+  { value: "{{companies}}", label: "Companies" },
 ];
 
 const BADGE_POSITIONS = [
@@ -332,9 +333,11 @@ const HeroSection = ({ content }: Props) => {
   const hero = content?.hero;
 
   const name        = hero?.shortName ?? "Siddharajsinh";
-  const bio         = hero?.bio       ?? "4+ years crafting scalable, high-performance web applications with React, TypeScript, and Node.js. I turn complex problems into clean, elegant solutions.";
+  const career      = deriveCareer(content);
+  const bio         = resolveCareerTokens(hero?.bio ?? "{{years}}+ years crafting scalable, high-performance web applications with React, TypeScript, and Node.js. I turn complex problems into clean, elegant solutions.", career);
   const roles       = (hero?.roles    ?? DEFAULT_ROLES) as string[];
-  const stats       = (hero?.stats    ?? DEFAULT_STATS) as { value: string; label: string }[];
+  const stats       = ((hero?.stats   ?? DEFAULT_STATS) as { value: string; label: string }[])
+    .map((s) => resolveStat(s, career));
   const linkedinUrl = hero?.linkedinUrl ?? "#";
   const githubUrl   = hero?.githubUrl   ?? "#";
   const email       = hero?.email       ?? "";

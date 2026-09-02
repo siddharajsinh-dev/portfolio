@@ -3,6 +3,7 @@ import { SectionBg } from "./SectionBg";
 import { MapPin, Mail, Phone, Code2, Layers, Cloud, Cpu, Calendar, Briefcase, Globe, GraduationCap } from "lucide-react";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
+import { deriveCareer, resolveCareerTokens, resolveStat } from "@/lib/career";
 
 const DEFAULT_PARAGRAPHS = [
   "I'm a Full-Stack Web Developer with 4+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
@@ -21,10 +22,10 @@ const WHAT_I_DO_ICONS = [Code2, Layers, Cloud, Cpu];
 const WHAT_I_DO_COLORS = ["#22d3ee", "#7c3aed", "#a78bfa", "#ec4899"];
 
 const DEFAULT_STATS = [
-  { value: "4+",  label: "Years of Experience", sub: "Since 2020"        },
-  { value: "10+", label: "Projects Delivered",  sub: "Live in production" },
-  { value: "2",   label: "Companies",           sub: "ZealousWeb & Aark"  },
-  { value: "8.3", label: "CGPA",                sub: "B.E. Computer Engg." },
+  { value: "{{years}}+",     label: "Years of Experience", sub: "Since {{since}}"    },
+  { value: "10+",            label: "Projects Delivered",  sub: "Live in production" },
+  { value: "{{companies}}",  label: "Companies",           sub: "{{companyList}}"    },
+  { value: "8.3",            label: "CGPA",                sub: "B.E. Computer Engg." },
 ];
 
 const STAT_ICONS = [Calendar, Briefcase, Globe, GraduationCap];
@@ -100,9 +101,13 @@ const AboutSection = ({ content }: Props) => {
   const about       = content?.about;
   const contactData = content?.contact;
 
-  const paragraphs: string[] = about?.paragraphs ?? DEFAULT_PARAGRAPHS;
-  const subheading: string   = about?.subheading ?? "Full-Stack Developer — building production-grade web apps.";
-  const stats = (about?.stats ?? DEFAULT_STATS) as { value: string; label: string; sub: string }[];
+  const career = deriveCareer(content);
+  const resolve = (text: string) => resolveCareerTokens(text, career);
+
+  const paragraphs: string[] = (about?.paragraphs ?? DEFAULT_PARAGRAPHS).map(resolve);
+  const subheading: string   = resolve(about?.subheading ?? "Full-Stack Developer — building production-grade web apps.");
+  const stats = ((about?.stats ?? DEFAULT_STATS) as { value: string; label: string; sub: string }[])
+    .map((s) => resolveStat(s, career));
   const whatIDo = (about?.whatIDo ?? DEFAULT_WHAT_I_DO) as { title: string; desc: string }[];
 
   const location    = contactData?.location    ?? "";
