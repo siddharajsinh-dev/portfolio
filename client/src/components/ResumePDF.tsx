@@ -39,7 +39,7 @@ const s = StyleSheet.create({
     width: "32%",
     backgroundColor: SIDEBAR,
     paddingTop: 32,
-    paddingBottom: 32,
+    paddingBottom: 24,
     paddingHorizontal: 14,
     borderRightWidth: 1,
     borderRightColor: RULE,
@@ -200,7 +200,7 @@ const s = StyleSheet.create({
   main: {
     flex: 1,
     paddingTop: 32,
-    paddingBottom: 32,
+    paddingBottom: 24,
     paddingHorizontal: 20,
   },
 
