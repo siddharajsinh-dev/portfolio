@@ -3,7 +3,7 @@ import { getStore } from "@netlify/blobs";
 
 export default async function handler(_req: Request) {
   const store = getStore("portfolio-uploads");
-  const result = await store.getWithMetadata("resume");
+  const result = await store.getWithMetadata("resume", { type: "arrayBuffer" });
 
   if (!result) {
     return new Response(null, {

@@ -6,7 +6,7 @@ export default async function handler(req: Request, context: Context) {
   if (!filename) return new Response("Not found", { status: 404 });
 
   const imageStore = getStore("portfolio-uploads");
-  const result = await imageStore.getWithMetadata(filename);
+  const result = await imageStore.getWithMetadata(filename, { type: "arrayBuffer" });
   if (!result) return new Response("Not found", { status: 404 });
 
   return new Response(result.data as BodyInit, {
