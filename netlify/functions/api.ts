@@ -277,11 +277,12 @@ export default async function handler(req: Request) {
 
     if (!isAdmin(req)) return json({ message: "Unauthorized" }, 401);
 
-    // ── Section updates (hero / about / contact / skills / experience / education)
+    // ── Section updates (site / hero / about / contact / skills / experience / education)
 
-    const sectionMatch = pathname.match(/^\/api\/admin\/(hero|about|contact|skills|experience|education|sections)$/);
+    const sectionMatch = pathname.match(/^\/api\/admin\/(site|hero|about|contact|skills|experience-meta|experience|education|sections)$/);
     if (sectionMatch && method === "PUT") {
-      const section = sectionMatch[1];
+      // The URL segment is kebab-case; the stored key is camelCase.
+      const section = sectionMatch[1] === "experience-meta" ? "experienceMeta" : sectionMatch[1];
       const body = await req.json();
       const data = await getContent();
       data[section] = body;
