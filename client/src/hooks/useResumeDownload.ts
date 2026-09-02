@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { pdf, type DocumentProps } from "@react-pdf/renderer";
 import React from "react";
 import { ResumePDF, type ResumeData } from "@/components/ResumePDF";
+import { coverCropRect, parseFraming } from "@/lib/framing";
 
 async function toDataUrl(url: string): Promise<string> {
   const res = await fetch(url);
@@ -15,52 +16,21 @@ async function toDataUrl(url: string): Promise<string> {
   });
 }
 
-// Detect face bounds using the browser FaceDetector API (Chrome/Edge)
-async function detectFaceBounds(
-  img: HTMLImageElement,
-): Promise<{ cx: number; cy: number; size: number } | null> {
-  if (!("FaceDetector" in window)) return null;
-  try {
-    const fd = new (window as any).FaceDetector({ fastMode: false, maxDetectedFaces: 1 });
-    const faces: Array<{ boundingBox: DOMRectReadOnly }> = await fd.detect(img);
-    if (!faces.length) return null;
-    const b = faces[0].boundingBox;
-    // Add generous vertical padding so top of head isn't clipped
-    const padV = b.height * 0.55;
-    const padH = b.height * 0.45;
-    const size = Math.round(b.height + padV + padH);
-    const cx   = Math.round(b.x + b.width / 2);
-    const cy   = Math.round(b.y + b.height / 2 - padV * 0.15); // slight upward shift for forehead
-    return { cx, cy, size };
-  } catch {
-    return null;
-  }
-}
-
-// Crop the image to a square centered on the detected face, or fall back to upper-center
-async function cropToHead(dataUrl: string): Promise<string> {
-  return new Promise((resolve) => {
+/**
+ * Crop the photo to the square the hero circle shows, using the framing
+ * stored with the content. Keeping the arithmetic in coverCropRect means
+ * the résumé and the hero cannot drift apart.
+ *
+ * This replaced a FaceDetector heuristic that fell back to a centre crop
+ * whenever the API was missing — which is most browsers — and so cut the
+ * top of the head off exactly like the hero used to.
+ */
+async function cropToFraming(dataUrl: string, position?: string, zoom?: unknown): Promise<string> {
+  return new Promise((resolve, reject) => {
     const img = new window.Image();
-    img.onload = async () => {
-      const face = await detectFaceBounds(img);
-
-      let sx: number, sy: number, size: number;
-
-      if (face) {
-        // Use detected face center
-        size = Math.min(face.size, img.width, img.height);
-        sx = Math.round(face.cx - size / 2);
-        sy = Math.round(face.cy - size / 2);
-      } else {
-        // Fallback: center square crop — mirrors CSS object-fit:cover;object-position:center
-        size = Math.min(img.width, img.height);
-        sx = Math.round((img.width - size) / 2);
-        sy = Math.round((img.height - size) / 2);
-      }
-
-      // Clamp so we never go outside image bounds
-      sx = Math.max(0, Math.min(sx, img.width  - size));
-      sy = Math.max(0, Math.min(sy, img.height - size));
+    img.onerror = reject;
+    img.onload = () => {
+      const { sx, sy, size } = coverCropRect(img.width, img.height, parseFraming(position, zoom));
 
       const canvas = document.createElement("canvas");
       canvas.width  = size;
@@ -98,7 +68,7 @@ async function generateResumeBlobUrl(): Promise<string> {
     let croppedPhoto = "";
     try {
       const photoDataUrl = await toDataUrl(photoAbsUrl);
-      croppedPhoto = await cropToHead(photoDataUrl);
+      croppedPhoto = await cropToFraming(photoDataUrl, data.hero.heroImagePosition, data.hero.heroImageZoom);
     } catch (imgErr) {
       console.warn("Resume: could not load hero image, generating without photo:", imgErr);
     }

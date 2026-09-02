@@ -11,6 +11,7 @@ import { Download, ArrowRight, Github, Linkedin, Mail, Sparkles, Loader2 } from 
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "../../assets/images/ImportedPhoto.760428188.70688.jpeg";
 import { deriveCareer, resolveCareerTokens, resolveStat } from "@/lib/career";
+import { DEFAULT_FRAMING_POSITION, DEFAULT_FRAMING_ZOOM } from "@/lib/framing";
 
 const DEFAULT_ROLES = [
   "React & Next.js Expert",
@@ -267,7 +268,7 @@ const StatItem = ({ value, label }: { value: string; label: string }) => {
 /* ══════════════════════════════════════════════════════════════
    3-D TILT PHOTO
    ══════════════════════════════════════════════════════════════ */
-const TiltPhoto = ({ src, alt, position = "50% 25%", zoom = 1 }:
+const TiltPhoto = ({ src, alt, position = DEFAULT_FRAMING_POSITION, zoom = DEFAULT_FRAMING_ZOOM }:
   { src: string; alt: string; position?: string; zoom?: number }) => {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -578,7 +579,8 @@ const HeroSection = ({ content }: Props) => {
               </motion.div>
 
               <TiltPhoto src={heroImage} alt={content?.site?.fullName ?? hero?.name ?? "Profile Photo"}
-                position={hero?.heroImagePosition || "50% 25%"} zoom={Number(hero?.heroImageZoom) || 1} />
+                position={hero?.heroImagePosition || DEFAULT_FRAMING_POSITION}
+                zoom={Number(hero?.heroImageZoom) || DEFAULT_FRAMING_ZOOM} />
             </div>
           </motion.div>
         </div>

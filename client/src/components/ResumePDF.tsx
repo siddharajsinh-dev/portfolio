@@ -1,4 +1,5 @@
 import React from "react";
+import { deriveCareer, resolveCareerTokens } from "@/lib/career";
 import {
   Document,
   Page,
@@ -336,6 +337,8 @@ export interface ResumeData {
     bio: string;
     email: string;
     heroImage: string;
+    heroImagePosition?: string;
+    heroImageZoom?: number;
     linkedinUrl: string;
     githubUrl: string;
   };
@@ -380,6 +383,8 @@ function SectionHeader({ title }: { title: string }) {
 
 export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: string }) {
   const { site, hero, contact, skills, experience, education, projects } = data;
+  // Content may carry {{years}} and friends, same as the site.
+  const career = deriveCareer(data);
   const fullName = site?.fullName ?? hero?.name ?? "Resume";
   const linkedinShort = hero.linkedinUrl?.replace("https://www.linkedin.com/in/", "linkedin.com/in/") ?? hero.linkedinUrl ?? "";
   const githubShort   = hero.githubUrl?.replace("https://github.com/", "github.com/") ?? hero.githubUrl ?? "";
@@ -503,7 +508,7 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
           {/* Summary */}
           <View style={s.section}>
             <SectionHeader title="Professional Summary" />
-            <Text style={s.summary}>{hero.bio}</Text>
+            <Text style={s.summary}>{resolveCareerTokens(hero.bio, career)}</Text>
           </View>
 
           {/* Experience */}

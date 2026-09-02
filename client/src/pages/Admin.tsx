@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { DEFAULT_FRAMING_POSITION, DEFAULT_FRAMING_ZOOM } from "@/lib/framing";
 import {
   LayoutDashboard, User, Briefcase, Code2, FolderOpen,
   Mail, LogOut, Plus, Trash2, Save, Loader2, ChevronDown, ChevronUp,
@@ -430,7 +431,7 @@ const HeroImageFraming = ({ url, position, zoom, onChange }: {
             <input type="range" min={1} max={2} step={0.05} value={zoom} className="w-full"
               onChange={(e) => set(x, y, Number(e.target.value))} />
           </div>
-          <button type="button" onClick={() => set(50, 25, 1)}
+          <button type="button" onClick={() => set(50, 25, DEFAULT_FRAMING_ZOOM)}
             className="text-xs text-muted-foreground hover:text-foreground underline transition">
             Reset to default
           </button>
@@ -509,8 +510,8 @@ const HeroPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) =>
           currentUrl={form.heroImage ?? ""} onUploaded={(url) => setForm({ ...form, heroImage: url })} />
         <HeroImageFraming
           url={form.heroImage ?? ""}
-          position={form.heroImagePosition ?? "50% 25%"}
-          zoom={Number(form.heroImageZoom) || 1}
+          position={form.heroImagePosition ?? DEFAULT_FRAMING_POSITION}
+          zoom={Number(form.heroImageZoom) || DEFAULT_FRAMING_ZOOM}
           onChange={(position, zoom) => setForm({ ...form, heroImagePosition: position, heroImageZoom: zoom })} />
         <ImageUpload label="Logo Image (small icon in header navbar)"
           currentUrl={form.logoImage ?? ""} onUploaded={(url) => setForm({ ...form, logoImage: url })} />
