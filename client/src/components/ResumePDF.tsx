@@ -368,9 +368,26 @@ export interface ResumeData {
   projects: Array<{
     title: string;
     description: string;
+    resumeDescription?: string;
     technologies: string[];
     demoLink: string;
   }>;
+}
+
+const RESUME_DESC_MAX = 190;
+
+/** Short project blurb for the PDF: the hand-written one if set, otherwise the
+ *  full description cut at the last full sentence that fits, never mid-word. */
+function projectSummary(p: { description: string; resumeDescription?: string }): string {
+  const short = p.resumeDescription?.trim();
+  if (short) return short;
+  const full = p.description.trim();
+  if (full.length <= RESUME_DESC_MAX) return full;
+  const window = full.slice(0, RESUME_DESC_MAX);
+  const lastStop = Math.max(window.lastIndexOf(". "), window.lastIndexOf("! "), window.lastIndexOf("? "));
+  if (lastStop > RESUME_DESC_MAX * 0.4) return window.slice(0, lastStop + 1);
+  const lastSpace = window.lastIndexOf(" ");
+  return window.slice(0, lastSpace > 0 ? lastSpace : RESUME_DESC_MAX).replace(/[,;:]$/, "") + "\u2026";
 }
 
 function SectionHeader({ title }: { title: string }) {
@@ -549,11 +566,7 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
                   <Text style={s.projTitle}>{proj.title}</Text>
                   <Link src={proj.demoLink} style={s.projLink}>{proj.demoLink}</Link>
                 </View>
-                <Text style={s.projDesc}>
-                  {proj.description.length > 190
-                    ? proj.description.slice(0, 190) + "…"
-                    : proj.description}
-                </Text>
+                <Text style={s.projDesc}>{projectSummary(proj)}</Text>
                 <View style={s.tagRow}>
                   {proj.technologies.map((t) => (
                     <Text key={t} style={s.tag}>{t}</Text>

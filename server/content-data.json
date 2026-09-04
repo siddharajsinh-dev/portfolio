@@ -429,6 +429,7 @@
       "title": "MightyMeals",
       "category": "Web App",
       "description": "MightyMeals is a meal delivery platform offering fresh, chef-prepared meals with a seamless user experience. I worked on the React.js frontend, implementing a responsive and intuitive UI. My contributions included integrating secure payment gateways, optimizing the checkout flow, and developing the order creation functionality.",
+      "resumeDescription": "Built the React.js frontend with a responsive UI, integrated secure payment gateways, optimized the checkout flow, and developed the order creation functionality.",
       "image": "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
       "technologies": [
         "ReactJS",
@@ -444,6 +445,7 @@
       "title": "By Best",
       "category": "Web App",
       "description": "By Best is an eCommerce platform for fashion and accessories, offering clothing for men, women, and kids, along with jewelry, sunglasses, and more. I worked on the React.js frontend, building responsive product pages, optimizing filtering and search functionality, and integrating dynamic cart and checkout experiences.",
+      "resumeDescription": "Built responsive React.js product pages, optimized filtering and search functionality, and integrated the dynamic cart and checkout experience.",
       "image": "https://bybest.shop/assets/img/bybest-logo.png",
       "technologies": [
         "ReactJS",
@@ -458,6 +460,7 @@
       "title": "Fields In Trust",
       "category": "Web App",
       "description": "Fields In Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
+      "resumeDescription": "Developed the ASP.NET MVC website: dynamic content management, secure and maintainable web forms, and location-based features to help users find protected fields across the UK.",
       "image": "/assets/images/fit.jpg",
       "technologies": [
         "ASP.NET MVC",

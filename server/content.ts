@@ -78,6 +78,7 @@ export type ContentData = {
     title: string;
     category: string;
     description: string;
+    resumeDescription?: string;
     image: string;
     technologies: string[];
     demoLink: string;
