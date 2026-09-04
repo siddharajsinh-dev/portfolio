@@ -50,7 +50,7 @@ export type ContentData = {
     database: string[];
     devops: string[];
     additional: string[];
-    proficiency: { name: string; level: number }[];
+    coreStack: { name: string; note?: string }[];
     items: { name: string; category: string }[];
     alsoComfortableWith: string;
   };

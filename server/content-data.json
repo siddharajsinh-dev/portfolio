@@ -168,26 +168,26 @@
       "ASP.NET MVC",
       "MSSQL"
     ],
-    "proficiency": [
+    "coreStack": [
       {
         "name": "TypeScript / JavaScript",
-        "level": 94
+        "note": "Primary language on every project since 2021"
       },
       {
         "name": "React.js / Next.js",
-        "level": 92
+        "note": "Frontend for MightyMeals, By Best and daily client work since 2022"
       },
       {
         "name": "Node.js / Express",
-        "level": 88
+        "note": "API and backend services alongside Python / FastAPI"
       },
       {
         "name": "Git & DevOps",
-        "level": 88
+        "note": "Git, GitHub, Docker and CI/CD on every project"
       },
       {
         "name": "ASP.NET Core",
-        "level": 65
+        "note": "Fields In Trust and client work, on an ASP.NET MVC / Razor background"
       }
     ],
     "items": [

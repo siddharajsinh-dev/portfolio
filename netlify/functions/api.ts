@@ -60,12 +60,12 @@ const DEFAULT_CONTENT = {
       { name: "Gujarati", level: "Native" },
       { name: "Hindi",    level: "Conversational" },
     ],
-    proficiency: [
-      { name: "TypeScript / JavaScript", level: 94 },
-      { name: "React.js / Next.js", level: 92 },
-      { name: "Node.js / Express", level: 88 },
-      { name: "Git & DevOps", level: 88 },
-      { name: "ASP.NET Core", level: 65 },
+    coreStack: [
+      { name: "TypeScript / JavaScript", note: "Primary language on every project since 2021" },
+      { name: "React.js / Next.js", note: "Frontend for MightyMeals, By Best and daily client work since 2022" },
+      { name: "Node.js / Express", note: "API and backend services alongside Python / FastAPI" },
+      { name: "Git & DevOps", note: "Git, GitHub, Docker and CI/CD on every project" },
+      { name: "ASP.NET Core", note: "Fields In Trust and client work, on an ASP.NET MVC / Razor background" },
     ],
   },
   experience: [

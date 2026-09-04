@@ -48,7 +48,7 @@ const Header = ({ content }: Props) => {
     switch (key) {
       case "hero":         return !!(c?.hero?.name);
       case "about":        return !!(c?.about?.paragraphs?.length);
-      case "skills":       return !!(c?.skills?.items?.length || c?.skills?.proficiency?.length || c?.skills?.frontend?.length);
+      case "skills":       return !!(c?.skills?.items?.length || c?.skills?.coreStack?.length || c?.skills?.frontend?.length);
       case "experience":   return !!(c?.experience?.length);
       case "projects":     return !!(c?.projects?.length);
       case "testimonials": return !!(c?.testimonials?.length);

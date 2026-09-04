@@ -283,7 +283,7 @@ const Field = ({ label, value, onChange, multiline = false, rows = 2, mono = fal
 const SECTION_LABELS: { key: string; label: string; description: string }[] = [
   { key: "hero",         label: "Hero",         description: "Main intro section with name, bio & photo" },
   { key: "about",        label: "About",        description: "About me paragraphs, stats & what I do cards" },
-  { key: "skills",       label: "Skills",       description: "Tech skills grid & proficiency bars" },
+  { key: "skills",       label: "Skills",       description: "Tech skills grid & core stack" },
   { key: "experience",   label: "Experience",   description: "Work history & education timeline" },
   { key: "projects",     label: "Projects",     description: "Featured project cards" },
   { key: "testimonials", label: "Testimonials", description: "Client / colleague testimonials carousel" },
@@ -645,7 +645,13 @@ const ContactPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void })
 /* ── Sub-panel: Skills ───────────────────────────────────────────── */
 const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) => {
   const [itemsText, setItemsText]     = useState(JSON.stringify(data.items ?? [], null, 2));
-  const [profText, setProfText]       = useState(JSON.stringify(data.proficiency ?? [], null, 2));
+  const [stackText, setStackText]     = useState(JSON.stringify(data.coreStack ?? [
+    { name: "TypeScript / JavaScript", note: "Primary language on every project since 2021" },
+    { name: "React.js / Next.js",      note: "Frontend for MightyMeals, By Best and daily client work since 2022" },
+    { name: "Node.js / Express",       note: "API and backend services alongside Python / FastAPI" },
+    { name: "Git & DevOps",            note: "Git, GitHub, Docker and CI/CD on every project" },
+    { name: "ASP.NET Core",            note: "Fields In Trust and client work, on an ASP.NET MVC / Razor background" },
+  ], null, 2));
   const [alsoText, setAlsoText]       = useState(data.alsoComfortableWith ?? "");
   const [langText, setLangText]       = useState(JSON.stringify(data.languages ?? [
     { name: "English",  level: "Professional Working" },
@@ -661,7 +667,7 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
       const payload = {
         ...data,
         items:               JSON.parse(itemsText),
-        proficiency:         JSON.parse(profText),
+        coreStack:           JSON.parse(stackText),
         alsoComfortableWith: alsoText,
         languages:           JSON.parse(langText),
       };
@@ -686,10 +692,10 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
       </div>
       <div>
         <label className="block text-sm text-muted-foreground mb-1.5">
-          Proficiency Bars (JSON — [{"{"}\"name\",\"level\"{"}"}])
+          Core Stack (JSON — [{"{"}\"name\",\"note\"{"}"}] — a short fact per item, e.g. where or since when you used it)
         </label>
-        <textarea rows={10} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-foreground text-xs font-mono focus:outline-none focus:border-primary/50 transition resize-none"
-          value={profText} onChange={(e) => setProfText(e.target.value)} />
+        <textarea rows={12} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-foreground text-xs font-mono focus:outline-none focus:border-primary/50 transition resize-none"
+          value={stackText} onChange={(e) => setStackText(e.target.value)} />
       </div>
       <div>
         <label className="block text-sm text-muted-foreground mb-1.5">Also Comfortable With</label>

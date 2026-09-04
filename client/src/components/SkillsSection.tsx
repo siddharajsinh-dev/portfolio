@@ -62,12 +62,12 @@ const DEFAULT_SKILL_ITEMS: { name: string; category: string }[] = [
   { name: "Webpack",      category: "devops"   },
 ];
 
-const DEFAULT_PROFICIENCY = [
-  { name: "TypeScript / JavaScript", level: 94 },
-  { name: "React.js / Next.js",      level: 92 },
-  { name: "Node.js / Express",       level: 88 },
-  { name: "Git & DevOps",            level: 88 },
-  { name: "ASP.NET Core",            level: 65 },
+const DEFAULT_CORE_STACK = [
+  { name: "TypeScript / JavaScript", note: "Primary language on every project since 2021" },
+  { name: "React.js / Next.js",      note: "Frontend for MightyMeals, By Best and daily client work since 2022" },
+  { name: "Node.js / Express",       note: "API and backend services alongside Python / FastAPI" },
+  { name: "Git & DevOps",            note: "Git, GitHub, Docker and CI/CD on every project" },
+  { name: "ASP.NET Core",            note: "Fields In Trust and client work, on an ASP.NET MVC / Razor background" },
 ];
 
 const DEFAULT_ALSO_COMFORTABLE = "Bootstrap, jQuery, C#, Entity Framework, ASP.NET MVC, Razor Pages, REST / GraphQL, Stripe / Authorize.net, Google Maps API, Jest, Mocha";
@@ -128,7 +128,7 @@ const SkillsSection = ({ content }: Props) => {
   const [activeTab, setActiveTab] = useState("all");
   const skills = content?.skills;
 
-  const proficiencyItems: { name: string; level: number }[] = skills?.proficiency ?? DEFAULT_PROFICIENCY;
+  const coreStack: { name: string; note?: string }[] = skills?.coreStack ?? DEFAULT_CORE_STACK;
   const alsoComfortableWith: string = skills?.alsoComfortableWith ?? DEFAULT_ALSO_COMFORTABLE;
 
   const skillItems: { name: string; category: string }[] = skills?.items ?? DEFAULT_SKILL_ITEMS;
@@ -243,33 +243,31 @@ const SkillsSection = ({ content }: Props) => {
             </AnimatePresence>
           </div>
 
-          {/* Proficiency bars */}
-          <div className="lg:col-span-2 space-y-5">
+          {/* Core stack */}
+          <div className="lg:col-span-2 space-y-4">
             <p className="text-sm font-semibold text-foreground mb-5 flex items-center gap-2">
               <span
                 className="w-2.5 h-2.5 rounded-full inline-block"
                 style={{ background: "linear-gradient(135deg, #7c3aed, #2563eb)" }}
               />
-              Top Proficiencies
+              Core Stack
             </p>
-            {proficiencyItems.map(({ name, level }, i) => (
+            {coreStack.map(({ name, note }, i) => (
               <motion.div key={name}
+                className="flex gap-3"
                 initial={{ opacity: 0, x: 28 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-foreground font-medium">{name}</span>
-                </div>
-                <div className="h-2 w-full rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
-                  <motion.div
-                    className="h-full rounded-full"
-                    style={{ background: "linear-gradient(90deg, #7c3aed, #2563eb, #06b6d4)" }}
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, delay: i * 0.1 + 0.3, ease: "easeOut" }}
-                  />
+                <span
+                  className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ background: "linear-gradient(90deg, #7c3aed, #06b6d4)" }}
+                />
+                <div>
+                  <p className="text-sm text-foreground font-medium">{name}</p>
+                  {note && (
+                    <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{note}</p>
+                  )}
                 </div>
               </motion.div>
             ))}
