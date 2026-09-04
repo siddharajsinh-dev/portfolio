@@ -33,6 +33,9 @@ const DEFAULT_CONTENT = {
     email: "siddharajkc294000@gmail.com",
     heroImage: "/assets-static/images/ImportedPhoto.760428188.70688.jpeg",
     logoImage: "",
+    resumeHeadline: "Full-Stack Software Engineer",
+    resumeSubheadline: "React.js · TypeScript · Next.js · Node.js",
+    resumeSummary: "Full-Stack Software Engineer with {{years}}+ years of experience building production-grade web applications with React.js, TypeScript, Next.js, and Node.js. Develops backend services and REST APIs in Node.js/Express.js, Python/FastAPI, and ASP.NET Core, with third-party, payment, and authentication integrations. Owns technical architecture and delivery in close collaboration with clients and stakeholders.",
   },
   about: {
     paragraphs: [
@@ -49,12 +52,12 @@ const DEFAULT_CONTENT = {
     githubUrl: "https://github.com/",
   },
   skills: {
-    frontend: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Redux", "Tailwind CSS", "Bootstrap", "Framer Motion"],
-    backend: ["Node.js", "Express.js", "REST APIs", "Python (FastAPI)", "ASP.NET Core", "Entity Framework", "C#"],
-    database: ["PostgreSQL", "MSSQL", "MongoDB", "Entity Framework", "SQL Server"],
-    devops: ["Git & GitHub", "Docker", "AWS", "CI/CD", "Linux", "Vite", "Webpack", "Jest", "Mocha"],
+    frontend: ["React.js","Next.js","TypeScript","JavaScript (ES6+)","Redux","Tailwind CSS","HTML5","CSS3"],
+    backend: ["Node.js","Express.js","REST APIs","Python","FastAPI","ASP.NET Core"],
+    database: ["PostgreSQL","Microsoft SQL Server","MongoDB","Entity Framework"],
+    devops: ["Git","GitHub","Docker","AWS","CI/CD","Linux"],
     additional: ["ReactJS", "NextJS", "TypeScript", "JavaScript", "NodeJS", "Python - FastAPI", "PostgreSQL", "MongoDB", "Bootstrap CSS", "HTML", "CSS", "ASP.NET Core", "ASP.NET MVC", "MSSQL"],
-    alsoComfortableWith: "Bootstrap, jQuery, C#, Entity Framework, ASP.NET MVC, Razor Pages, REST / GraphQL, Stripe / Authorize.net, Google Maps API, Jest, Mocha",
+    alsoComfortableWith: "Stripe, Authorize.net, ID.me, Google Maps Places API, ASP.NET MVC, C#, jQuery, Bootstrap, Jest",
     languages: [
       { name: "English",  level: "Professional Working" },
       { name: "Gujarati", level: "Native" },
@@ -71,36 +74,93 @@ const DEFAULT_CONTENT = {
   experience: [
     {
       id: 1,
-      position: "Web Developer",
-      company: "ZealousWeb Technologies PVT LTD.",
-      period: "Apr 2022 - Present",
+      position: "Lead Software Engineer",
+      company: "FlatFour Ventures",
+      location: "USA",
+      period: "Jul 2026 – Present",
       description: [
-        "Developed and maintained full-stack web applications using React, TypeScript, and Node.js",
-        "Led the integration of third-party services including Stripe, Authorize.net, and ID.me for secure payments and user verification",
-        "Built dynamic address forms using Google Maps Places Autocomplete and optimized autofill logic for better UX and accuracy",
-        "Improved frontend architecture by modularizing form components and leveraging Redux for predictable state management",
-        "Enhanced performance by optimizing bundle size and implementing lazy loading, resulting in 30% faster load times",
-        "Collaborated closely with designers and backend teams in Agile sprints to deliver responsive, accessible, and scalable applications",
+        "Own end-to-end delivery of full-stack web applications built with React.js, TypeScript, Next.js, and Node.js, from technical architecture through release.",
+        "Design and build backend services and REST APIs, integrating third-party services, payment gateways, and authentication to deliver secure, scalable, and maintainable solutions.",
+        "Lead and mentor engineers through code reviews and shared engineering standards, raising code quality and consistency across the codebase.",
+        "Collaborate directly with clients and cross-functional stakeholders to define requirements, scope technical solutions, and keep delivery on schedule."
       ],
-      skills: ["ReactJS", "TypeScript", "Next.js", "NodeJS", "Redux", "Python - FastAPI", "ASP.NET Core", "JavaScript"],
+      skills: [
+        "React.js",
+        "TypeScript",
+        "Next.js",
+        "Node.js",
+        "REST APIs",
+        "Payment Integration",
+        "Authentication"
+      ]
     },
     {
       id: 2,
+      position: "Web Developer",
+      company: "ZealousWeb Technologies Pvt. Ltd.",
+      location: "Ahmedabad, India",
+      period: "Apr 2022 – Jun 2026",
+      description: [
+        "Engineered and maintained production-grade full-stack web applications using React.js, TypeScript, Next.js, and Node.js, with backend work in Python/FastAPI and ASP.NET Core across client projects.",
+        "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows for production applications.",
+        "Built dynamic address forms with the Google Maps Places API and refined autofill logic, improving data accuracy and checkout UX.",
+        "Strengthened frontend architecture by modularizing form components into reusable building blocks and adopting Redux for predictable state management.",
+        "Optimized bundle size and implemented lazy loading to improve page-load performance.",
+        "Collaborated with designers and backend engineers in Agile sprints to ship responsive, accessible, scalable web applications."
+      ],
+      skills: [
+        "React.js",
+        "TypeScript",
+        "Next.js",
+        "Node.js",
+        "Redux",
+        "Stripe",
+        "Authorize.net",
+        "ID.me",
+        "Google Maps API"
+      ]
+    },
+    {
+      id: 3,
       position: "Trainee",
       company: "Aark Inosoft",
-      period: "Nov 2021 - Mar 2022",
+      location: "Ahmedabad, India",
+      period: "Nov 2021 – Mar 2022",
       description: [
-        "Developed responsive websites for various clients using HTML5, CSS3, and JavaScript",
-        "Implemented interactive features with JavaScript and jQuery to enhance user engagement",
-        "Supported senior developers with backend tasks in ASP.NET Web Forms and MVC, gaining hands-on experience with C# and SQL Server",
-        "Participated in QA testing and bug fixing to ensure cross-browser compatibility and mobile responsiveness",
+        "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript, and jQuery, adding interactive features to improve user engagement.",
+        "Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends using C# and SQL Server, and contributed to QA testing and bug fixing."
       ],
-      skills: ["HTML5", "CSS3", "JavaScript", "jQuery", "ASP.NET Web Forms", "ASP.NET MVC"],
-    },
+      skills: [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "jQuery",
+        "ASP.NET Web Forms",
+        "ASP.NET MVC",
+        "C#",
+        "SQL Server"
+      ]
+    }
   ],
   education: [
     { id: 1, degree: "Bachelor of Engineering in Computer Engineering", institution: "D.A. Degree Engineering & Technology", period: "2020 - 2023", cgpa: "8.3/10.0" },
     { id: 2, degree: "Diploma in Computer Engineering", institution: "D.A. Diploma Engineering & Technology", period: "2016 - 2019", cgpa: "7.3/10.0" },
+  ],
+  awards: [
+    {
+      id: 1,
+      title: "WOW Award",
+      issuer: "ZealousWeb Technologies Pvt. Ltd.",
+      date: "May 2023",
+      note: ""
+    },
+    {
+      id: 2,
+      title: "Employee of the Year Nominee",
+      issuer: "ZealousWeb Technologies Pvt. Ltd.",
+      date: "2025",
+      note: ""
+    }
   ],
   sections: {
     hero: true,
@@ -125,9 +185,9 @@ const DEFAULT_CONTENT = {
       title: "MightyMeals",
       category: "Web App",
       description: "MightyMeals is a meal delivery platform offering fresh, chef-prepared meals with a seamless user experience. I worked on the React.js frontend, implementing a responsive and intuitive UI. My contributions included integrating secure payment gateways, optimizing the checkout flow, and developing the order creation functionality.",
-      resumeDescription: "Built the React.js frontend with a responsive UI, integrated secure payment gateways, optimized the checkout flow, and developed the order creation functionality.",
+      resumeDescription: "Meal delivery platform for fresh, chef-prepared meals. Built the responsive React.js frontend, integrated secure payment gateways, optimized the checkout flow, and developed the order creation functionality.",
       image: "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
-      technologies: ["ReactJS", "WordPress", "Python - FastAPI"],
+      technologies: ["React.js","Python/FastAPI","WordPress"],
       demoLink: "https://mightymeals.com/",
       demoLinkText: "Live Demo",
       displayOrder: 1,
@@ -137,9 +197,9 @@ const DEFAULT_CONTENT = {
       title: "By Best",
       category: "Web App",
       description: "By Best is an eCommerce platform for fashion and accessories, offering clothing for men, women, and kids, along with jewelry, sunglasses, and more. I worked on the React.js frontend, building responsive product pages, optimizing filtering and search functionality, and integrating dynamic cart and checkout experiences.",
-      resumeDescription: "Built responsive React.js product pages, optimized filtering and search functionality, and integrated the dynamic cart and checkout experience.",
+      resumeDescription: "eCommerce platform for fashion and accessories. Built responsive React.js product pages, optimized product filtering and search, and integrated the dynamic cart and checkout experience against a Laravel backend.",
       image: "https://bybest.shop/assets/img/bybest-logo.png",
-      technologies: ["ReactJS", "Laravel"],
+      technologies: ["React.js","Laravel"],
       demoLink: "https://bybest.shop/",
       demoLinkText: "Live Demo",
       displayOrder: 2,
@@ -149,9 +209,9 @@ const DEFAULT_CONTENT = {
       title: "Fields In Trust",
       category: "Web App",
       description: "Fields In Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
-      resumeDescription: "Developed the ASP.NET MVC website: dynamic content management, secure and maintainable web forms, and location-based features to help users find protected fields across the UK.",
+      resumeDescription: "UK charity protecting parks, playgrounds, and green spaces. Developed the ASP.NET MVC website in C# with Entity Framework: dynamic content management, secure and maintainable web forms, and location-based search for protected fields across the UK.",
       image: "/assets-static/images/fit.jpg",
-      technologies: ["ASP.NET MVC", "C#", "Razor Pages", "Entity Framework"],
+      technologies: ["ASP.NET MVC","C#","Entity Framework","Razor Pages"],
       demoLink: "https://fieldsintrust.org/",
       demoLinkText: "Live Demo",
       displayOrder: 3,
@@ -282,7 +342,7 @@ export default async function handler(req: Request) {
 
     // ── Section updates (site / hero / about / contact / skills / experience / education)
 
-    const sectionMatch = pathname.match(/^\/api\/admin\/(site|hero|about|contact|skills|experience-meta|experience|education|sections)$/);
+    const sectionMatch = pathname.match(/^\/api\/admin\/(site|hero|about|contact|skills|experience-meta|experience|education|awards|sections)$/);
     if (sectionMatch && method === "PUT") {
       // The URL segment is kebab-case; the stored key is camelCase.
       const section = sectionMatch[1] === "experience-meta" ? "experienceMeta" : sectionMatch[1];

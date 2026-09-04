@@ -18,6 +18,7 @@ type ContentData = {
   experience: any[];
   experienceMeta: any;
   education: any[];
+  awards?: any[];
   projects: any[];
   testimonials: any[];
   sections: Record<string, boolean>;
@@ -478,6 +479,8 @@ const HeroPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) =>
       <Field label="Short Name (shown in hero heading)" {...f("shortName")} />
       <Field label="Bio / Tagline" {...f("bio")} multiline rows={3} />
       <Field label="Résumé Headline — printed under your name in the PDF" {...f("resumeHeadline")} />
+      <Field label="Résumé Sub-headline — core stack line under the headline (optional)" {...f("resumeSubheadline")} />
+      <Field label="Résumé Summary — Professional Summary paragraph in the PDF (falls back to Bio when blank)" {...f("resumeSummary")} multiline rows={4} />
       <Field label="LinkedIn URL" {...f("linkedinUrl")} />
       <Field label="GitHub URL" {...f("githubUrl")} />
       <Field label="Email" {...f("email")} />
@@ -653,6 +656,9 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
     { name: "ASP.NET Core",            note: "Fields In Trust and client work, on an ASP.NET MVC / Razor background" },
   ], null, 2));
   const [alsoText, setAlsoText]       = useState(data.alsoComfortableWith ?? "");
+  const [catsText, setCatsText]       = useState(JSON.stringify({
+    frontend: data.frontend ?? [], backend: data.backend ?? [], database: data.database ?? [], devops: data.devops ?? [],
+  }, null, 2));
   const [langText, setLangText]       = useState(JSON.stringify(data.languages ?? [
     { name: "English",  level: "Professional Working" },
     { name: "Gujarati", level: "Native" },
@@ -670,6 +676,7 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
         coreStack:           JSON.parse(stackText),
         alsoComfortableWith: alsoText,
         languages:           JSON.parse(langText),
+        ...JSON.parse(catsText),
       };
       await apiFetch("/api/admin/skills", "PUT", payload);
       onSave(payload);
@@ -698,7 +705,14 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
           value={stackText} onChange={(e) => setStackText(e.target.value)} />
       </div>
       <div>
-        <label className="block text-sm text-muted-foreground mb-1.5">Also Comfortable With</label>
+        <label className="block text-sm text-muted-foreground mb-1.5">
+          Resume Skill Categories — shown on Resume PDF (JSON — {"{"}frontend, backend, database, devops{"}"} arrays)
+        </label>
+        <textarea rows={14} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-foreground text-xs font-mono focus:outline-none focus:border-primary/50 transition resize-none"
+          value={catsText} onChange={(e) => setCatsText(e.target.value)} />
+      </div>
+      <div>
+        <label className="block text-sm text-muted-foreground mb-1.5">Additional Technologies — shown under the skill categories on the Resume PDF</label>
         <textarea rows={3} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-foreground text-sm focus:outline-none focus:border-primary/50 transition resize-none"
           value={alsoText} onChange={(e) => setAlsoText(e.target.value)} />
       </div>
@@ -718,11 +732,13 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
 };
 
 /* ── Sub-panel: Experience ───────────────────────────────────────── */
-const ExperiencePanel = ({ data, meta, onSaveData, onSaveMeta }: {
-  data: any; meta: any;
-  onSaveData: (d: any) => void; onSaveMeta: (d: any) => void;
+const ExperiencePanel = ({ data, meta, awards, education, onSaveData, onSaveMeta, onSaveAwards, onSaveEducation }: {
+  data: any; meta: any; awards: any[]; education: any[];
+  onSaveData: (d: any) => void; onSaveMeta: (d: any) => void; onSaveAwards: (d: any[]) => void; onSaveEducation: (d: any[]) => void;
 }) => {
+  const [eduText, setEduText] = useState(JSON.stringify(education ?? [], null, 2));
   const [expText,  setExpText]  = useState(JSON.stringify(data, null, 2));
+  const [awardsText, setAwardsText] = useState(JSON.stringify(awards ?? [], null, 2));
   const [highlight, setHighlight] = useState(meta?.highlight ?? "");
   const [location,  setLocation]  = useState(meta?.location  ?? "");
   const { toast } = useToast();
@@ -736,6 +752,12 @@ const ExperiencePanel = ({ data, meta, onSaveData, onSaveMeta }: {
       onSaveData(parsedExp);
       await apiFetch("/api/admin/experience-meta", "PUT", { highlight, location });
       onSaveMeta({ highlight, location });
+      const parsedAwards = JSON.parse(awardsText);
+      await apiFetch("/api/admin/awards", "PUT", parsedAwards);
+      onSaveAwards(parsedAwards);
+      const parsedEdu = JSON.parse(eduText);
+      await apiFetch("/api/admin/education", "PUT", parsedEdu);
+      onSaveEducation(parsedEdu);
       toast({ title: "Experience saved!" });
     } catch (e: any) { toast({ title: "Save failed", description: e.message, variant: "destructive" }); }
     finally { setSaving(false); }
@@ -757,6 +779,16 @@ const ExperiencePanel = ({ data, meta, onSaveData, onSaveMeta }: {
         <label className="block text-sm text-muted-foreground mb-1.5">Experience Entries (JSON)</label>
         <textarea rows={22} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-foreground text-xs font-mono focus:outline-none focus:border-primary/50 transition resize-none"
           value={expText} onChange={(e) => setExpText(e.target.value)} />
+      </div>
+      <div>
+        <label className="block text-sm text-muted-foreground mb-1.5">Awards &amp; Recognition — shown on Resume PDF (JSON — [{"{"}\"title\", \"issuer\", \"date\", \"note\"{"}"}])</label>
+        <textarea rows={6} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-foreground text-xs font-mono focus:outline-none focus:border-primary/50 transition resize-none"
+          value={awardsText} onChange={(e) => setAwardsText(e.target.value)} />
+      </div>
+      <div>
+        <label className="block text-sm text-muted-foreground mb-1.5">Education (JSON — [{"{"}\"degree\", \"institution\", \"period\", \"cgpa\"{"}"}])</label>
+        <textarea rows={10} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-foreground text-xs font-mono focus:outline-none focus:border-primary/50 transition resize-none"
+          value={eduText} onChange={(e) => setEduText(e.target.value)} />
       </div>
       <SaveBtn saving={saving} onClick={save} />
     </div>
@@ -1116,8 +1148,12 @@ const Admin = () => {
                 <ExperiencePanel
                   data={data.experience}
                   meta={data.experienceMeta}
+                  awards={data.awards ?? []}
+                  education={data.education ?? []}
                   onSaveData={(d) => setData({ ...data, experience: d })}
                   onSaveMeta={(d) => setData({ ...data, experienceMeta: d })}
+                  onSaveAwards={(d) => setData({ ...data, awards: d })}
+                  onSaveEducation={(d) => setData({ ...data, education: d })}
                 />
               )}
               {activeTab === "projects" && (

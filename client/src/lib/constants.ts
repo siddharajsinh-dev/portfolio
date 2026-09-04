@@ -44,37 +44,59 @@ export const additionalSkills = [
 
 export const experience = [
   {
-    position: "Web Developer",
-    company: "ZealousWeb Technologies PVT LTD.",
-    period: "Apr 2022 - Present",
+    position: "Lead Software Engineer",
+    company: "FlatFour Ventures",
+    location: "USA",
+    period: "Jul 2026 – Present",
     description: [
-      "Developed and maintained full-stack web applications using React, TypeScript, and ASP.NET Core",
-      "Led the integration of third-party services including Stripe, Authorize.net, and ID.me for secure payments and user verification",
-      "Built dynamic address forms using Google Maps Places Autocomplete and optimized autofill logic for better UX and accuracy",
-      "Improved frontend architecture by modularizing form components and leveraging Redux for predictable state management",
-      "Enhanced performance by optimizing bundle size and implementing lazy loading, resulting in 30% faster load times",
-      "Collaborated closely with designers and backend teams in Agile sprints to deliver responsive, accessible, and scalable applications",
+      "Own end-to-end delivery of full-stack web applications built with React.js, TypeScript, Next.js, and Node.js, from technical architecture through release.",
+      "Design and build backend services and REST APIs, integrating third-party services, payment gateways, and authentication to deliver secure, scalable, and maintainable solutions.",
+      "Lead and mentor engineers through code reviews and shared engineering standards, raising code quality and consistency across the codebase.",
+      "Collaborate directly with clients and cross-functional stakeholders to define requirements, scope technical solutions, and keep delivery on schedule."
     ],
     skills: [
-      "ReactJS",
+      "React.js",
       "TypeScript",
       "Next.js",
-      "NodeJS",
-      "Redux",
-      "Python - FastAPI",
-      "ASP.NET Core",
-      "JavaScript",
+      "Node.js",
+      "REST APIs",
+      "Payment Integration",
+      "Authentication"
+    ]
+  },
+  {
+    position: "Web Developer",
+    company: "ZealousWeb Technologies Pvt. Ltd.",
+    location: "Ahmedabad, India",
+    period: "Apr 2022 – Jun 2026",
+    description: [
+      "Engineered and maintained production-grade full-stack web applications using React.js, TypeScript, Next.js, and Node.js, with backend work in Python/FastAPI and ASP.NET Core across client projects.",
+      "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows for production applications.",
+      "Built dynamic address forms with the Google Maps Places API and refined autofill logic, improving data accuracy and checkout UX.",
+      "Strengthened frontend architecture by modularizing form components into reusable building blocks and adopting Redux for predictable state management.",
+      "Optimized bundle size and implemented lazy loading to improve page-load performance.",
+      "Collaborated with designers and backend engineers in Agile sprints to ship responsive, accessible, scalable web applications."
     ],
+    skills: [
+      "React.js",
+      "TypeScript",
+      "Next.js",
+      "Node.js",
+      "Redux",
+      "Stripe",
+      "Authorize.net",
+      "ID.me",
+      "Google Maps API"
+    ]
   },
   {
     position: "Trainee",
     company: "Aark Inosoft",
-    period: "Nov 2021 - Mar 2022",
+    location: "Ahmedabad, India",
+    period: "Nov 2021 – Mar 2022",
     description: [
-      "Developed responsive websites for various clients using HTML5, CSS3, and JavaScript",
-      "Implemented interactive features with JavaScript and jQuery to enhance user engagement",
-      "Supported senior developers with backend tasks in ASP.NET Web Forms and MVC, gaining hands-on experience with C# and SQL Server",
-      "Participated in QA testing and bug fixing to ensure cross-browser compatibility and mobile responsiveness",
+      "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript, and jQuery, adding interactive features to improve user engagement.",
+      "Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends using C# and SQL Server, and contributed to QA testing and bug fixing."
     ],
     skills: [
       "HTML5",
@@ -83,8 +105,10 @@ export const experience = [
       "jQuery",
       "ASP.NET Web Forms",
       "ASP.NET MVC",
-    ],
-  },
+      "C#",
+      "SQL Server"
+    ]
+  }
 ];
 
 export const education = [

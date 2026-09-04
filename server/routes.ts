@@ -268,6 +268,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     catch { res.status(400).json({ message: "Invalid data." }); }
   });
 
+  app.put("/api/admin/awards", requireAdmin, (req, res) => {
+    try { content.updateAwards(req.body); res.json({ message: "Updated." }); }
+    catch { res.status(400).json({ message: "Invalid data." }); }
+  });
+
   app.put("/api/admin/sections", requireAdmin, (req, res) => {
     try { content.updateSections(req.body); res.json({ message: "Updated." }); }
     catch { res.status(400).json({ message: "Invalid data." }); }

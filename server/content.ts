@@ -73,6 +73,13 @@ export type ContentData = {
     period: string;
     cgpa: string;
   }[];
+  awards?: {
+    id: number;
+    title: string;
+    issuer?: string;
+    date?: string;
+    note?: string;
+  }[];
   projects: {
     id: number;
     title: string;
@@ -156,6 +163,12 @@ export const content = {
   updateEducation(education: ContentData["education"]): void {
     const data = readData();
     data.education = education;
+    writeData(data);
+  },
+
+  updateAwards(awards: NonNullable<ContentData["awards"]>): void {
+    const data = readData();
+    data.awards = awards;
     writeData(data);
   },
 
