@@ -208,6 +208,9 @@ const s = StyleSheet.create({
   section: {
     marginBottom: 14,
   },
+  lastSection: {
+    marginBottom: 0,
+  },
   sectionHead: {
     flexDirection: "row",
     alignItems: "center",
@@ -374,6 +377,12 @@ export interface ResumeData {
   }>;
 }
 
+/** Blank or the "#" placeholder from a freshly added project: nothing to print. */
+function isRealUrl(url: string | undefined): url is string {
+  const u = url?.trim() ?? "";
+  return u !== "" && u !== "#";
+}
+
 const RESUME_DESC_MAX = 190;
 
 /** Short project blurb for the PDF: the hand-written one if set, otherwise the
@@ -407,12 +416,27 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
   // are written to be punchy, which is not what belongs under a name here.
   const headline = hero.resumeHeadline?.trim() || hero.roles?.[0] || "";
   const fullName = site?.fullName ?? hero?.name ?? "Resume";
-  const linkedinShort = hero.linkedinUrl?.replace("https://www.linkedin.com/in/", "linkedin.com/in/") ?? hero.linkedinUrl ?? "";
-  const githubShort   = hero.githubUrl?.replace("https://github.com/", "github.com/") ?? hero.githubUrl ?? "";
+  // A blank value in admin means "leave it off the resume": the row is
+  // dropped entirely rather than printed with an empty label.
+  const email       = contact.email?.trim() ?? "";
+  const phone       = contact.phone?.trim() ?? "";
+  const city        = contact.location?.trim() ?? "";
+  const linkedinUrl = hero.linkedinUrl?.trim() ?? "";
+  const githubUrl   = hero.githubUrl?.trim() ?? "";
+  const contactRows: Array<{ label: string; value: string; href?: string }> = [
+    { label: "Email",    value: email,       href: email ? `mailto:${email}` : undefined },
+    { label: "Phone",    value: phone },
+    { label: "City",     value: city },
+    { label: "LinkedIn", value: linkedinUrl.replace("https://www.linkedin.com/in/", "linkedin.com/in/"), href: linkedinUrl },
+    { label: "GitHub",   value: githubUrl.replace("https://github.com/", "github.com/"),                  href: githubUrl },
+  ].filter((row) => row.value);
 
   return (
     <Document title={`${fullName} — Resume`} author={fullName}>
-      <Page size="A4" style={s.page}>
+      {/* One-page resume by design. wrap={false} stops react-pdf from
+          paginating when the columns run a few points past A4, which used
+          to yield a second page containing only the sidebar background. */}
+      <Page size="A4" style={s.page} wrap={false}>
 
         {/* ════════════ SIDEBAR ════════════ */}
         <View style={s.sidebar}>
@@ -429,29 +453,19 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
           <View style={s.sbRule} />
 
           {/* Contact */}
-          <View style={s.sbSection}>
-            <Text style={s.sbSectionTitle}>Contact</Text>
-            <View style={s.ctRow}>
-              <Text style={s.ctLabel}>Email</Text>
-              <Link src={`mailto:${contact.email}`} style={s.ctLink}>{contact.email}</Link>
+          {contactRows.length > 0 && (
+            <View style={s.sbSection}>
+              <Text style={s.sbSectionTitle}>Contact</Text>
+              {contactRows.map(({ label, value, href }) => (
+                <View key={label} style={s.ctRow}>
+                  <Text style={s.ctLabel}>{label}</Text>
+                  {href
+                    ? <Link src={href} style={s.ctLink}>{value}</Link>
+                    : <Text style={s.ctVal}>{value}</Text>}
+                </View>
+              ))}
             </View>
-            <View style={s.ctRow}>
-              <Text style={s.ctLabel}>Phone</Text>
-              <Text style={s.ctVal}>{contact.phone}</Text>
-            </View>
-            <View style={s.ctRow}>
-              <Text style={s.ctLabel}>City</Text>
-              <Text style={s.ctVal}>{contact.location}</Text>
-            </View>
-            <View style={s.ctRow}>
-              <Text style={s.ctLabel}>LinkedIn</Text>
-              <Link src={hero.linkedinUrl} style={s.ctLink}>{linkedinShort}</Link>
-            </View>
-            <View style={s.ctRow}>
-              <Text style={s.ctLabel}>GitHub</Text>
-              <Link src={hero.githubUrl} style={s.ctLink}>{githubShort}</Link>
-            </View>
-          </View>
+          )}
 
           {/* Skills */}
           <View style={s.sbSection}>
@@ -558,13 +572,15 @@ export function ResumePDF({ data, photoUrl }: { data: ResumeData; photoUrl: stri
           </View>
 
           {/* Projects */}
-          <View style={s.section}>
+          <View style={[s.section, s.lastSection]}>
             <SectionHeader title="Key Projects" />
-            {projects.slice(0, 3).map((proj) => (
-              <View key={proj.title} style={s.projItem}>
+            {projects.slice(0, 3).map((proj, i, arr) => (
+              <View key={proj.title} style={[s.projItem, i === arr.length - 1 ? s.lastSection : {}]}>
                 <View style={s.projTopRow}>
                   <Text style={s.projTitle}>{proj.title}</Text>
-                  <Link src={proj.demoLink} style={s.projLink}>{proj.demoLink}</Link>
+                  {isRealUrl(proj.demoLink) && (
+                    <Link src={proj.demoLink} style={s.projLink}>{proj.demoLink}</Link>
+                  )}
                 </View>
                 <Text style={s.projDesc}>{projectSummary(proj)}</Text>
                 <View style={s.tagRow}>
