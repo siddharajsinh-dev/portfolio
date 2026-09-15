@@ -44,17 +44,17 @@ export const additionalSkills = [
 
 export const experience = [
   {
-    position: "Lead Software Engineer",
-    company: "FlatFour Ventures",
-    location: "USA",
-    period: "Jul 2026 – Present",
-    description: [
-      "Own end-to-end delivery of full-stack web applications built with React.js, TypeScript, Next.js, and Node.js, from technical architecture through release.",
-      "Design and build backend services and REST APIs, integrating third-party services, payment gateways, and authentication to deliver secure, scalable, and maintainable solutions.",
-      "Lead and mentor engineers through code reviews and shared engineering standards, raising code quality and consistency across the codebase.",
-      "Collaborate directly with clients and cross-functional stakeholders to define requirements, scope technical solutions, and keep delivery on schedule."
+    "position": "Lead Software Engineer",
+    "company": "FlatFour Ventures",
+    "location": "USA · Remote",
+    "period": "Jul 2026 – Present",
+    "description": [
+      "Own delivery of full-stack web applications built with React.js, TypeScript, Next.js and Node.js, from technical architecture through release.",
+      "Design and build backend services and REST APIs, integrating third-party services, payment gateways and authentication.",
+      "Review code and set engineering standards for the team; mentor other engineers.",
+      "Work directly with clients and stakeholders to define requirements, scope solutions and keep delivery on schedule."
     ],
-    skills: [
+    "skills": [
       "React.js",
       "TypeScript",
       "Next.js",
@@ -65,19 +65,18 @@ export const experience = [
     ]
   },
   {
-    position: "Web Developer",
-    company: "ZealousWeb Technologies Pvt. Ltd.",
-    location: "Ahmedabad, India",
-    period: "Apr 2022 – Jun 2026",
-    description: [
-      "Engineered and maintained production-grade full-stack web applications using React.js, TypeScript, Next.js, and Node.js, with backend work in Python/FastAPI and ASP.NET Core across client projects.",
-      "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows for production applications.",
-      "Built dynamic address forms with the Google Maps Places API and refined autofill logic, improving data accuracy and checkout UX.",
-      "Strengthened frontend architecture by modularizing form components into reusable building blocks and adopting Redux for predictable state management.",
-      "Optimized bundle size and implemented lazy loading to improve page-load performance.",
-      "Collaborated with designers and backend engineers in Agile sprints to ship responsive, accessible, scalable web applications."
+    "position": "Web Developer",
+    "company": "ZealousWeb Technologies Pvt. Ltd.",
+    "location": "Ahmedabad, India",
+    "period": "Apr 2022 – Jun 2026",
+    "description": [
+      "Built and maintained full-stack web applications for client projects using React.js, TypeScript, Next.js and Node.js, with backend work in Python/FastAPI and ASP.NET Core.",
+      "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows.",
+      "Built dynamic address forms with the Google Maps Places API and improved the autofill logic, which improved address accuracy and checkout UX.",
+      "Split form components into reusable modules and introduced Redux for state management; reduced bundle size and added lazy loading to improve page-load times.",
+      "Worked with designers and backend engineers in Agile sprints. Received the company WOW Award (May 2023) and was nominated for Employee of the Year (2025)."
     ],
-    skills: [
+    "skills": [
       "React.js",
       "TypeScript",
       "Next.js",
@@ -90,15 +89,14 @@ export const experience = [
     ]
   },
   {
-    position: "Trainee",
-    company: "Aark Inosoft",
-    location: "Ahmedabad, India",
-    period: "Nov 2021 – Mar 2022",
-    description: [
-      "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript, and jQuery, adding interactive features to improve user engagement.",
-      "Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends using C# and SQL Server, and contributed to QA testing and bug fixing."
+    "position": "Trainee",
+    "company": "Aark Inosoft",
+    "location": "Ahmedabad, India",
+    "period": "Nov 2021 – Mar 2022",
+    "description": [
+      "Built responsive client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms/MVC backends (C#, SQL Server), including QA testing and bug fixing."
     ],
-    skills: [
+    "skills": [
       "HTML5",
       "CSS3",
       "JavaScript",
@@ -113,17 +111,17 @@ export const experience = [
 
 export const education = [
   {
-    degree: "Bachelor of Engineering in Computer Engineering",
-    institution: "D.A. Degree Engineering & Technology",
-    period: "2020 - 2023",
-    cgpa: "8.3/10.0",
+    "degree": "B.E. Computer Engineering",
+    "institution": "D.A. Degree Engineering & Technology",
+    "period": "2020 – 2023",
+    "cgpa": "8.3/10"
   },
   {
-    degree: "Diploma in Computer Engineering",
-    institution: "D.A. Diploma Engineering & Technology",
-    period: "2016 - 2019",
-    cgpa: "7.3/10.0",
-  },
+    "degree": "Diploma in Computer Engineering",
+    "institution": "D.A. Diploma Engineering & Technology",
+    "period": "2016 – 2019",
+    "cgpa": "7.3/10"
+  }
 ];
 
 export const projects: Project[] = [
@@ -149,9 +147,9 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Fields In Trust",
+    title: "Fields in Trust",
     category: "Web App",
-    description: "Fields In Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
+    description: "Fields in Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
     image: FITImage,
     technologies: ["ASP.NET MVC", "C#", "Razor Pages", "Entity Framework"],
     demoLink: "https://fieldsintrust.org/",

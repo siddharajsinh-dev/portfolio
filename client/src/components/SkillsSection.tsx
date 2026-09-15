@@ -70,7 +70,7 @@ const DEFAULT_CORE_STACK = [
   { name: "ASP.NET Core",            note: "Fields In Trust and client work, on an ASP.NET MVC / Razor background" },
 ];
 
-const DEFAULT_ALSO_COMFORTABLE = "Bootstrap, jQuery, C#, Entity Framework, ASP.NET MVC, Razor Pages, REST / GraphQL, Stripe / Authorize.net, Google Maps API, Jest, Mocha";
+const DEFAULT_ALSO_COMFORTABLE = "Stripe, Authorize.net, ID.me, Google Maps Places API, authentication";
 
 const hexToRgba = (hex: string, alpha: number) => {
   const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

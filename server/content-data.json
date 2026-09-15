@@ -4,8 +4,8 @@
     "logoSubtext": "Full-Stack Engineer",
     "fullName": "Siddharajsinh Chauhan",
     "tagline": "Crafting scalable, beautiful web experiences with modern technologies.",
-    "pageTitle": "Siddharajsinh Chauhan - Full-Stack Software Engineer",
-    "hireMeText": "Open to full-time roles and freelance projects."
+    "pageTitle": "Siddharajsinh Chauhan — Full-Stack Software Engineer",
+    "hireMeText": "Open to full-time (direct or via EOR) and contract roles."
   },
   "hero": {
     "greeting": "Available for opportunities",
@@ -32,7 +32,7 @@
         "label": "Companies"
       }
     ],
-    "linkedinUrl": "https://www.linkedin.com/in/siddharajsinh-chauhan-410741199",
+    "linkedinUrl": "https://linkedin.com/in/siddharajsinh-chauhan-410741199",
     "githubUrl": "",
     "email": "siddharajkc294000@gmail.com",
     "heroImage": "/uploads/04ae6990ba713781-1788333932589.png",
@@ -54,7 +54,7 @@
     "heroImageZoom": 1,
     "resumeHeadline": "Full-Stack Software Engineer",
     "resumeSubheadline": "React.js · TypeScript · Next.js · Node.js",
-    "resumeSummary": "Full-Stack Software Engineer with {{years}}+ years of experience building production-grade web applications with React.js, TypeScript, Next.js, and Node.js. Develops backend services and REST APIs in Node.js/Express.js, Python/FastAPI, and ASP.NET Core, with third-party, payment, and authentication integrations. Owns technical architecture and delivery in close collaboration with clients and stakeholders."
+    "resumeSummary": "Full-stack software engineer with {{years}}+ years of experience building web applications with React.js, TypeScript, Next.js and Node.js. Backend work in Node.js/Express, Python/FastAPI and ASP.NET Core, including payment (Stripe, Authorize.net) and identity verification (ID.me) integrations for US and UK clients. Currently Lead Software Engineer at a US company, responsible for technical architecture, delivery and code review."
   },
   "about": {
     "paragraphs": [
@@ -108,11 +108,11 @@
   "contact": {
     "location": "Ahmedabad, India",
     "email": "siddharajkc294000@gmail.com",
-    "phone": "+91 8320032657",
-    "linkedinUrl": "https://www.linkedin.com/in/siddharajsinh-chauhan-410741199",
+    "phone": "+91 83200 32657",
+    "linkedinUrl": "https://linkedin.com/in/siddharajsinh-chauhan-410741199",
     "githubUrl": "https://github.com/Sid7005",
     "availabilityTitle": "Currently Available",
-    "availabilityText": "Open to full-time roles, freelance projects, and consulting. Response within 24 hours."
+    "availabilityText": "Remote · available during US Eastern and UK working hours · open to full-time (direct or via EOR) and contract roles"
   },
   "skills": {
     "frontend": [
@@ -131,20 +131,23 @@
       "REST APIs",
       "Python",
       "FastAPI",
-      "ASP.NET Core"
+      "ASP.NET Core",
+      "ASP.NET MVC",
+      "C#",
+      "Entity Framework"
     ],
     "database": [
       "PostgreSQL",
       "Microsoft SQL Server",
-      "MongoDB",
-      "Entity Framework"
+      "MongoDB"
     ],
     "devops": [
       "Git",
       "GitHub",
       "Docker",
       "AWS",
-      "CI/CD"
+      "CI/CD",
+      "Jest"
     ],
     "additional": [
       "ReactJS",
@@ -181,7 +184,7 @@
       },
       {
         "name": "ASP.NET Core",
-        "note": "Fields In Trust and client work, on an ASP.NET MVC / Razor background"
+        "note": "Fields in Trust and client work, on an ASP.NET MVC / Razor background"
       }
     ],
     "items": [
@@ -270,7 +273,7 @@
         "category": "devops"
       }
     ],
-    "alsoComfortableWith": "Stripe, Authorize.net, ID.me, Google Maps Places API, ASP.NET MVC, C#, jQuery, Bootstrap, Jest",
+    "alsoComfortableWith": "Stripe, Authorize.net, ID.me, Google Maps Places API, authentication",
     "languages": [
       {
         "name": "English",
@@ -287,7 +290,7 @@
     ]
   },
   "experienceMeta": {
-    "highlight": "Led Stripe & Authorize.net payment integrations and Google Maps autocomplete features at ZealousWeb, improving checkout UX for thousands of users.",
+    "highlight": "Led Stripe and Authorize.net payment processing and ID.me identity verification integrations at ZealousWeb, delivering secure checkout and user-verification flows.",
     "location": "Based in Ahmedabad, India · Open to remote"
   },
   "experience": [
@@ -295,13 +298,13 @@
       "id": 1,
       "position": "Lead Software Engineer",
       "company": "FlatFour Ventures",
-      "location": "USA",
+      "location": "USA · Remote",
       "period": "Jul 2026 – Present",
       "description": [
-        "Own end-to-end delivery of full-stack web applications built with React.js, TypeScript, Next.js, and Node.js, from technical architecture through release.",
-        "Design and build backend services and REST APIs, integrating third-party services, payment gateways, and authentication to deliver secure, scalable, and maintainable solutions.",
-        "Lead and mentor engineers through code reviews and shared engineering standards, raising code quality and consistency across the codebase.",
-        "Collaborate directly with clients and cross-functional stakeholders to define requirements, scope technical solutions, and keep delivery on schedule."
+        "Own delivery of full-stack web applications built with React.js, TypeScript, Next.js and Node.js, from technical architecture through release.",
+        "Design and build backend services and REST APIs, integrating third-party services, payment gateways and authentication.",
+        "Review code and set engineering standards for the team; mentor other engineers.",
+        "Work directly with clients and stakeholders to define requirements, scope solutions and keep delivery on schedule."
       ],
       "skills": [
         "React.js",
@@ -320,12 +323,11 @@
       "location": "Ahmedabad, India",
       "period": "Apr 2022 – Jun 2026",
       "description": [
-        "Engineered and maintained production-grade full-stack web applications using React.js, TypeScript, Next.js, and Node.js, with backend work in Python/FastAPI and ASP.NET Core across client projects.",
-        "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows for production applications.",
-        "Built dynamic address forms with the Google Maps Places API and refined autofill logic, improving data accuracy and checkout UX.",
-        "Strengthened frontend architecture by modularizing form components into reusable building blocks and adopting Redux for predictable state management.",
-        "Optimized bundle size and implemented lazy loading to improve page-load performance.",
-        "Collaborated with designers and backend engineers in Agile sprints to ship responsive, accessible, scalable web applications."
+        "Built and maintained full-stack web applications for client projects using React.js, TypeScript, Next.js and Node.js, with backend work in Python/FastAPI and ASP.NET Core.",
+        "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows.",
+        "Built dynamic address forms with the Google Maps Places API and improved the autofill logic, which improved address accuracy and checkout UX.",
+        "Split form components into reusable modules and introduced Redux for state management; reduced bundle size and added lazy loading to improve page-load times.",
+        "Worked with designers and backend engineers in Agile sprints. Received the company WOW Award (May 2023) and was nominated for Employee of the Year (2025)."
       ],
       "skills": [
         "React.js",
@@ -346,8 +348,7 @@
       "location": "Ahmedabad, India",
       "period": "Nov 2021 – Mar 2022",
       "description": [
-        "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript, and jQuery, adding interactive features to improve user engagement.",
-        "Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends using C# and SQL Server, and contributed to QA testing and bug fixing."
+        "Built responsive client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms/MVC backends (C#, SQL Server), including QA testing and bug fixing."
       ],
       "skills": [
         "HTML5",
@@ -364,17 +365,17 @@
   "education": [
     {
       "id": 1,
-      "degree": "Bachelor of Engineering in Computer Engineering",
+      "degree": "B.E. Computer Engineering",
       "institution": "D.A. Degree Engineering & Technology",
-      "period": "2020 - 2023",
-      "cgpa": "8.3/10.0"
+      "period": "2020 – 2023",
+      "cgpa": "8.3/10"
     },
     {
       "id": 2,
       "degree": "Diploma in Computer Engineering",
       "institution": "D.A. Diploma Engineering & Technology",
-      "period": "2016 - 2019",
-      "cgpa": "7.3/10.0"
+      "period": "2016 – 2019",
+      "cgpa": "7.3/10"
     }
   ],
   "sections": {
@@ -448,14 +449,15 @@
       "title": "MightyMeals",
       "category": "Web App",
       "description": "MightyMeals is a meal delivery platform offering fresh, chef-prepared meals with a seamless user experience. I worked on the React.js frontend, implementing a responsive and intuitive UI. My contributions included integrating secure payment gateways, optimizing the checkout flow, and developing the order creation functionality.",
-      "resumeDescription": "Meal delivery platform for fresh, chef-prepared meals. Built the responsive React.js frontend, integrated secure payment gateways, optimized the checkout flow, and developed the order creation functionality.",
+      "resumeSubtitle": "meal delivery platform, USA",
+      "resumeDescription": "Built the React.js frontend, integrated payment gateways, optimised the checkout flow and developed order creation. Stack: React.js, Python/FastAPI, WordPress.",
       "image": "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
       "technologies": [
         "React.js",
         "Python/FastAPI",
         "WordPress"
       ],
-      "demoLink": "https://mightymeals.com/",
+      "demoLink": "https://mightymeals.com",
       "demoLinkText": "Live Demo",
       "displayOrder": 1
     },
@@ -464,22 +466,24 @@
       "title": "By Best",
       "category": "Web App",
       "description": "By Best is an eCommerce platform for fashion and accessories, offering clothing for men, women, and kids, along with jewelry, sunglasses, and more. I worked on the React.js frontend, building responsive product pages, optimizing filtering and search functionality, and integrating dynamic cart and checkout experiences.",
-      "resumeDescription": "eCommerce platform for fashion and accessories. Built responsive React.js product pages, optimized product filtering and search, and integrated the dynamic cart and checkout with a Laravel backend.",
+      "resumeSubtitle": "fashion and accessories eCommerce",
+      "resumeDescription": "Built responsive React.js product pages, improved product filtering and search, and integrated the cart and checkout with a Laravel backend.",
       "image": "https://bybest.shop/assets/img/bybest-logo.png",
       "technologies": [
         "React.js",
         "Laravel"
       ],
-      "demoLink": "https://bybest.shop/",
+      "demoLink": "https://bybest.shop",
       "demoLinkText": "Live Demo",
       "displayOrder": 2
     },
     {
       "id": 3,
-      "title": "Fields In Trust",
+      "title": "Fields in Trust",
       "category": "Web App",
-      "description": "Fields In Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
-      "resumeDescription": "UK charity protecting parks, playgrounds, and green spaces. Built the ASP.NET MVC website in C# with Entity Framework: dynamic content management, secure and maintainable web forms, and location-based search for protected fields across the UK.",
+      "description": "Fields in Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
+      "resumeSubtitle": "UK charity for parks and green spaces",
+      "resumeDescription": "Built the ASP.NET MVC website in C# with Entity Framework: dynamic content management, secure web forms and location-based search for protected fields across the UK.",
       "image": "/assets/images/fit.jpg",
       "technologies": [
         "ASP.NET MVC",
@@ -487,7 +491,7 @@
         "Entity Framework",
         "Razor Pages"
       ],
-      "demoLink": "https://fieldsintrust.org/",
+      "demoLink": "https://fieldsintrust.org",
       "demoLinkText": "Live Demo",
       "displayOrder": 3
     }

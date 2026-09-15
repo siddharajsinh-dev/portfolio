@@ -46,7 +46,7 @@ const ContactSection = ({ content }: Props) => {
   const linkedinUrl       = contactData?.linkedinUrl       ?? "#";
   const githubUrl         = contactData?.githubUrl         ?? "#";
   const availabilityTitle = contactData?.availabilityTitle ?? "Currently Available";
-  const availabilityText  = contactData?.availabilityText  ?? "Open to full-time roles, freelance projects, and consulting. Response within 24 hours.";
+  const availabilityText  = contactData?.availabilityText  ?? "Remote · available during US Eastern and UK working hours · open to full-time (direct or via EOR) and contract roles";
 
   const contactItems = [
     { icon: MapPin, label: "Location", value: location,               href: undefined         },

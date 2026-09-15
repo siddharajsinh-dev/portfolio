@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { deriveCareer, resolveCareerTokens, resolveStat } from "@/lib/career";
 
 const DEFAULT_PARAGRAPHS = [
-  "I'm a Full-Stack Web Developer with 4+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
+  "I'm a Full-Stack Software Engineer with {{years}}+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
   "React and TypeScript are my primary tools of choice. I've spent the last few years building complex SPAs, optimizing performance, integrating payment gateways like Stripe, and shipping features that real users rely on every day.",
   "Outside of coding, I enjoy hiking, playing cricket, reading tech blogs, and contributing to open-source. I thrive in collaborative Agile environments and I'm always excited to take on new challenges.",
 ];

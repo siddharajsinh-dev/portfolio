@@ -17,7 +17,7 @@ const Home = () => {
   });
 
   useEffect(() => {
-    document.title = (content as any)?.site?.pageTitle ?? "Siddharajsinh Chauhan - Web Developer";
+    document.title = (content as any)?.site?.pageTitle ?? "Siddharajsinh Chauhan — Full-Stack Software Engineer";
   }, [content]);
 
   const c = content as any;

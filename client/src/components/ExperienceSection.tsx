@@ -158,7 +158,7 @@ const EducationCard = ({
 const ExperienceSection = ({ content }: Props) => {
   const experienceData = content?.experience    ?? defaultExperience;
   const educationData  = content?.education     ?? defaultEducation;
-  const highlight      = content?.experienceMeta?.highlight ?? "Led Stripe & Authorize.net payment integrations and Google Maps autocomplete features, improving checkout UX for thousands of users.";
+  const highlight      = content?.experienceMeta?.highlight ?? "Led Stripe and Authorize.net payment processing and ID.me identity verification integrations at ZealousWeb, delivering secure checkout and user-verification flows.";
   const expLocation    = content?.experienceMeta?.location  ?? content?.contact?.location ?? "";
 
   return (

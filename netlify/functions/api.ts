@@ -4,87 +4,314 @@ import { createHmac, randomBytes } from "crypto";
 
 // ── Default content (seeds Blobs on first deploy) ─────────────────────────────
 const DEFAULT_CONTENT = {
-  site: {
-    logoText: "SID.",
-    logoSubtext: "Full-Stack Dev",
-    fullName: "Siddharajsinh Chauhan",
-    tagline: "Crafting scalable, beautiful web experiences with modern technologies.",
-    pageTitle: "Siddharajsinh Chauhan - Web Developer",
-    hireMeText: "Open to full-time roles and freelance projects.",
+  "site": {
+    "logoText": "SID.",
+    "logoSubtext": "Full-Stack Engineer",
+    "fullName": "Siddharajsinh Chauhan",
+    "tagline": "Crafting scalable, beautiful web experiences with modern technologies.",
+    "pageTitle": "Siddharajsinh Chauhan — Full-Stack Software Engineer",
+    "hireMeText": "Open to full-time (direct or via EOR) and contract roles."
   },
-  hero: {
-    greeting: "Available for opportunities",
-    name: "Siddharajsinh Chauhan",
-    shortName: "Siddharajsinh",
-    roles: [
+  "hero": {
+    "greeting": "Available for opportunities",
+    "name": "Siddharajsinh Chauhan",
+    "shortName": "Siddharajsinh",
+    "roles": [
+      "Full-Stack Software Engineer",
       "React & Next.js Expert",
-      "Full-Stack Web Developer",
       "Node.js Engineer",
-      "TypeScript Enthusiast",
+      "TypeScript Enthusiast"
     ],
-    bio: "4+ years crafting scalable, high-performance web applications with React, TypeScript, and Node.js. I turn complex problems into clean, elegant solutions.",
-    stats: [
-      { value: "4+", label: "Years Exp" },
-      { value: "10+", label: "Projects" },
-      { value: "2", label: "Companies" },
+    "bio": "{{years}}+ years crafting scalable, high-performance web applications with React, TypeScript, and Node.js. I turn complex problems into clean, elegant solutions.",
+    "stats": [
+      {
+        "value": "{{years}}+",
+        "label": "Years Exp"
+      },
+      {
+        "value": "10+",
+        "label": "Projects"
+      },
+      {
+        "value": "{{companies}}",
+        "label": "Companies"
+      }
     ],
-    linkedinUrl: "https://www.linkedin.com/in/siddharajsinh-chauhan-410741199",
-    githubUrl: "https://github.com/",
-    email: "siddharajkc294000@gmail.com",
-    heroImage: "/assets-static/images/ImportedPhoto.760428188.70688.jpeg",
-    logoImage: "",
-    resumeHeadline: "Full-Stack Software Engineer",
-    resumeSubheadline: "React.js · TypeScript · Next.js · Node.js",
-    resumeSummary: "Full-Stack Software Engineer with {{years}}+ years of experience building production-grade web applications with React.js, TypeScript, Next.js, and Node.js. Develops backend services and REST APIs in Node.js/Express.js, Python/FastAPI, and ASP.NET Core, with third-party, payment, and authentication integrations. Owns technical architecture and delivery in close collaboration with clients and stakeholders.",
+    "linkedinUrl": "https://linkedin.com/in/siddharajsinh-chauhan-410741199",
+    "githubUrl": "",
+    "email": "siddharajkc294000@gmail.com",
+    "heroImage": "/assets-static/images/ImportedPhoto.760428188.70688.jpeg",
+    "logoImage": "/assets-static/images/sid-avatar.png",
+    "techBadges": [
+      "TypeScript",
+      "React.js",
+      "Next.js",
+      "Node.js"
+    ],
+    "techPills": [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "heroImagePosition": "50% 18%",
+    "heroImageZoom": 1,
+    "resumeHeadline": "Full-Stack Software Engineer",
+    "resumeSubheadline": "React.js · TypeScript · Next.js · Node.js",
+    "resumeSummary": "Full-stack software engineer with {{years}}+ years of experience building web applications with React.js, TypeScript, Next.js and Node.js. Backend work in Node.js/Express, Python/FastAPI and ASP.NET Core, including payment (Stripe, Authorize.net) and identity verification (ID.me) integrations for US and UK clients. Currently Lead Software Engineer at a US company, responsible for technical architecture, delivery and code review."
   },
-  about: {
-    paragraphs: [
-      "I'm a Full-Stack Web Developer with 4+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
+  "about": {
+    "paragraphs": [
+      "I'm a Full-Stack Software Engineer with {{years}}+ years of experience building and scaling production web applications. My passion lies in crafting intuitive, performant, and beautiful solutions — from pixel-perfect React UIs to resilient Node.js backends.",
       "React and TypeScript are my primary tools of choice. I've spent the last few years building complex SPAs, optimizing performance, integrating payment gateways like Stripe, and shipping features that real users rely on every day.",
-      "Outside of coding, I enjoy hiking, playing cricket, reading tech blogs, and contributing to open-source. I thrive in collaborative Agile environments and I'm always excited to take on new challenges.",
+      "Outside of coding, I enjoy hiking, playing cricket, reading tech blogs, and contributing to open-source. I thrive in collaborative Agile environments and I'm always excited to take on new challenges."
     ],
-  },
-  contact: {
-    location: "Ahmedabad, India",
-    email: "siddharajkc294000@gmail.com",
-    phone: "+91 8320032657",
-    linkedinUrl: "https://www.linkedin.com/in/siddharajsinh-chauhan-410741199",
-    githubUrl: "https://github.com/",
-  },
-  skills: {
-    frontend: ["React.js","Next.js","TypeScript","JavaScript (ES6+)","Redux","Tailwind CSS","HTML5","CSS3"],
-    backend: ["Node.js","Express.js","REST APIs","Python","FastAPI","ASP.NET Core"],
-    database: ["PostgreSQL","Microsoft SQL Server","MongoDB","Entity Framework"],
-    devops: ["Git","GitHub","Docker","AWS","CI/CD","Linux"],
-    additional: ["ReactJS", "NextJS", "TypeScript", "JavaScript", "NodeJS", "Python - FastAPI", "PostgreSQL", "MongoDB", "Bootstrap CSS", "HTML", "CSS", "ASP.NET Core", "ASP.NET MVC", "MSSQL"],
-    alsoComfortableWith: "Stripe, Authorize.net, ID.me, Google Maps Places API, ASP.NET MVC, C#, jQuery, Bootstrap, Jest",
-    languages: [
-      { name: "English",  level: "Professional Working" },
-      { name: "Gujarati", level: "Native" },
-      { name: "Hindi",    level: "Conversational" },
+    "subheading": "Full-Stack Software Engineer based in Ahmedabad, India — building production-grade web apps since {{since}}.",
+    "stats": [
+      {
+        "value": "{{years}}+",
+        "label": "Years of Experience",
+        "sub": "Since {{since}}"
+      },
+      {
+        "value": "10+",
+        "label": "Projects Delivered",
+        "sub": "Live in production"
+      },
+      {
+        "value": "{{companies}}",
+        "label": "Companies",
+        "sub": "{{companyList}}"
+      },
+      {
+        "value": "8.3",
+        "label": "CGPA",
+        "sub": "B.E. Computer Engg."
+      }
     ],
-    coreStack: [
-      { name: "TypeScript / JavaScript", note: "Primary language on every project since 2021" },
-      { name: "React.js / Next.js", note: "Frontend for MightyMeals, By Best and daily client work since 2022" },
-      { name: "Node.js / Express", note: "API and backend services alongside Python / FastAPI" },
-      { name: "Git & DevOps", note: "Git, GitHub, Docker and CI/CD on every project" },
-      { name: "ASP.NET Core", note: "Fields In Trust and client work, on an ASP.NET MVC / Razor background" },
+    "whatIDo": [
+      {
+        "title": "React / Next.js",
+        "desc": "Pixel-perfect, accessible UIs with TypeScript, Redux, and Framer Motion"
+      },
+      {
+        "title": "Node.js / APIs",
+        "desc": "Express, REST APIs, PostgreSQL — scalable backends built for production"
+      },
+      {
+        "title": "Cloud & DevOps",
+        "desc": "AWS, Docker, CI/CD pipelines, Vite, and deployment automation"
+      },
+      {
+        "title": "Performance",
+        "desc": "Bundle splitting, lazy loading, and caching strategies for fast UX"
+      }
     ],
+    "careerStart": "2021-11"
   },
-  experience: [
+  "contact": {
+    "location": "Ahmedabad, India",
+    "email": "siddharajkc294000@gmail.com",
+    "phone": "+91 83200 32657",
+    "linkedinUrl": "https://linkedin.com/in/siddharajsinh-chauhan-410741199",
+    "githubUrl": "https://github.com/Sid7005",
+    "availabilityTitle": "Currently Available",
+    "availabilityText": "Remote · available during US Eastern and UK working hours · open to full-time (direct or via EOR) and contract roles"
+  },
+  "skills": {
+    "frontend": [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "Redux",
+      "Tailwind CSS",
+      "HTML5",
+      "CSS3"
+    ],
+    "backend": [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "Python",
+      "FastAPI",
+      "ASP.NET Core",
+      "ASP.NET MVC",
+      "C#",
+      "Entity Framework"
+    ],
+    "database": [
+      "PostgreSQL",
+      "Microsoft SQL Server",
+      "MongoDB"
+    ],
+    "devops": [
+      "Git",
+      "GitHub",
+      "Docker",
+      "AWS",
+      "CI/CD",
+      "Jest"
+    ],
+    "additional": [
+      "ReactJS",
+      "NextJS",
+      "TypeScript",
+      "JavaScript",
+      "NodeJS",
+      "Python - FastAPI",
+      "PostgreSQL",
+      "MongoDB",
+      "Bootstrap CSS",
+      "HTML",
+      "CSS",
+      "ASP.NET Core",
+      "ASP.NET MVC",
+      "MSSQL"
+    ],
+    "coreStack": [
+      {
+        "name": "TypeScript / JavaScript",
+        "note": "Primary language on every project since 2021"
+      },
+      {
+        "name": "React.js / Next.js",
+        "note": "Frontend for MightyMeals, By Best and daily client work since 2022"
+      },
+      {
+        "name": "Node.js / Express",
+        "note": "API and backend services alongside Python / FastAPI"
+      },
+      {
+        "name": "Git & DevOps",
+        "note": "Git, GitHub, Docker and CI/CD on every project"
+      },
+      {
+        "name": "ASP.NET Core",
+        "note": "Fields in Trust and client work, on an ASP.NET MVC / Razor background"
+      }
+    ],
+    "items": [
+      {
+        "name": "React.js",
+        "category": "frontend"
+      },
+      {
+        "name": "Next.js",
+        "category": "frontend"
+      },
+      {
+        "name": "TypeScript",
+        "category": "frontend"
+      },
+      {
+        "name": "JavaScript",
+        "category": "frontend"
+      },
+      {
+        "name": "Tailwind CSS",
+        "category": "frontend"
+      },
+      {
+        "name": "Redux",
+        "category": "frontend"
+      },
+      {
+        "name": "HTML5",
+        "category": "frontend"
+      },
+      {
+        "name": "CSS3",
+        "category": "frontend"
+      },
+      {
+        "name": "Node.js",
+        "category": "backend"
+      },
+      {
+        "name": "Express.js",
+        "category": "backend"
+      },
+      {
+        "name": "Python",
+        "category": "backend"
+      },
+      {
+        "name": "FastAPI",
+        "category": "backend"
+      },
+      {
+        "name": "ASP.NET",
+        "category": "backend"
+      },
+      {
+        "name": "PostgreSQL",
+        "category": "database"
+      },
+      {
+        "name": "MongoDB",
+        "category": "database"
+      },
+      {
+        "name": "MySQL",
+        "category": "database"
+      },
+      {
+        "name": "Git",
+        "category": "devops"
+      },
+      {
+        "name": "GitHub",
+        "category": "devops"
+      },
+      {
+        "name": "Docker",
+        "category": "devops"
+      },
+      {
+        "name": "Vite",
+        "category": "devops"
+      },
+      {
+        "name": "Webpack",
+        "category": "devops"
+      }
+    ],
+    "alsoComfortableWith": "Stripe, Authorize.net, ID.me, Google Maps Places API, authentication",
+    "languages": [
+      {
+        "name": "English",
+        "level": "Professional Working"
+      },
+      {
+        "name": "Gujarati",
+        "level": "Native"
+      },
+      {
+        "name": "Hindi",
+        "level": "Conversational"
+      }
+    ]
+  },
+  "experienceMeta": {
+    "highlight": "Led Stripe and Authorize.net payment processing and ID.me identity verification integrations at ZealousWeb, delivering secure checkout and user-verification flows.",
+    "location": "Based in Ahmedabad, India · Open to remote"
+  },
+  "experience": [
     {
-      id: 1,
-      position: "Lead Software Engineer",
-      company: "FlatFour Ventures",
-      location: "USA",
-      period: "Jul 2026 – Present",
-      description: [
-        "Own end-to-end delivery of full-stack web applications built with React.js, TypeScript, Next.js, and Node.js, from technical architecture through release.",
-        "Design and build backend services and REST APIs, integrating third-party services, payment gateways, and authentication to deliver secure, scalable, and maintainable solutions.",
-        "Lead and mentor engineers through code reviews and shared engineering standards, raising code quality and consistency across the codebase.",
-        "Collaborate directly with clients and cross-functional stakeholders to define requirements, scope technical solutions, and keep delivery on schedule."
+      "id": 1,
+      "position": "Lead Software Engineer",
+      "company": "FlatFour Ventures",
+      "location": "USA · Remote",
+      "period": "Jul 2026 – Present",
+      "description": [
+        "Own delivery of full-stack web applications built with React.js, TypeScript, Next.js and Node.js, from technical architecture through release.",
+        "Design and build backend services and REST APIs, integrating third-party services, payment gateways and authentication.",
+        "Review code and set engineering standards for the team; mentor other engineers.",
+        "Work directly with clients and stakeholders to define requirements, scope solutions and keep delivery on schedule."
       ],
-      skills: [
+      "skills": [
         "React.js",
         "TypeScript",
         "Next.js",
@@ -95,20 +322,19 @@ const DEFAULT_CONTENT = {
       ]
     },
     {
-      id: 2,
-      position: "Web Developer",
-      company: "ZealousWeb Technologies Pvt. Ltd.",
-      location: "Ahmedabad, India",
-      period: "Apr 2022 – Jun 2026",
-      description: [
-        "Engineered and maintained production-grade full-stack web applications using React.js, TypeScript, Next.js, and Node.js, with backend work in Python/FastAPI and ASP.NET Core across client projects.",
-        "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows for production applications.",
-        "Built dynamic address forms with the Google Maps Places API and refined autofill logic, improving data accuracy and checkout UX.",
-        "Strengthened frontend architecture by modularizing form components into reusable building blocks and adopting Redux for predictable state management.",
-        "Optimized bundle size and implemented lazy loading to improve page-load performance.",
-        "Collaborated with designers and backend engineers in Agile sprints to ship responsive, accessible, scalable web applications."
+      "id": 2,
+      "position": "Web Developer",
+      "company": "ZealousWeb Technologies Pvt. Ltd.",
+      "location": "Ahmedabad, India",
+      "period": "Apr 2022 – Jun 2026",
+      "description": [
+        "Built and maintained full-stack web applications for client projects using React.js, TypeScript, Next.js and Node.js, with backend work in Python/FastAPI and ASP.NET Core.",
+        "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows.",
+        "Built dynamic address forms with the Google Maps Places API and improved the autofill logic, which improved address accuracy and checkout UX.",
+        "Split form components into reusable modules and introduced Redux for state management; reduced bundle size and added lazy loading to improve page-load times.",
+        "Worked with designers and backend engineers in Agile sprints. Received the company WOW Award (May 2023) and was nominated for Employee of the Year (2025)."
       ],
-      skills: [
+      "skills": [
         "React.js",
         "TypeScript",
         "Next.js",
@@ -121,16 +347,15 @@ const DEFAULT_CONTENT = {
       ]
     },
     {
-      id: 3,
-      position: "Trainee",
-      company: "Aark Inosoft",
-      location: "Ahmedabad, India",
-      period: "Nov 2021 – Mar 2022",
-      description: [
-        "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript, and jQuery, adding interactive features to improve user engagement.",
-        "Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends using C# and SQL Server, and contributed to QA testing and bug fixing."
+      "id": 3,
+      "position": "Trainee",
+      "company": "Aark Inosoft",
+      "location": "Ahmedabad, India",
+      "period": "Nov 2021 – Mar 2022",
+      "description": [
+        "Built responsive client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms/MVC backends (C#, SQL Server), including QA testing and bug fixing."
       ],
-      skills: [
+      "skills": [
         "HTML5",
         "CSS3",
         "JavaScript",
@@ -142,81 +367,156 @@ const DEFAULT_CONTENT = {
       ]
     }
   ],
-  education: [
-    { id: 1, degree: "Bachelor of Engineering in Computer Engineering", institution: "D.A. Degree Engineering & Technology", period: "2020 - 2023", cgpa: "8.3/10.0" },
-    { id: 2, degree: "Diploma in Computer Engineering", institution: "D.A. Diploma Engineering & Technology", period: "2016 - 2019", cgpa: "7.3/10.0" },
-  ],
-  awards: [
+  "education": [
     {
-      id: 1,
-      title: "WOW Award",
-      issuer: "ZealousWeb Technologies Pvt. Ltd.",
-      date: "May 2023",
-      note: ""
+      "id": 1,
+      "degree": "B.E. Computer Engineering",
+      "institution": "D.A. Degree Engineering & Technology",
+      "period": "2020 – 2023",
+      "cgpa": "8.3/10"
     },
     {
-      id: 2,
-      title: "Employee of the Year Nominee",
-      issuer: "ZealousWeb Technologies Pvt. Ltd.",
-      date: "2025",
-      note: ""
+      "id": 2,
+      "degree": "Diploma in Computer Engineering",
+      "institution": "D.A. Diploma Engineering & Technology",
+      "period": "2016 – 2019",
+      "cgpa": "7.3/10"
     }
   ],
-  sections: {
-    hero: true,
-    about: true,
-    skills: true,
-    experience: true,
-    projects: true,
-    testimonials: false,
-    contact: true,
+  "sections": {
+    "hero": true,
+    "about": true,
+    "skills": true,
+    "experience": true,
+    "projects": true,
+    "testimonials": false,
+    "contact": true
   },
-  testimonials: [
-    { id: 1, name: "Ravi Patel", role: "Product Manager", company: "ZealousWeb Technologies", quote: "Sid turned around a complex Stripe + Authorize.net integration in record time. His TypeScript is clean, his PRs are well-structured, and he always asks the right clarifying questions before diving in.", rating: 5, color: "#7c3aed" },
-    { id: 2, name: "Anita Sharma", role: "Lead Designer", company: "ZealousWeb Technologies", quote: "Working with Sid on the React UI was a pleasure. He translates Figma comps pixel-perfectly and proactively suggests micro-animations that genuinely improve the UX rather than just adding noise.", rating: 5, color: "#2563eb" },
-    { id: 3, name: "Mihir Desai", role: "Backend Engineer", company: "Aark Digital", quote: "Sid's Node/Express APIs are consistently well-thought-out — proper error handling, sensible status codes, and he writes integration tests without being asked. A developer you can actually depend on.", rating: 5, color: "#06b6d4" },
-    { id: 4, name: "Priya Mehta", role: "Engineering Manager", company: "ZealousWeb Technologies", quote: "He shipped a Google Maps autocomplete feature end-to-end in 3 days with zero reported bugs. Strong self-starter who doesn't need his hand held through ambiguous requirements.", rating: 5, color: "#ec4899" },
-    { id: 5, name: "Jatin Vora", role: "Full-Stack Developer", company: "Freelance Collaborator", quote: "We built a multi-tenant SaaS dashboard together. Sid's performance optimisations — bundle splitting, lazy routes, memo boundaries — cut initial load from 4.2 s to under 1.3 s. Impressive stuff.", rating: 5, color: "#a78bfa" },
-    { id: 6, name: "Sneha Kapoor", role: "QA Engineer", company: "ZealousWeb Technologies", quote: "His code quality means our QA cycles are shorter. Fewer regressions, self-documenting components, and he actually writes unit tests alongside features. A rare find in the frontend world.", rating: 5, color: "#34d399" },
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Ravi Patel",
+      "role": "Product Manager",
+      "company": "ZealousWeb Technologies",
+      "quote": "Sid turned around a complex Stripe + Authorize.net integration in record time. His TypeScript is clean, his PRs are well-structured, and he always asks the right clarifying questions before diving in.",
+      "rating": 5,
+      "color": "#7c3aed"
+    },
+    {
+      "id": 2,
+      "name": "Anita Sharma",
+      "role": "Lead Designer",
+      "company": "ZealousWeb Technologies",
+      "quote": "Working with Sid on the React UI was a pleasure. He translates Figma comps pixel-perfectly and proactively suggests micro-animations that genuinely improve the UX rather than just adding noise.",
+      "rating": 5,
+      "color": "#2563eb"
+    },
+    {
+      "id": 3,
+      "name": "Mihir Desai",
+      "role": "Backend Engineer",
+      "company": "Aark Digital",
+      "quote": "Sid's Node/Express APIs are consistently well-thought-out — proper error handling, sensible status codes, and he writes integration tests without being asked. A developer you can actually depend on.",
+      "rating": 5,
+      "color": "#06b6d4"
+    },
+    {
+      "id": 4,
+      "name": "Priya Mehta",
+      "role": "Engineering Manager",
+      "company": "ZealousWeb Technologies",
+      "quote": "He shipped a Google Maps autocomplete feature end-to-end in 3 days with zero reported bugs. Strong self-starter who doesn't need his hand held through ambiguous requirements.",
+      "rating": 5,
+      "color": "#ec4899"
+    },
+    {
+      "id": 5,
+      "name": "Jatin Vora",
+      "role": "Full-Stack Developer",
+      "company": "Freelance Collaborator",
+      "quote": "We built a multi-tenant SaaS dashboard together. Sid's performance optimisations — bundle splitting, lazy routes, memo boundaries — cut initial load from 4.2 s to under 1.3 s. Impressive stuff.",
+      "rating": 5,
+      "color": "#a78bfa"
+    },
+    {
+      "id": 6,
+      "name": "Sneha Kapoor",
+      "role": "QA Engineer",
+      "company": "ZealousWeb Technologies",
+      "quote": "His code quality means our QA cycles are shorter. Fewer regressions, self-documenting components, and he actually writes unit tests alongside features. A rare find in the frontend world.",
+      "rating": 5,
+      "color": "#34d399"
+    }
   ],
-  projects: [
+  "projects": [
     {
-      id: 1,
-      title: "MightyMeals",
-      category: "Web App",
-      description: "MightyMeals is a meal delivery platform offering fresh, chef-prepared meals with a seamless user experience. I worked on the React.js frontend, implementing a responsive and intuitive UI. My contributions included integrating secure payment gateways, optimizing the checkout flow, and developing the order creation functionality.",
-      resumeDescription: "Meal delivery platform for fresh, chef-prepared meals. Built the responsive React.js frontend, integrated secure payment gateways, optimized the checkout flow, and developed the order creation functionality.",
-      image: "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
-      technologies: ["React.js","Python/FastAPI","WordPress"],
-      demoLink: "https://mightymeals.com/",
-      demoLinkText: "Live Demo",
-      displayOrder: 1,
+      "id": 1,
+      "title": "MightyMeals",
+      "category": "Web App",
+      "description": "MightyMeals is a meal delivery platform offering fresh, chef-prepared meals with a seamless user experience. I worked on the React.js frontend, implementing a responsive and intuitive UI. My contributions included integrating secure payment gateways, optimizing the checkout flow, and developing the order creation functionality.",
+      "resumeSubtitle": "meal delivery platform, USA",
+      "resumeDescription": "Built the React.js frontend, integrated payment gateways, optimised the checkout flow and developed order creation. Stack: React.js, Python/FastAPI, WordPress.",
+      "image": "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
+      "technologies": [
+        "React.js",
+        "Python/FastAPI",
+        "WordPress"
+      ],
+      "demoLink": "https://mightymeals.com",
+      "demoLinkText": "Live Demo",
+      "displayOrder": 1
     },
     {
-      id: 2,
-      title: "By Best",
-      category: "Web App",
-      description: "By Best is an eCommerce platform for fashion and accessories, offering clothing for men, women, and kids, along with jewelry, sunglasses, and more. I worked on the React.js frontend, building responsive product pages, optimizing filtering and search functionality, and integrating dynamic cart and checkout experiences.",
-      resumeDescription: "eCommerce platform for fashion and accessories. Built responsive React.js product pages, optimized product filtering and search, and integrated the dynamic cart and checkout experience against a Laravel backend.",
-      image: "https://bybest.shop/assets/img/bybest-logo.png",
-      technologies: ["React.js","Laravel"],
-      demoLink: "https://bybest.shop/",
-      demoLinkText: "Live Demo",
-      displayOrder: 2,
+      "id": 2,
+      "title": "By Best",
+      "category": "Web App",
+      "description": "By Best is an eCommerce platform for fashion and accessories, offering clothing for men, women, and kids, along with jewelry, sunglasses, and more. I worked on the React.js frontend, building responsive product pages, optimizing filtering and search functionality, and integrating dynamic cart and checkout experiences.",
+      "resumeSubtitle": "fashion and accessories eCommerce",
+      "resumeDescription": "Built responsive React.js product pages, improved product filtering and search, and integrated the cart and checkout with a Laravel backend.",
+      "image": "https://bybest.shop/assets/img/bybest-logo.png",
+      "technologies": [
+        "React.js",
+        "Laravel"
+      ],
+      "demoLink": "https://bybest.shop",
+      "demoLinkText": "Live Demo",
+      "displayOrder": 2
     },
     {
-      id: 3,
-      title: "Fields In Trust",
-      category: "Web App",
-      description: "Fields In Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
-      resumeDescription: "UK charity protecting parks, playgrounds, and green spaces. Developed the ASP.NET MVC website in C# with Entity Framework: dynamic content management, secure and maintainable web forms, and location-based search for protected fields across the UK.",
-      image: "/assets-static/images/fit.jpg",
-      technologies: ["ASP.NET MVC","C#","Entity Framework","Razor Pages"],
-      demoLink: "https://fieldsintrust.org/",
-      demoLinkText: "Live Demo",
-      displayOrder: 3,
-    },
+      "id": 3,
+      "title": "Fields in Trust",
+      "category": "Web App",
+      "description": "Fields in Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
+      "resumeSubtitle": "UK charity for parks and green spaces",
+      "resumeDescription": "Built the ASP.NET MVC website in C# with Entity Framework: dynamic content management, secure web forms and location-based search for protected fields across the UK.",
+      "image": "/assets-static/images/fit.jpg",
+      "technologies": [
+        "ASP.NET MVC",
+        "C#",
+        "Entity Framework",
+        "Razor Pages"
+      ],
+      "demoLink": "https://fieldsintrust.org",
+      "demoLinkText": "Live Demo",
+      "displayOrder": 3
+    }
   ],
+  "awards": [
+    {
+      "id": 1,
+      "title": "WOW Award",
+      "issuer": "ZealousWeb Technologies Pvt. Ltd.",
+      "date": "May 2023",
+      "note": ""
+    },
+    {
+      "id": 2,
+      "title": "Employee of the Year Nominee",
+      "issuer": "ZealousWeb Technologies Pvt. Ltd.",
+      "date": "2025",
+      "note": ""
+    }
+  ]
 };
 
 // ── Auth helpers (stateless HMAC-signed token, no extra library needed) ────────

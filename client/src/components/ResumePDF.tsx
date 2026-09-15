@@ -6,360 +6,105 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   Link,
+  Font,
 } from "@react-pdf/renderer";
 
-/* ── Palette ── */
-const NAVY      = "#1a3a5c";   // headers, accent
-const TEAL      = "#0f7490";   // links, company names
-const DARK      = "#1c1c2e";   // body text
-const MID       = "#4a5568";   // secondary text
-const MUTED     = "#718096";   // meta / dates
-const SIDEBAR   = "#f0f4f8";   // left column bg
-const WHITE     = "#ffffff";
-const RULE      = "#c8d8e8";   // horizontal rules
-const PILL_BG   = "#e8f0f8";
-const PILL_TEXT = "#1a3a5c";
-const TAG_BG    = "#eef2f7";
-const TAG_TEXT  = "#334155";
+/* ══════════════════════════════════════════════════════════════
+   ATS-SAFE RESUME
+   Single column, reading order top to bottom, one font, one accent
+   colour, real text everywhere, standard "•" bullets, no photo.
+   Mirrors resume/resume.html so the site download and the static
+   file look the same; this one is driven by the live admin content.
+   ══════════════════════════════════════════════════════════════ */
 
-const SIDEBAR_WIDTH = "28%";
-/** A4 height in points. With wrap off, react-pdf sizes the page to its
- *  content, so this keeps a short page at exactly A4 while a page that runs
- *  over still grows rather than paginating. */
-const A4_HEIGHT = 841.89;
+/** Carlito (SIL OFL, metric-compatible with Calibri) ships in client/assets/fonts
+ *  and is served at /assets-static in dev and on Netlify. A render check running
+ *  in Node can point RESUME_FONT_DIR at the folder on disk instead. */
+const FONT_DIR =
+  typeof window === "undefined" && typeof process !== "undefined" && process.env.RESUME_FONT_DIR
+    ? process.env.RESUME_FONT_DIR
+    : "/assets-static/fonts";
+
+Font.register({
+  family: "Carlito",
+  fonts: [
+    { src: `${FONT_DIR}/Carlito-Regular.ttf` },
+    { src: `${FONT_DIR}/Carlito-Bold.ttf`, fontWeight: 700 },
+    { src: `${FONT_DIR}/Carlito-Italic.ttf`, fontStyle: "italic" },
+    { src: `${FONT_DIR}/Carlito-BoldItalic.ttf`, fontWeight: 700, fontStyle: "italic" },
+  ],
+});
+
+// ATS rule: never hyphenate a word at a line end.
+Font.registerHyphenationCallback((word) => [word]);
+
+const NAVY = "#1F3A5F";
+const INK  = "#000000";
+const GREY = "#555555";
+
+/** US Letter is 612 x 792 pt. Margins: 0.35 in top, 0.47 in sides, 0.5 in bottom. */
+const LETTER_HEIGHT = 792;
+const MARGIN_X = 34;
+const MARGIN_TOP = 25;
+const MARGIN_BOTTOM = 36;
 
 const s = StyleSheet.create({
-  /* Page */
   page: {
-    fontFamily: "Helvetica",
-    fontSize: 9,
-    color: DARK,
-    backgroundColor: WHITE,
-    flexDirection: "column",
-    minHeight: A4_HEIGHT,
-  },
-
-  /* ── Header band ── */
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 18,
-    paddingBottom: 13,
-    paddingHorizontal: 24,
-    borderBottomWidth: 1.5,
-    borderBottomColor: NAVY,
-    gap: 14,
-  },
-  photoRing: {
-    borderRadius: 999,
-    borderWidth: 2,
-    borderColor: NAVY,
-    overflow: "hidden",
-    width: 58,
-    height: 58,
-  },
-  photo: {
-    width: 58,
-    height: 58,
-    borderRadius: 999,
-    objectFit: "cover",
-    objectPosition: "center",
-  },
-  identity: {
-    flex: 1,
-  },
-  name: {
-    color: NAVY,
-    fontSize: 19,
-    fontFamily: "Helvetica-Bold",
-    letterSpacing: 0.2,
-    marginBottom: 3,
-  },
-  headline: {
-    color: TEAL,
-    fontSize: 9,
-    fontFamily: "Helvetica-Bold",
-    letterSpacing: 1.4,
-    textTransform: "uppercase",
-    marginBottom: 3,
-  },
-  subheadline: {
-    color: MUTED,
-    fontSize: 7.5,
-    letterSpacing: 0.3,
-  },
-  contactBlock: {
-    alignItems: "flex-end",
-    gap: 2.5,
-  },
-  ctRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-  ctLabel: {
-    color: MUTED,
-    fontSize: 6,
-    fontFamily: "Helvetica-Bold",
-    textTransform: "uppercase",
-    letterSpacing: 0.6,
-  },
-  ctVal: {
-    color: MID,
-    fontSize: 7.5,
-  },
-  ctLink: {
-    color: TEAL,
-    fontSize: 7.5,
-    textDecoration: "none",
-  },
-
-  /* ── Body: two columns ── */
-  body: {
-    flex: 1,
-    flexDirection: "row",
-  },
-
-  /* ── Sidebar ── */
-  sidebar: {
-    width: SIDEBAR_WIDTH,
-    backgroundColor: SIDEBAR,
-    paddingTop: 14,
-    paddingBottom: 12,
-    paddingHorizontal: 14,
-    borderRightWidth: 1,
-    borderRightColor: RULE,
-  },
-  sbSection: {
-    marginBottom: 13,
-  },
-  sbSectionTitle: {
-    color: NAVY,
-    fontSize: 7.5,
-    fontFamily: "Helvetica-Bold",
-    textTransform: "uppercase",
-    letterSpacing: 1.1,
-    marginBottom: 7,
-    paddingBottom: 3,
-    borderBottomWidth: 1,
-    borderBottomColor: RULE,
-  },
-
-  /* Skill pills */
-  skillGroup: {
-    marginBottom: 6,
-  },
-  skillLabel: {
-    color: MUTED,
-    fontSize: 6.5,
-    fontFamily: "Helvetica-Bold",
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
-    marginBottom: 3.5,
-  },
-  pillRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 3,
-  },
-  pill: {
-    backgroundColor: PILL_BG,
-    color: PILL_TEXT,
-    fontSize: 6.5,
-    fontFamily: "Helvetica-Bold",
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    borderRadius: 3,
-  },
-  alsoWith: {
-    color: MID,
-    fontSize: 6.8,
-    lineHeight: 1.5,
-  },
-
-  /* Education */
-  eduItem: {
-    marginBottom: 7,
-  },
-  eduDeg: {
-    color: DARK,
-    fontSize: 7.5,
-    fontFamily: "Helvetica-Bold",
-    lineHeight: 1.3,
-    marginBottom: 1.5,
-  },
-  eduInst: {
-    color: MID,
-    fontSize: 7,
-    marginBottom: 1,
-  },
-  eduMeta: {
-    color: MUTED,
-    fontSize: 6.8,
-  },
-
-  /* Awards */
-  awardItem: {
-    marginBottom: 6,
-  },
-  awardTitle: {
-    color: DARK,
-    fontSize: 7.5,
-    fontFamily: "Helvetica-Bold",
-    marginBottom: 1.5,
-  },
-  awardIssuer: {
-    color: MID,
-    fontSize: 7,
-    marginBottom: 1,
-  },
-  awardMeta: {
-    color: MUTED,
-    fontSize: 6.8,
-  },
-
-  /* ── Main column ── */
-  main: {
-    flex: 1,
-    paddingTop: 14,
-    paddingBottom: 12,
-    paddingHorizontal: 20,
-  },
-  section: {
-    marginBottom: 10,
-  },
-  lastSection: {
-    marginBottom: 0,
-  },
-  sectionHead: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 7,
-    gap: 6,
-  },
-  sectionTitle: {
-    color: NAVY,
-    fontSize: 8.5,
-    fontFamily: "Helvetica-Bold",
-    textTransform: "uppercase",
-    letterSpacing: 1.3,
-  },
-  sectionLine: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: RULE,
-    marginBottom: 1,
-  },
-
-  /* Summary */
-  summary: {
-    color: MID,
-    fontSize: 8.2,
-    lineHeight: 1.5,
-  },
-
-  /* Experience */
-  expItem: {
-    marginBottom: 7,
-  },
-  expTopRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 2,
-  },
-  expPos: {
-    color: DARK,
+    fontFamily: "Carlito",
     fontSize: 9.5,
-    fontFamily: "Helvetica-Bold",
-  },
-  expPeriod: {
-    color: WHITE,
-    fontSize: 6.8,
-    fontFamily: "Helvetica-Bold",
-    backgroundColor: NAVY,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 3,
-  },
-  expCoRow: {
-    flexDirection: "row",
-    alignItems: "baseline",
-    gap: 4,
-    marginBottom: 4,
-  },
-  expCo: {
-    color: TEAL,
-    fontSize: 8,
-    fontFamily: "Helvetica-Bold",
-  },
-  expLoc: {
-    color: MUTED,
-    fontSize: 7.2,
-  },
-  bullet: {
-    flexDirection: "row",
-    marginBottom: 2.2,
-  },
-  bulletDot: {
-    color: TEAL,
-    fontSize: 8,
-    marginRight: 5,
-    lineHeight: 1.4,
-  },
-  bulletTxt: {
-    color: MID,
-    fontSize: 7.9,
-    flex: 1,
-    lineHeight: 1.4,
-  },
-  tagRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 3,
-    marginTop: 3.5,
-  },
-  tag: {
-    backgroundColor: TAG_BG,
-    color: TAG_TEXT,
-    fontSize: 6.3,
-    paddingHorizontal: 4.5,
-    paddingVertical: 1.5,
-    borderRadius: 3,
-    borderWidth: 0.5,
-    borderColor: RULE,
+    lineHeight: 1.2,
+    color: INK,
+    backgroundColor: "#ffffff",
+    paddingTop: MARGIN_TOP,
+    paddingBottom: MARGIN_BOTTOM,
+    paddingHorizontal: MARGIN_X,
+    minHeight: LETTER_HEIGHT,
   },
 
-  /* Projects */
-  projItem: {
-    marginBottom: 6,
-    paddingLeft: 8,
-    borderLeftWidth: 2,
-    borderLeftColor: TEAL,
+  /* Header block (centred) */
+  header:       { alignItems: "center" },
+  name:         { fontSize: 17, fontWeight: 700, color: NAVY, textTransform: "uppercase", letterSpacing: 0.5, lineHeight: 1.15, textAlign: "center" },
+  title:        { fontSize: 11, fontWeight: 700, marginTop: 3, textAlign: "center" },
+  contact:      { fontSize: 9.5, color: GREY, marginTop: 2, textAlign: "center" },
+  availability: { fontSize: 9.5, color: GREY, fontStyle: "italic", marginTop: 1, textAlign: "center" },
+  link:         { color: GREY, textDecoration: "none" },
+
+  /* Section headings */
+  h2: {
+    fontSize: 10.5,
+    fontWeight: 700,
+    color: NAVY,
+    textTransform: "uppercase",
+    letterSpacing: 0.75,
+    lineHeight: 1.2,
+    borderBottomWidth: 1,
+    borderBottomColor: NAVY,
+    paddingBottom: 1.5,
+    marginTop: 7,
+    marginBottom: 3,
   },
-  projTopRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 2,
-  },
-  projTitle: {
-    color: DARK,
-    fontSize: 8.8,
-    fontFamily: "Helvetica-Bold",
-  },
-  projLink: {
-    color: TEAL,
-    fontSize: 6.8,
-    textDecoration: "none",
-  },
-  projDesc: {
-    color: MID,
-    fontSize: 7.9,
-    lineHeight: 1.4,
-  },
+
+  /* Technical skills: label + list, no bullets */
+  skillLine: { marginBottom: 1.5 },
+
+  /* Entries */
+  entry:    { marginBottom: 4 },
+  eduEntry: { marginBottom: 3 },
+  row:      { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
+  roleWrap: { flex: 1, paddingRight: 12 },
+  role:     { fontSize: 10.5, fontWeight: 700 },
+  eduRole:  { fontSize: 10, fontWeight: 700 },
+  dates:    { fontSize: 9.5, color: GREY },
+  org:      { fontStyle: "italic" },
+  grey:     { color: GREY },
+
+  /* Bullets */
+  list:   { marginTop: 1.5 },
+  li:     { flexDirection: "row", marginBottom: 1 },
+  dot:    { width: 10 },
+  liText: { flex: 1 },
+  bold:   { fontWeight: 700 },
 });
 
 /* ── Types ── */
@@ -373,13 +118,19 @@ export interface ResumeData {
     resumeSubheadline?: string;
     resumeSummary?: string;
     email: string;
-    heroImage: string;
+    heroImage?: string;
     heroImagePosition?: string;
     heroImageZoom?: number;
     linkedinUrl: string;
     githubUrl: string;
   };
-  contact: { location: string; phone: string; email: string };
+  contact: {
+    location: string;
+    phone: string;
+    email: string;
+    linkedinUrl?: string;
+    availabilityText?: string;
+  };
   skills: {
     frontend: string[];
     backend: string[];
@@ -411,6 +162,7 @@ export interface ResumeData {
   projects: Array<{
     title: string;
     description: string;
+    resumeSubtitle?: string;
     resumeDescription?: string;
     technologies: string[];
     demoLink: string;
@@ -423,10 +175,15 @@ function isRealUrl(url: string | undefined): url is string {
   return u !== "" && u !== "#";
 }
 
+/** "https://www.linkedin.com/in/x/" → "linkedin.com/in/x": visible, scannable, still clickable. */
+function displayUrl(url: string): string {
+  return url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+}
+
 const RESUME_DESC_MAX = 220;
 
-/** Short project blurb for the PDF: the hand-written one if set, otherwise the
- *  full description cut at the last full sentence that fits, never mid-word. */
+/** Short project blurb: the hand-written one if set, otherwise the full
+ *  description cut at the last full sentence that fits, never mid-word. */
 function projectSummary(p: { description: string; resumeDescription?: string }): string {
   const short = p.resumeDescription?.trim();
   if (short) return short;
@@ -439,221 +196,170 @@ function projectSummary(p: { description: string; resumeDescription?: string }):
   return window.slice(0, lastSpace > 0 ? lastSpace : RESUME_DESC_MAX).replace(/[,;:]$/, "") + "…";
 }
 
-/** "https://www.linkedin.com/in/x" → "linkedin.com/in/x"; keeps the page one line and scannable. */
-function displayUrl(url: string): string {
-  return url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
-}
-
-/** One page means a hard cap on bullets: the most recent roles get the room. */
+/** Bullets must be one or two lines on the page: the most recent roles get the room. */
 const MAX_BULLETS = 6;
 const MAX_PROJECTS = 3;
 
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <View style={s.sectionHead}>
-      <Text style={s.sectionTitle}>{title}</Text>
-      <View style={s.sectionLine} />
-    </View>
-  );
+function SectionHeading({ title }: { title: string }) {
+  return <Text style={s.h2}>{title}</Text>;
 }
 
-function SkillGroup({ label, items }: { label: string; items: string[] }) {
-  if (!items?.length) return null;
+function Bullet({ children }: { children: React.ReactNode }) {
   return (
-    <View style={s.skillGroup}>
-      <Text style={s.skillLabel}>{label}</Text>
-      <View style={s.pillRow}>
-        {items.map((sk) => (
-          <Text key={sk} style={s.pill}>{sk}</Text>
-        ))}
-      </View>
+    <View style={s.li}>
+      <Text style={s.dot}>•</Text>
+      <Text style={s.liText}>{children}</Text>
     </View>
   );
 }
 
 export function ResumePDF({
   data,
-  photoUrl,
   wrap = false,
 }: {
   data: ResumeData;
-  photoUrl: string;
+  /** Kept for callers that still pass it; the ATS layout prints no photo. */
+  photoUrl?: string;
   /** Pagination is off by design; a render check may turn it on to count pages. */
   wrap?: boolean;
 }) {
   const { site, hero, contact, skills, experience, education, projects } = data;
-  const awards = data.awards ?? [];
-  // Content may carry {{years}} and friends, same as the site.
   const career = deriveCareer(data);
-  // The printed headline and summary are their own fields: the typewriter
-  // roles and the hero bio on the site are written to be punchy, which is
-  // not what belongs on a resume.
-  const headline    = hero.resumeHeadline?.trim() || hero.roles?.[0] || "";
+
+  const fullName    = site?.fullName ?? hero?.name ?? "Resume";
+  const headline    = resolveCareerTokens(hero.resumeHeadline?.trim() || hero.roles?.[0] || "", career);
   const subheadline = hero.resumeSubheadline?.trim() ?? "";
-  const summary     = hero.resumeSummary?.trim() || hero.bio;
-  const fullName = site?.fullName ?? hero?.name ?? "Resume";
-  // A blank value in admin means "leave it off the resume": the row is
-  // dropped entirely rather than printed with an empty label.
-  const email       = contact.email?.trim() ?? "";
-  const phone       = contact.phone?.trim() ?? "";
-  const city        = contact.location?.trim() ?? "";
-  const linkedinUrl = hero.linkedinUrl?.trim() ?? "";
-  const githubUrl   = hero.githubUrl?.trim() ?? "";
-  const contactRows: Array<{ label: string; value: string; href?: string }> = [
-    { label: "Email",    value: email, href: email ? `mailto:${email}` : undefined },
-    { label: "Phone",    value: phone },
-    { label: "Location", value: city },
-    { label: "LinkedIn", value: displayUrl(linkedinUrl), href: linkedinUrl },
-    { label: "GitHub",   value: displayUrl(githubUrl),   href: githubUrl },
-  ].filter((row) => row.value);
+  const titleLine   = [headline, subheadline].filter(Boolean).join(" · ");
+  const summary     = resolveCareerTokens(hero.resumeSummary?.trim() || hero.bio, career);
+
+  const email        = contact.email?.trim() ?? "";
+  const phone        = contact.phone?.trim() ?? "";
+  const city         = contact.location?.trim() ?? "";
+  const linkedinUrl  = (contact.linkedinUrl ?? hero.linkedinUrl)?.trim() ?? "";
+  const availability = contact.availabilityText?.trim() ?? "";
+
+  // Contact line order per ATS convention: City, Country · phone · email · LinkedIn URL.
+  const contactParts: React.ReactNode[] = [];
+  if (city)  contactParts.push(city);
+  if (phone) contactParts.push(phone);
+  if (email) contactParts.push(<Link key="email" src={`mailto:${email}`} style={s.link}>{email}</Link>);
+  if (linkedinUrl) contactParts.push(<Link key="li" src={linkedinUrl} style={s.link}>{displayUrl(linkedinUrl)}</Link>);
+
+  const skillGroups: Array<[string, string]> = [
+    ["Frontend",     (skills.frontend ?? []).join(", ")],
+    ["Backend",      (skills.backend ?? []).join(", ")],
+    ["Databases",    (skills.database ?? []).join(", ")],
+    ["Integrations", skills.alsoComfortableWith?.trim() ?? ""],
+    ["Tools",        (skills.devops ?? []).join(", ")],
+  ].filter(([, v]) => v) as Array<[string, string]>;
 
   return (
-    <Document title={`${fullName} — Resume`} author={fullName} subject={headline}>
-      {/* One-page resume by design. wrap={false} stops react-pdf from
-          paginating when the columns run a few points past A4, which used
-          to yield a second page containing only the sidebar background. */}
-      <Page size="A4" style={s.page} wrap={wrap}>
+    <Document title={`${fullName} – Resume`} author={fullName} subject={headline}>
+      {/* One page by design. wrap={false} stops react-pdf from paginating
+          when the content runs a few points past Letter; the page grows
+          instead, which the render check catches. */}
+      <Page size="LETTER" style={s.page} wrap={wrap}>
 
-        {/* ════════════ HEADER ════════════ */}
+        {/* ── Header ── */}
         <View style={s.header}>
-          {photoUrl ? (
-            <View style={s.photoRing}>
-              <Image src={photoUrl} style={s.photo} />
-            </View>
-          ) : null}
-
-          <View style={s.identity}>
-            <Text style={s.name}>{fullName}</Text>
-            <Text style={s.headline}>{resolveCareerTokens(headline, career)}</Text>
-            {subheadline ? <Text style={s.subheadline}>{subheadline}</Text> : null}
-          </View>
-
-          {contactRows.length > 0 && (
-            <View style={s.contactBlock}>
-              {contactRows.map(({ label, value, href }) => (
-                <View key={label} style={s.ctRow}>
-                  <Text style={s.ctLabel}>{label}</Text>
-                  {href
-                    ? <Link src={href} style={s.ctLink}>{value}</Link>
-                    : <Text style={s.ctVal}>{value}</Text>}
-                </View>
+          <Text style={s.name}>{fullName}</Text>
+          {titleLine ? <Text style={s.title}>{titleLine}</Text> : null}
+          {contactParts.length > 0 && (
+            <Text style={s.contact}>
+              {contactParts.map((part, i) => (
+                <React.Fragment key={i}>{i > 0 ? " · " : ""}{part}</React.Fragment>
               ))}
-            </View>
+            </Text>
           )}
+          {availability ? <Text style={s.availability}>{availability}</Text> : null}
         </View>
 
-        <View style={s.body}>
+        {/* ── Summary ── */}
+        {summary ? (
+          <View>
+            <SectionHeading title="Summary" />
+            <Text>{summary}</Text>
+          </View>
+        ) : null}
 
-          {/* ════════════ SIDEBAR ════════════ */}
-          <View style={s.sidebar}>
+        {/* ── Technical Skills ── */}
+        {skillGroups.length > 0 && (
+          <View>
+            <SectionHeading title="Technical Skills" />
+            {skillGroups.map(([label, value], i, arr) => (
+              <Text key={label} style={i === arr.length - 1 ? undefined : s.skillLine}>
+                <Text style={s.bold}>{label}: </Text>{value}
+              </Text>
+            ))}
+          </View>
+        )}
 
-            {/* Skills */}
-            <View style={s.sbSection}>
-              <Text style={s.sbSectionTitle}>Technical Skills</Text>
-              <SkillGroup label="Frontend"       items={skills.frontend} />
-              <SkillGroup label="Backend"        items={skills.backend} />
-              <SkillGroup label="Database"       items={skills.database} />
-              <SkillGroup label="DevOps & Tools" items={skills.devops} />
-              {skills.alsoComfortableWith ? (
-                <View style={s.skillGroup}>
-                  <Text style={s.skillLabel}>Additional Technologies</Text>
-                  <Text style={s.alsoWith}>{skills.alsoComfortableWith}</Text>
-                </View>
-              ) : null}
-            </View>
-
-            {/* Education */}
-            <View style={s.sbSection}>
-              <Text style={s.sbSectionTitle}>Education</Text>
-              {education.map((edu) => (
-                <View key={`${edu.degree}-${edu.institution}`} style={s.eduItem}>
-                  <Text style={s.eduDeg}>{edu.degree}</Text>
-                  <Text style={s.eduInst}>{edu.institution}</Text>
-                  <Text style={s.eduMeta}>{edu.period}{edu.cgpa ? ` · CGPA ${edu.cgpa}` : ""}</Text>
-                </View>
-              ))}
-            </View>
-
-            {/* Awards */}
-            {awards.length > 0 && (
-              <View style={[s.sbSection, s.lastSection]}>
-                <Text style={s.sbSectionTitle}>Awards & Recognition</Text>
-                {awards.map((a) => (
-                  <View key={`${a.title}-${a.date}`} style={s.awardItem}>
-                    <Text style={s.awardTitle}>{a.title}{a.date ? ` — ${a.date}` : ""}</Text>
-                    {a.issuer ? <Text style={s.awardIssuer}>{a.issuer}</Text> : null}
-                    {a.note ? <Text style={s.awardMeta}>{a.note}</Text> : null}
-                  </View>
+        {/* ── Experience ── */}
+        <View>
+          <SectionHeading title="Experience" />
+          {experience.map((exp, i, arr) => (
+            <View key={`${exp.company}-${exp.period}`} style={i === arr.length - 1 ? undefined : s.entry}>
+              <View style={s.row}>
+                <View style={s.roleWrap}><Text style={s.role}>{exp.position}</Text></View>
+                <Text style={s.dates}>{exp.period}</Text>
+              </View>
+              <Text style={s.org}>
+                {exp.company}
+                {exp.location ? <Text style={s.grey}>{` · ${exp.location}`}</Text> : null}
+              </Text>
+              <View style={s.list}>
+                {exp.description.slice(0, MAX_BULLETS).map((line, j) => (
+                  <Bullet key={j}>{line}</Bullet>
                 ))}
               </View>
-            )}
-
-          </View>
-
-          {/* ════════════ MAIN ════════════ */}
-          <View style={s.main}>
-
-            {/* Summary */}
-            <View style={s.section}>
-              <SectionHeader title="Professional Summary" />
-              <Text style={s.summary}>{resolveCareerTokens(summary, career)}</Text>
             </View>
-
-            {/* Experience */}
-            <View style={s.section}>
-              <SectionHeader title="Professional Experience" />
-              {experience.map((exp) => (
-                <View key={`${exp.company}-${exp.period}`} style={s.expItem}>
-                  <View style={s.expTopRow}>
-                    <Text style={s.expPos}>{exp.position}</Text>
-                    <Text style={s.expPeriod}>{exp.period}</Text>
-                  </View>
-                  <View style={s.expCoRow}>
-                    <Text style={s.expCo}>{exp.company}</Text>
-                    {exp.location ? <Text style={s.expLoc}>· {exp.location}</Text> : null}
-                  </View>
-                  {exp.description.slice(0, MAX_BULLETS).map((line, i) => (
-                    <View key={i} style={s.bullet}>
-                      <Text style={s.bulletDot}>•</Text>
-                      <Text style={s.bulletTxt}>{line}</Text>
-                    </View>
-                  ))}
-                  {exp.skills?.length ? (
-                    <View style={s.tagRow}>
-                      {exp.skills.map((sk) => (
-                        <Text key={sk} style={s.tag}>{sk}</Text>
-                      ))}
-                    </View>
-                  ) : null}
-                </View>
-              ))}
-            </View>
-
-            {/* Projects */}
-            <View style={[s.section, s.lastSection]}>
-              <SectionHeader title="Key Projects" />
-              {projects.slice(0, MAX_PROJECTS).map((proj, i, arr) => (
-                <View key={proj.title} style={[s.projItem, i === arr.length - 1 ? s.lastSection : {}]}>
-                  <View style={s.projTopRow}>
-                    <Text style={s.projTitle}>{proj.title}</Text>
-                    {isRealUrl(proj.demoLink) && (
-                      <Link src={proj.demoLink} style={s.projLink}>{displayUrl(proj.demoLink)}</Link>
-                    )}
-                  </View>
-                  <Text style={s.projDesc}>{projectSummary(proj)}</Text>
-                  {proj.technologies?.length ? (
-                    <View style={s.tagRow}>
-                      {proj.technologies.map((t) => (
-                        <Text key={t} style={s.tag}>{t}</Text>
-                      ))}
-                    </View>
-                  ) : null}
-                </View>
-              ))}
-            </View>
-
-          </View>
+          ))}
         </View>
+
+        {/* ── Projects ── */}
+        {projects.length > 0 && (
+          <View>
+            <SectionHeading title="Projects" />
+            {projects.slice(0, MAX_PROJECTS).map((proj, i, arr) => {
+              const subtitle = proj.resumeSubtitle?.trim();
+              return (
+                <View key={proj.title} style={i === arr.length - 1 ? undefined : s.entry}>
+                  <View style={s.row}>
+                    <View style={s.roleWrap}>
+                      <Text style={s.role}>{subtitle ? `${proj.title} — ${subtitle}` : proj.title}</Text>
+                    </View>
+                    {isRealUrl(proj.demoLink) ? (
+                      <Link src={proj.demoLink} style={[s.dates, s.link]}>{displayUrl(proj.demoLink)}</Link>
+                    ) : null}
+                  </View>
+                  <View style={s.list}>
+                    <Bullet>{projectSummary(proj)}</Bullet>
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+        )}
+
+        {/* ── Education ── */}
+        {education.length > 0 && (
+          <View>
+            <SectionHeading title="Education" />
+            {education.map((edu, i, arr) => (
+              <View key={`${edu.degree}-${edu.institution}`} style={i === arr.length - 1 ? undefined : s.eduEntry}>
+                <View style={s.row}>
+                  <View style={s.roleWrap}>
+                    <Text style={s.eduRole}>
+                      {edu.degree}{edu.institution ? ` — ${edu.institution}` : ""}{edu.cgpa ? ` (CGPA ${edu.cgpa})` : ""}
+                    </Text>
+                  </View>
+                  <Text style={s.dates}>{edu.period}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+
       </Page>
     </Document>
   );

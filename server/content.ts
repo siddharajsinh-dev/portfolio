@@ -86,6 +86,7 @@ export type ContentData = {
     category: string;
     description: string;
     resumeDescription?: string;
+    resumeSubtitle?: string;
     image: string;
     technologies: string[];
     demoLink: string;

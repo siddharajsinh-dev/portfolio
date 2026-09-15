@@ -15,7 +15,7 @@ import { DEFAULT_FRAMING_POSITION, DEFAULT_FRAMING_ZOOM } from "@/lib/framing";
 
 const DEFAULT_ROLES = [
   "React & Next.js Expert",
-  "Full-Stack Web Developer",
+  "Full-Stack Software Engineer",
   "Node.js Engineer",
   "TypeScript Enthusiast",
 ];

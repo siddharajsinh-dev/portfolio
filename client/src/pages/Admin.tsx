@@ -999,6 +999,7 @@ const ProjectsPanel = ({ data, onChange }: { data: any[]; onChange: (d: any[]) =
                 ["title", "Title"],
                 ["category", "Category (Web App / Mobile / API / UI/UX)"],
                 ["description", "Description", true],
+                ["resumeSubtitle", "Resume Subtitle (short tagline printed after the title on the PDF, e.g. meal delivery platform, USA)"],
                 ["resumeDescription", "Resume Description (1–2 lines on what you worked on and did — shown on the PDF instead of the full description)", true],
                 ["demoLink", "Demo Link URL"],
                 ["demoLinkText", "Demo Link Text"],
