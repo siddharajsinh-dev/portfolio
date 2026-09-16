@@ -94,12 +94,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   /* ─── Contact form ───────────────────────────────────────────── */
 
+  // ── WhatsApp notification via CallMeBot (server-side only; keys never reach the browser)
+  const CALLMEBOT_PHONE   = process.env.CALLMEBOT_PHONE;
+  const CALLMEBOT_API_KEY = process.env.CALLMEBOT_API_KEY;
+
+  async function sendWhatsApp(name: string, senderEmail: string, subject: string, message: string) {
+    if (!CALLMEBOT_PHONE || !CALLMEBOT_API_KEY) return;
+    const text = encodeURIComponent(
+      `📬 Portfolio Contact\n👤 ${name}\n📧 ${senderEmail}\n📌 ${subject}\n💬 ${message}`
+    );
+    const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(CALLMEBOT_PHONE)}&text=${text}&apikey=${encodeURIComponent(CALLMEBOT_API_KEY)}`;
+    await fetch(url);
+  }
+
   app.post("/api/contact", (req: Request, res: Response) => {
     const { name, email, subject, message } = req.body ?? {};
     if (!name || !email || !subject || !message) {
       return res.status(400).json({ message: "All fields are required." });
     }
-    console.log("[Contact]", { name, email, subject, message });
+    console.log("[Contact]", { name, email, subject });
+    sendWhatsApp(name, email, subject, message).catch((err) => console.error("[Contact] WhatsApp failed", err));
     res.json({ message: "Message received." });
   });
 
