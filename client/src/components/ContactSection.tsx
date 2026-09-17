@@ -18,12 +18,40 @@ const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  as string;
 
 // WhatsApp notification is sent server-side (/api/contact) so the CallMeBot
 // key and phone number never reach the browser bundle.
-async function notifyServer(name: string, senderEmail: string, subject: string, message: string) {
+async function notifyServer(name: string, senderEmail: string, subject: string, message: string, meta: SenderMeta) {
   await fetch("/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email: senderEmail, subject, message }),
+    body: JSON.stringify({ name, email: senderEmail, subject, message, meta }),
   });
+}
+
+// Everything the browser can tell us about the person sending the message.
+// These are included in both the EmailJS payload and the server notification.
+type SenderMeta = {
+  sent_at: string;
+  timezone: string;
+  language: string;
+  user_agent: string;
+  device: string;
+  screen: string;
+  page_url: string;
+  referrer: string;
+};
+
+function collectSenderMeta(): SenderMeta {
+  const ua = navigator.userAgent;
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(ua);
+  return {
+    sent_at: new Date().toString(),
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone ?? "",
+    language: navigator.language ?? "",
+    user_agent: ua,
+    device: isMobile ? "Mobile" : "Desktop",
+    screen: `${window.screen.width}x${window.screen.height}`,
+    page_url: window.location.href,
+    referrer: document.referrer || "(direct)",
+  };
 }
 
 const formSchema = z.object({
@@ -66,12 +94,42 @@ const ContactSection = ({ content }: Props) => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
+      const meta = collectSenderMeta();
+      const details = [
+        `Name: ${data.name}`,
+        `Email: ${data.email}`,
+        `Subject: ${data.subject}`,
+        `Sent at: ${meta.sent_at}`,
+        `Timezone: ${meta.timezone}`,
+        `Language: ${meta.language}`,
+        `Device: ${meta.device} (${meta.screen})`,
+        `Browser: ${meta.user_agent}`,
+        `Page: ${meta.page_url}`,
+        `Referrer: ${meta.referrer}`,
+      ].join("\n");
+
       await emailjs.send(
         EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID,
-        { from_name: data.name, from_email: data.email, subject: data.subject, message: data.message, to_name: "Siddharajsinh" },
+        {
+          // EmailJS default template variables ({{name}}, {{email}}, {{title}}, {{message}})
+          name: data.name,
+          email: data.email,
+          title: data.subject,
+          message: data.message,
+          // Legacy / alternative names so any template wording keeps working
+          from_name: data.name,
+          from_email: data.email,
+          reply_to: data.email,
+          subject: data.subject,
+          to_name: "Siddharajsinh",
+          time: meta.sent_at,
+          // Extra sender details ({{details}} renders them all as one block)
+          ...meta,
+          details,
+        },
         EMAILJS_PUBLIC_KEY
       );
-      notifyServer(data.name, data.email, data.subject, data.message).catch(() => {});
+      notifyServer(data.name, data.email, data.subject, data.message, meta).catch(() => {});
       toast({ title: "Message sent!", description: "I'll get back to you soon." });
       form.reset();
     } catch {

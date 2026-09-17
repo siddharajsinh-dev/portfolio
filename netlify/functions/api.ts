@@ -588,10 +588,30 @@ async function saveContent(data: unknown): Promise<void> {
 const CALLMEBOT_PHONE   = process.env.CALLMEBOT_PHONE;
 const CALLMEBOT_API_KEY = process.env.CALLMEBOT_API_KEY;
 
-async function sendWhatsApp(name: string, senderEmail: string, subject: string, message: string) {
+type SenderMeta = Partial<Record<
+  "sent_at" | "timezone" | "language" | "user_agent" | "device" | "screen" | "page_url" | "referrer",
+  string
+>>;
+
+async function sendWhatsApp(
+  name: string, senderEmail: string, subject: string, message: string,
+  meta: SenderMeta, ip: string, country: string,
+) {
   if (!CALLMEBOT_PHONE || !CALLMEBOT_API_KEY) return;
   const text = encodeURIComponent(
-    `📬 Portfolio Contact\n👤 ${name}\n📧 ${senderEmail}\n📌 ${subject}\n💬 ${message}`
+    [
+      `📬 Portfolio Contact`,
+      `👤 ${name}`,
+      `📧 ${senderEmail}`,
+      `📌 ${subject}`,
+      `💬 ${message}`,
+      ``,
+      `🌍 ${country || "?"} · IP ${ip || "?"}`,
+      `🕒 ${meta.sent_at ?? ""} (${meta.timezone ?? ""})`,
+      `📱 ${meta.device ?? ""} ${meta.screen ?? ""} · ${meta.language ?? ""}`,
+      `🧭 ${meta.user_agent ?? ""}`,
+      `🔗 ${meta.page_url ?? ""} ← ${meta.referrer ?? ""}`,
+    ].join("\n")
   );
   const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(CALLMEBOT_PHONE)}&text=${text}&apikey=${encodeURIComponent(CALLMEBOT_API_KEY)}`;
   await fetch(url);
@@ -614,13 +634,17 @@ export default async function handler(req: Request) {
     }
 
     if (pathname === "/api/contact" && method === "POST") {
-      const body = await req.json() as Record<string, string>;
+      const body = await req.json() as Record<string, string> & { meta?: SenderMeta };
       const { name, email, subject, message } = body;
       if (!name || !email || !subject || !message) {
         return json({ message: "All fields are required." }, 400);
       }
-      console.log("[Contact]", { name, email, subject });
-      await sendWhatsApp(name, email, subject, message).catch((err) => console.error("[Contact] WhatsApp failed", err));
+      const meta: SenderMeta = body.meta ?? {};
+      const ip = req.headers.get("x-nf-client-connection-ip") ?? req.headers.get("x-forwarded-for") ?? "";
+      const country = req.headers.get("x-country") ?? "";
+      console.log("[Contact]", { name, email, subject, ip, country, ...meta });
+      await sendWhatsApp(name, email, subject, message, meta, ip, country)
+        .catch((err) => console.error("[Contact] WhatsApp failed", err));
       return json({ message: "Message received." });
     }
 

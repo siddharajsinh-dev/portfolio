@@ -98,22 +98,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const CALLMEBOT_PHONE   = process.env.CALLMEBOT_PHONE;
   const CALLMEBOT_API_KEY = process.env.CALLMEBOT_API_KEY;
 
-  async function sendWhatsApp(name: string, senderEmail: string, subject: string, message: string) {
+  type SenderMeta = Partial<Record<
+    "sent_at" | "timezone" | "language" | "user_agent" | "device" | "screen" | "page_url" | "referrer",
+    string
+  >>;
+
+  async function sendWhatsApp(
+    name: string, senderEmail: string, subject: string, message: string,
+    meta: SenderMeta, ip: string, country: string,
+  ) {
     if (!CALLMEBOT_PHONE || !CALLMEBOT_API_KEY) return;
     const text = encodeURIComponent(
-      `📬 Portfolio Contact\n👤 ${name}\n📧 ${senderEmail}\n📌 ${subject}\n💬 ${message}`
+      [
+        `📬 Portfolio Contact`,
+        `👤 ${name}`,
+        `📧 ${senderEmail}`,
+        `📌 ${subject}`,
+        `💬 ${message}`,
+        ``,
+        `🌍 ${country || "?"} · IP ${ip || "?"}`,
+        `🕒 ${meta.sent_at ?? ""} (${meta.timezone ?? ""})`,
+        `📱 ${meta.device ?? ""} ${meta.screen ?? ""} · ${meta.language ?? ""}`,
+        `🧭 ${meta.user_agent ?? ""}`,
+        `🔗 ${meta.page_url ?? ""} ← ${meta.referrer ?? ""}`,
+      ].join("\n")
     );
     const url = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(CALLMEBOT_PHONE)}&text=${text}&apikey=${encodeURIComponent(CALLMEBOT_API_KEY)}`;
     await fetch(url);
   }
 
   app.post("/api/contact", (req: Request, res: Response) => {
-    const { name, email, subject, message } = req.body ?? {};
+    const { name, email, subject, message, meta = {} } = req.body ?? {};
     if (!name || !email || !subject || !message) {
       return res.status(400).json({ message: "All fields are required." });
     }
-    console.log("[Contact]", { name, email, subject });
-    sendWhatsApp(name, email, subject, message).catch((err) => console.error("[Contact] WhatsApp failed", err));
+    const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ?? req.ip ?? "";
+    const country = (req.headers["x-country"] as string | undefined) ?? "";
+    console.log("[Contact]", { name, email, subject, ip, country, ...meta });
+    sendWhatsApp(name, email, subject, message, meta, ip, country)
+      .catch((err) => console.error("[Contact] WhatsApp failed", err));
     res.json({ message: "Message received." });
   });
 
