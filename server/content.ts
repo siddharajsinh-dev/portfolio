@@ -41,6 +41,7 @@ export type ContentData = {
     phone: string;
     linkedinUrl: string;
     githubUrl: string;
+    websiteUrl?: string;
     availabilityTitle: string;
     availabilityText: string;
   };

@@ -44,15 +44,14 @@ export const additionalSkills = [
 
 export const experience = [
   {
-    "position": "Lead Software Engineer",
+    "position": "Lead Software Engineer (Contract)",
     "company": "FlatFour Ventures",
-    "location": "USA · Remote",
+    "location": "USA (Remote)",
     "period": "Jul 2026 – Present",
     "description": [
-      "Own delivery of full-stack web applications built with React.js, TypeScript, Next.js and Node.js, from technical architecture through release.",
-      "Design and build backend services and REST APIs, integrating third-party services, payment gateways and authentication.",
-      "Review code and set engineering standards for the team; mentor other engineers.",
-      "Work directly with clients and stakeholders to define requirements, scope solutions and keep delivery on schedule."
+      "Own delivery of full-stack ecommerce web applications in React.js, TypeScript, Next.js and Node.js, from architecture decisions through release.",
+      "Build backend services and REST APIs, including payment gateway and authentication integrations.",
+      "Work directly with clients and stakeholders to define requirements, scope the work and keep releases on schedule."
     ],
     "skills": [
       "React.js",
@@ -70,11 +69,13 @@ export const experience = [
     "location": "Ahmedabad, India",
     "period": "Apr 2022 – Jun 2026",
     "description": [
-      "Built and maintained full-stack web applications for client projects using React.js, TypeScript, Next.js and Node.js, with backend work in Python/FastAPI and ASP.NET Core.",
-      "Led third-party integrations including Stripe and Authorize.net payment processing and ID.me identity verification, delivering secure checkout and user-verification flows.",
-      "Built dynamic address forms with the Google Maps Places API and improved the autofill logic, which improved address accuracy and checkout UX.",
-      "Split form components into reusable modules and introduced Redux for state management; reduced bundle size and added lazy loading to improve page-load times.",
-      "Worked with designers and backend engineers in Agile sprints. Received the company WOW Award (May 2023) and was nominated for Employee of the Year (2025)."
+      "Primary developer on 5+ production ecommerce sites for USA, UK and Portugal clients, building about 90% of each: storefront, cart, checkout and order processing.",
+      "Built with React.js, TypeScript, Next.js and Node.js on the frontend, with backend work in Python/FastAPI or ASP.NET Core depending on the client.",
+      "Integrated Stripe and Authorize.net payments and ID.me identity verification into checkout and account flows.",
+      "Built address forms on the Google Maps Places API and reworked the autofill logic to cut down on wrong addresses at checkout.",
+      "Split large form code into reusable components and moved shared state to Redux, so the same pieces could be reused across pages.",
+      "Reduced bundle size and added lazy loading to speed up page loads.",
+      "Worked in Agile sprints with designers and backend engineers to ship responsive, accessible sites."
     ],
     "skills": [
       "React.js",
@@ -94,7 +95,8 @@ export const experience = [
     "location": "Ahmedabad, India",
     "period": "Nov 2021 – Mar 2022",
     "description": [
-      "Built responsive client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms/MVC backends (C#, SQL Server), including QA testing and bug fixing."
+      "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript and jQuery.",
+      "Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends in C# and SQL Server, and helped with QA testing and bug fixing."
     ],
     "skills": [
       "HTML5",
@@ -129,7 +131,7 @@ export const projects: Project[] = [
     id: 1,
     title: "MightyMeals",
     category: "Web App",
-    description: "MightyMeals is a meal delivery platform offering fresh, chef-prepared meals with a seamless user experience. I worked on the React.js frontend, implementing a responsive and intuitive UI. My contributions included integrating secure payment gateways, optimizing the checkout flow, and developing the order creation functionality.",
+    description: "Meal delivery platform for chef-prepared meals (USA). Primary developer: built the React.js frontend, payment gateway integration, checkout flow and order creation.",
     image: "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
     technologies: ["ReactJS", "WordPress", "Python - FastAPI"],
     demoLink: "https://mightymeals.com/",
@@ -139,7 +141,7 @@ export const projects: Project[] = [
     id: 2,
     title: "By Best",
     category: "Web App",
-    description: "By Best is an eCommerce platform for fashion and accessories, offering clothing for men, women, and kids, along with jewelry, sunglasses, and more. I worked on the React.js frontend, building responsive product pages, optimizing filtering and search functionality, and integrating dynamic cart and checkout experiences.",
+    description: "Fashion and accessories ecommerce store. Primary developer on the frontend: React.js product pages, product filtering and search, and cart and checkout integrated with a Laravel backend.",
     image: "https://bybest.shop/assets/img/bybest-logo.png",
     technologies: ["ReactJS", "Laravel"],
     demoLink: "https://bybest.shop/",
@@ -147,9 +149,9 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Fields in Trust",
+    title: "Fields In Trust",
     category: "Web App",
-    description: "Fields in Trust is a UK-based charity dedicated to protecting parks, playgrounds, and green spaces for future generations. I contributed to the development of their ASP.NET MVC website, focusing on implementing dynamic content management, building secure and maintainable web forms, and integrating location-based features to help users find protected fields and sites across the UK.",
+    description: "UK charity protecting parks, playgrounds and green spaces. Built the ASP.NET MVC website in C# with Entity Framework: content management, web forms and location-based search for protected fields across the UK.",
     image: FITImage,
     technologies: ["ASP.NET MVC", "C#", "Razor Pages", "Entity Framework"],
     demoLink: "https://fieldsintrust.org/",

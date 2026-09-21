@@ -44,7 +44,6 @@ const INK  = "#000000";
 const GREY = "#555555";
 
 /** US Letter is 612 x 792 pt. Margins: 0.35 in top, 0.47 in sides, 0.5 in bottom. */
-const LETTER_HEIGHT = 792;
 const MARGIN_X = 34;
 const MARGIN_TOP = 25;
 const MARGIN_BOTTOM = 36;
@@ -59,7 +58,6 @@ const s = StyleSheet.create({
     paddingTop: MARGIN_TOP,
     paddingBottom: MARGIN_BOTTOM,
     paddingHorizontal: MARGIN_X,
-    minHeight: LETTER_HEIGHT,
   },
 
   /* Header block (centred) */
@@ -67,6 +65,7 @@ const s = StyleSheet.create({
   name:         { fontSize: 17, fontWeight: 700, color: NAVY, textTransform: "uppercase", letterSpacing: 0.5, lineHeight: 1.15, textAlign: "center" },
   title:        { fontSize: 11, fontWeight: 700, marginTop: 3, textAlign: "center" },
   contact:      { fontSize: 9.5, color: GREY, marginTop: 2, textAlign: "center" },
+  contactUrls:  { fontSize: 9.5, color: GREY, marginTop: 1, textAlign: "center" },
   availability: { fontSize: 9.5, color: GREY, fontStyle: "italic", marginTop: 1, textAlign: "center" },
   link:         { color: GREY, textDecoration: "none" },
 
@@ -129,6 +128,8 @@ export interface ResumeData {
     phone: string;
     email: string;
     linkedinUrl?: string;
+    githubUrl?: string;
+    websiteUrl?: string;
     availabilityText?: string;
   };
   skills: {
@@ -197,7 +198,7 @@ function projectSummary(p: { description: string; resumeDescription?: string }):
 }
 
 /** Bullets must be one or two lines on the page: the most recent roles get the room. */
-const MAX_BULLETS = 6;
+const MAX_BULLETS = 7;
 const MAX_PROJECTS = 3;
 
 function SectionHeading({ title }: { title: string }) {
@@ -215,12 +216,13 @@ function Bullet({ children }: { children: React.ReactNode }) {
 
 export function ResumePDF({
   data,
-  wrap = false,
+  wrap = true,
 }: {
   data: ResumeData;
   /** Kept for callers that still pass it; the ATS layout prints no photo. */
   photoUrl?: string;
-  /** Pagination is off by design; a render check may turn it on to count pages. */
+  /** Pagination stays on so the page is always standard Letter; with it off,
+   *  react-pdf stretches the page to a custom height when content overflows. */
   wrap?: boolean;
 }) {
   const { site, hero, contact, skills, experience, education, projects } = data;
@@ -236,41 +238,45 @@ export function ResumePDF({
   const phone        = contact.phone?.trim() ?? "";
   const city         = contact.location?.trim() ?? "";
   const linkedinUrl  = (contact.linkedinUrl ?? hero.linkedinUrl)?.trim() ?? "";
+  const githubUrl    = (contact.githubUrl ?? hero.githubUrl)?.trim() ?? "";
+  const websiteUrl   = contact.websiteUrl?.trim() ?? "";
   const availability = contact.availabilityText?.trim() ?? "";
 
-  // Contact line order per ATS convention: City, Country · phone · email · LinkedIn URL.
+  // Two centred contact lines: City, Country · phone · email, then the URLs.
   const contactParts: React.ReactNode[] = [];
   if (city)  contactParts.push(city);
-  if (phone) contactParts.push(phone);
+  if (phone) contactParts.push(<Link key="phone" src={`tel:${phone.replace(/[^\d+]/g, "")}`} style={s.link}>{phone}</Link>);
   if (email) contactParts.push(<Link key="email" src={`mailto:${email}`} style={s.link}>{email}</Link>);
-  if (linkedinUrl) contactParts.push(<Link key="li" src={linkedinUrl} style={s.link}>{displayUrl(linkedinUrl)}</Link>);
+
+  const urlParts = [linkedinUrl, githubUrl, websiteUrl].filter(isRealUrl).map((url) => (
+    <Link key={url} src={url} style={s.link}>{displayUrl(url)}</Link>
+  ));
 
   const skillGroups: Array<[string, string]> = [
-    ["Frontend",     (skills.frontend ?? []).join(", ")],
-    ["Backend",      (skills.backend ?? []).join(", ")],
-    ["Databases",    (skills.database ?? []).join(", ")],
-    ["Integrations", skills.alsoComfortableWith?.trim() ?? ""],
-    ["Tools",        (skills.devops ?? []).join(", ")],
+    ["Frontend",                (skills.frontend ?? []).join(", ")],
+    ["Backend",                 (skills.backend ?? []).join(", ")],
+    ["Databases",               (skills.database ?? []).join(", ")],
+    ["Payments & Integrations", skills.alsoComfortableWith?.trim() ?? ""],
+    ["Testing & Tools",         (skills.devops ?? []).join(", ")],
   ].filter(([, v]) => v) as Array<[string, string]>;
 
   return (
     <Document title={`${fullName} – Resume`} author={fullName} subject={headline}>
-      {/* One page by design. wrap={false} stops react-pdf from paginating
-          when the content runs a few points past Letter; the page grows
-          instead, which the render check catches. */}
+      {/* One standard Letter page by design. If the content ever runs past it,
+          it spills onto a second page, which the render check catches. */}
       <Page size="LETTER" style={s.page} wrap={wrap}>
 
         {/* ── Header ── */}
         <View style={s.header}>
           <Text style={s.name}>{fullName}</Text>
           {titleLine ? <Text style={s.title}>{titleLine}</Text> : null}
-          {contactParts.length > 0 && (
-            <Text style={s.contact}>
-              {contactParts.map((part, i) => (
+          {[contactParts, urlParts].map((parts, line) => parts.length > 0 && (
+            <Text key={line} style={line === 0 ? s.contact : s.contactUrls}>
+              {parts.map((part, i) => (
                 <React.Fragment key={i}>{i > 0 ? " · " : ""}{part}</React.Fragment>
               ))}
             </Text>
-          )}
+          ))}
           {availability ? <Text style={s.availability}>{availability}</Text> : null}
         </View>
 

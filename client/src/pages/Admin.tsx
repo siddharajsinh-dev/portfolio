@@ -611,7 +611,7 @@ const ContactPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void })
   const [saving, setSaving] = useState(false);
 
   const f = (key: string) => ({
-    label: key === "linkedinUrl" ? "LinkedIn URL" : key === "githubUrl" ? "GitHub URL" : key.charAt(0).toUpperCase() + key.slice(1),
+    label: key === "linkedinUrl" ? "LinkedIn URL" : key === "githubUrl" ? "GitHub URL" : key === "websiteUrl" ? "Portfolio URL (printed on the Resume PDF)" : key.charAt(0).toUpperCase() + key.slice(1),
     value: form[key] ?? "",
     onChange: (v: string) => setForm({ ...form, [key]: v }),
   });
@@ -633,6 +633,7 @@ const ContactPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void })
       <Field {...f("phone")} />
       <Field {...f("linkedinUrl")} />
       <Field {...f("githubUrl")} />
+      <Field {...f("websiteUrl")} />
       <div className="pt-2 border-t border-white/5">
         <p className="text-xs font-mono text-muted-foreground mb-3">// availability badge</p>
         <div className="space-y-3">
@@ -712,7 +713,7 @@ const SkillsPanel = ({ data, onSave }: { data: any; onSave: (d: any) => void }) 
           value={catsText} onChange={(e) => setCatsText(e.target.value)} />
       </div>
       <div>
-        <label className="block text-sm text-muted-foreground mb-1.5">Additional Technologies — shown under the skill categories on the Resume PDF</label>
+        <label className="block text-sm text-muted-foreground mb-1.5">Payments &amp; Integrations — printed as its own line in Technical Skills on the Resume PDF</label>
         <textarea rows={3} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-foreground text-sm focus:outline-none focus:border-primary/50 transition resize-none"
           value={alsoText} onChange={(e) => setAlsoText(e.target.value)} />
       </div>
