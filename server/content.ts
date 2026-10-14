@@ -88,6 +88,7 @@ export type ContentData = {
     description: string;
     resumeDescription?: string;
     resumeSubtitle?: string;
+    resumeBullets?: string[];
     image: string;
     technologies: string[];
     demoLink: string;

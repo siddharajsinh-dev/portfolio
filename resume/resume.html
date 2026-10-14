@@ -21,7 +21,7 @@
   body {
     font-family: "Carlito", Calibri, Arial, sans-serif;
     font-size: 9.5pt;
-    line-height: 1.2;
+    line-height: 1.15;
     color: #000;
     background: #fff;
     -webkit-print-color-adjust: exact;
@@ -51,30 +51,31 @@
     line-height: 1.2;
     border-bottom: 1px solid #1F3A5F;
     padding-bottom: 1.5pt;
-    margin-top: 7pt;
-    margin-bottom: 3pt;
+    margin-top: 6pt;
+    margin-bottom: 2.5pt;
     break-after: avoid;
     page-break-after: avoid;
   }
 
   /* ── Technical skills: label + list on one line, no bullets ── */
-  .skills p { margin-bottom: 1.5pt; }
+  .skills p { margin-bottom: 1pt; }
   .skills p:last-child { margin-bottom: 0; }
 
   /* ── Entries ── */
-  .entry { margin-bottom: 4pt; break-inside: avoid; page-break-inside: avoid; }
+  .entry { margin-bottom: 3pt; break-inside: avoid; page-break-inside: avoid; }
   .entry:last-child { margin-bottom: 0; }
   .row   { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
   .role  { font-size: 10.5pt; font-weight: 700; }
   .dates { font-size: 9.5pt; color: #555; white-space: nowrap; }
   .org   { font-style: italic; }
+  .tech  { font-style: italic; color: #555; }
   .edu .role { font-size: 10pt; }
   .edu .entry { margin-bottom: 3pt; }
 
   /* ── Bullets: real list items, standard "•" glyph (Chrome paints CSS
      disc markers as shapes, which text extraction drops) ── */
-  ul { list-style: none; padding-left: 14px; margin-top: 1.5pt; }
-  li { position: relative; margin-bottom: 1pt; }
+  ul { list-style: none; padding-left: 14px; margin-top: 1pt; }
+  li { position: relative; margin-bottom: 0.5pt; }
   li::before { content: "\2022"; position: absolute; left: -10px; }
   li:last-child { margin-bottom: 0; }
 
@@ -93,7 +94,7 @@
 
   <section>
     <h2>Summary</h2>
-    <p>Full-stack software engineer with 4+ years of experience building ecommerce web applications for USA, UK and Portugal clients, mainly meal delivery and online shopping. Frontend focus in React.js, TypeScript and Next.js, with backend work in Node.js/Express.js, Python/FastAPI and ASP.NET Core. Primary developer on 5+ production sites, typically building about 90% of each, including cart, checkout, payments and order processing.</p>
+    <p>Full-stack software engineer with 4+ years building ecommerce web applications for USA, UK and Portugal clients, mainly meal delivery and online shopping. Primary developer on 5+ production sites, typically building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Use AI coding tools daily for development and testing, and review their output against real production requirements.</p>
   </section>
 
   <section class="skills">
@@ -101,8 +102,8 @@
     <p><strong>Frontend:</strong> React.js, Next.js, TypeScript, JavaScript (ES6+), Redux, Tailwind CSS, HTML5, CSS3, jQuery, Bootstrap</p>
     <p><strong>Backend:</strong> Node.js, Express.js, REST APIs, Python, FastAPI, C#, ASP.NET Core, ASP.NET MVC</p>
     <p><strong>Databases:</strong> PostgreSQL, Microsoft SQL Server, MongoDB, Entity Framework</p>
-    <p><strong>Payments &amp; Integrations:</strong> Stripe, Authorize.net, ID.me, Google Maps Places API</p>
-    <p><strong>Testing &amp; Tools:</strong> Jest, Git, GitHub, Docker, AWS, CI/CD</p>
+    <p><strong>Payments &amp; Integrations:</strong> Stripe, Authorize.net, WooCommerce REST API, ID.me, Google Maps Places API</p>
+    <p><strong>Testing &amp; Tools:</strong> Jest, AI-assisted development and testing, Git, GitHub, Docker, AWS, CI/CD</p>
   </section>
 
   <section>
@@ -112,7 +113,7 @@
       <div class="row"><span class="role">Lead Software Engineer (Contract)</span><span class="dates">Jul 2026 – Present</span></div>
       <p class="org">FlatFour Ventures <span class="grey">· USA (Remote)</span></p>
       <ul>
-        <li>Own delivery of full-stack ecommerce web applications in React.js, TypeScript, Next.js and Node.js, from architecture decisions through release.</li>
+        <li>Lead developer on full-stack ecommerce web apps in React.js, TypeScript, Next.js and Node.js, from architecture through release.</li>
         <li>Build backend services and REST APIs, including payment gateway and authentication integrations.</li>
         <li>Work directly with clients and stakeholders to define requirements, scope the work and keep releases on schedule.</li>
       </ul>
@@ -122,12 +123,10 @@
       <div class="row"><span class="role">Web Developer</span><span class="dates">Apr 2022 – Jun 2026</span></div>
       <p class="org">ZealousWeb Technologies Pvt. Ltd. <span class="grey">· Ahmedabad, India</span></p>
       <ul>
-        <li>Primary developer on 5+ production ecommerce sites for USA, UK and Portugal clients, building about 90% of each: storefront, cart, checkout and order processing.</li>
-        <li>Built with React.js, TypeScript, Next.js and Node.js on the frontend, with backend work in Python/FastAPI or ASP.NET Core depending on the client.</li>
+        <li>Primary developer on 5+ production ecommerce sites for USA, UK and Portugal clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.</li>
         <li>Integrated Stripe and Authorize.net payments and ID.me identity verification into checkout and account flows.</li>
         <li>Built address forms on the Google Maps Places API and reworked the autofill logic to cut down on wrong addresses at checkout.</li>
-        <li>Split large form code into reusable components and moved shared state to Redux, so the same pieces could be reused across pages.</li>
-        <li>Reduced bundle size and added lazy loading to speed up page loads.</li>
+        <li>Split large forms into reusable components with shared state in Redux; cut bundle size and added lazy loading for faster page loads.</li>
         <li>Worked in Agile sprints with designers and backend engineers to ship responsive, accessible sites.</li>
       </ul>
     </div>
@@ -136,8 +135,7 @@
       <div class="row"><span class="role">Trainee</span><span class="dates">Nov 2021 – Mar 2022</span></div>
       <p class="org">Aark Inosoft <span class="grey">· Ahmedabad, India</span></p>
       <ul>
-        <li>Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript and jQuery.</li>
-        <li>Supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends in C# and SQL Server, and helped with QA testing and bug fixing.</li>
+        <li>Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends in C# and SQL Server, including QA testing and bug fixing.</li>
       </ul>
     </div>
   </section>
@@ -146,23 +144,32 @@
     <h2>Projects</h2>
 
     <div class="entry">
-      <div class="row"><span class="role">MightyMeals</span><span class="dates"><a href="https://mightymeals.com">mightymeals.com</a></span></div>
+      <div class="row"><span class="role">MightyMeals — Custom Ecommerce &amp; Meal Delivery Platform</span><span class="dates"><a href="https://mightymeals.com">mightymeals.com</a></span></div>
+      <p class="tech">React.js · JavaScript · REST APIs · WooCommerce · Python/FastAPI · Stripe · Authorize.net</p>
       <ul>
-        <li>Meal delivery platform for chef-prepared meals (USA). Primary developer: built the React.js frontend, payment gateway integration, checkout flow and order creation.</li>
+        <li>High-traffic ecommerce platform for an $18M USD annual revenue meal delivery business, processing thousands of transactions a week. Headless React.js frontend on a WooCommerce backend via REST APIs, with custom ordering workflows and secure payment processing.</li>
+        <li><strong>Frontend architecture:</strong> built and maintain the custom React.js ecommerce app with reusable components and dynamic product browsing.</li>
+        <li><strong>Checkout and payments:</strong> integrated Authorize.net and Stripe; built custom checkout for complex payment and order-processing rules.</li>
+        <li><strong>Autoship subscriptions:</strong> led development and maintenance of the custom recurring-delivery system, covering subscription management, recurring order generation, payment processing, delivery scheduling and customer accounts.</li>
+        <li><strong>Order management:</strong> built custom order creation workflows linking the frontend to backend APIs for customer, product and payment data.</li>
+        <li><strong>Performance and UX:</strong> frontend and performance work for a high-volume store, improving product discovery, cart and checkout usability.</li>
       </ul>
     </div>
 
     <div class="entry">
-      <div class="row"><span class="role">By Best</span><span class="dates"><a href="https://bybest.shop">bybest.shop</a></span></div>
+      <div class="row"><span class="role">By Best — Fashion &amp; Accessories Ecommerce Store</span><span class="dates"><a href="https://bybest.shop">bybest.shop</a></span></div>
+      <p class="tech">React.js · REST APIs · Laravel</p>
       <ul>
-        <li>Fashion and accessories ecommerce store. Primary developer on the frontend: React.js product pages, product filtering and search, and cart and checkout integrated with a Laravel backend.</li>
+        <li>Primary developer on the frontend, building the React.js product catalogue, product pages, filtering and search.</li>
+        <li>Built the cart and checkout flow and integrated it with the Laravel backend through REST APIs.</li>
       </ul>
     </div>
 
     <div class="entry">
-      <div class="row"><span class="role">Fields In Trust</span><span class="dates"><a href="https://fieldsintrust.org">fieldsintrust.org</a></span></div>
+      <div class="row"><span class="role">Fields In Trust — UK Charity Website</span><span class="dates"><a href="https://fieldsintrust.org">fieldsintrust.org</a></span></div>
+      <p class="tech">ASP.NET MVC · C# · Entity Framework · Razor Pages</p>
       <ul>
-        <li>UK charity protecting parks, playgrounds and green spaces. Built the ASP.NET MVC website in C# with Entity Framework: content management, web forms and location-based search for protected fields across the UK.</li>
+        <li>Built the ASP.NET MVC website in C# with Entity Framework: content management for the charity&#x27;s staff, web forms and location-based search of protected fields across the UK.</li>
       </ul>
     </div>
   </section>

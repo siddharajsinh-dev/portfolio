@@ -1020,6 +1020,13 @@ const ProjectsPanel = ({ data, onChange }: { data: any[]; onChange: (d: any[]) =
                 </div>
               ))}
               <div>
+                <label className="block text-xs text-muted-foreground mb-1">Resume Bullets (one per line; printed on the PDF instead of the Resume Description. Start a line with a short label and a colon, e.g. "Checkout and payments: ...", to print that label in bold)</label>
+                <textarea rows={6}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50 resize-none"
+                  value={(project.resumeBullets ?? []).join("\n")}
+                  onChange={(e) => updateLocal(project.id, { resumeBullets: e.target.value.split("\n").map((s: string) => s.trim()).filter(Boolean) })} />
+              </div>
+              <div>
                 <label className="block text-xs text-muted-foreground mb-1">Technologies (comma separated)</label>
                 <input className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   value={(project.technologies ?? []).join(", ")}

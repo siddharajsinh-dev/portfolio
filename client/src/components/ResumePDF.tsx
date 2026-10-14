@@ -52,7 +52,7 @@ const s = StyleSheet.create({
   page: {
     fontFamily: "Carlito",
     fontSize: 9.5,
-    lineHeight: 1.2,
+    lineHeight: 1.15,
     color: INK,
     backgroundColor: "#ffffff",
     paddingTop: MARGIN_TOP,
@@ -76,19 +76,19 @@ const s = StyleSheet.create({
     color: NAVY,
     textTransform: "uppercase",
     letterSpacing: 0.75,
-    lineHeight: 1.2,
+    lineHeight: 1.15,
     borderBottomWidth: 1,
     borderBottomColor: NAVY,
     paddingBottom: 1.5,
-    marginTop: 7,
-    marginBottom: 3,
+    marginTop: 6,
+    marginBottom: 2.5,
   },
 
   /* Technical skills: label + list, no bullets */
-  skillLine: { marginBottom: 1.5 },
+  skillLine: { marginBottom: 1 },
 
   /* Entries */
-  entry:    { marginBottom: 4 },
+  entry:    { marginBottom: 3 },
   eduEntry: { marginBottom: 3 },
   row:      { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
   roleWrap: { flex: 1, paddingRight: 12 },
@@ -96,11 +96,12 @@ const s = StyleSheet.create({
   eduRole:  { fontSize: 10, fontWeight: 700 },
   dates:    { fontSize: 9.5, color: GREY },
   org:      { fontStyle: "italic" },
+  tech:     { fontStyle: "italic", color: GREY },
   grey:     { color: GREY },
 
   /* Bullets */
-  list:   { marginTop: 1.5 },
-  li:     { flexDirection: "row", marginBottom: 1 },
+  list:   { marginTop: 1 },
+  li:     { flexDirection: "row", marginBottom: 0.5 },
   dot:    { width: 10 },
   liText: { flex: 1 },
   bold:   { fontWeight: 700 },
@@ -165,6 +166,8 @@ export interface ResumeData {
     description: string;
     resumeSubtitle?: string;
     resumeDescription?: string;
+    /** Several bullets for the PDF; when set they replace the single description bullet. */
+    resumeBullets?: string[];
     technologies: string[];
     demoLink: string;
   }>;
@@ -195,6 +198,19 @@ function projectSummary(p: { description: string; resumeDescription?: string }):
   if (lastStop > RESUME_DESC_MAX * 0.4) return window.slice(0, lastStop + 1);
   const lastSpace = window.lastIndexOf(" ");
   return window.slice(0, lastSpace > 0 ? lastSpace : RESUME_DESC_MAX).replace(/[,;:]$/, "") + "…";
+}
+
+/** Bullets for the PDF: the hand-written list if set, otherwise the one-line summary. */
+function projectBullets(p: { description: string; resumeDescription?: string; resumeBullets?: string[] }): string[] {
+  const list = (p.resumeBullets ?? []).map((b) => b.trim()).filter(Boolean);
+  return list.length > 0 ? list : [projectSummary(p)];
+}
+
+/** "Checkout and payments: integrated ..." → bold label, plain rest. Only short
+ *  labels count, so a sentence that merely contains a colon is left alone. */
+function splitLabel(line: string): [string, string] | null {
+  const m = /^([^:]{3,40}):\s+([\s\S]+)$/.exec(line);
+  return m ? [m[1], m[2]] : null;
 }
 
 /** Bullets must be one or two lines on the page: the most recent roles get the room. */
@@ -338,8 +354,18 @@ export function ResumePDF({
                       <Link src={proj.demoLink} style={[s.dates, s.link]}>{displayUrl(proj.demoLink)}</Link>
                     ) : null}
                   </View>
+                  {proj.technologies?.length ? (
+                    <Text style={s.tech}>{proj.technologies.join(" · ")}</Text>
+                  ) : null}
                   <View style={s.list}>
-                    <Bullet>{projectSummary(proj)}</Bullet>
+                    {projectBullets(proj).map((line, j) => {
+                      const parts = splitLabel(line);
+                      return (
+                        <Bullet key={j}>
+                          {parts ? <><Text style={s.bold}>{parts[0]}: </Text>{parts[1]}</> : line}
+                        </Bullet>
+                      );
+                    })}
                   </View>
                 </View>
               );
