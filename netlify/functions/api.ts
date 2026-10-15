@@ -40,7 +40,7 @@ const DEFAULT_CONTENT = {
     "linkedinUrl": "https://linkedin.com/in/siddharajsinh-chauhan-410741199",
     "githubUrl": "https://github.com/siddharajsinh-dev",
     "email": "siddharajkc294000@gmail.com",
-    "heroImage": "/assets-static/images/ImportedPhoto.760428188.70688.jpeg",
+    "heroImage": "/assets-static/images/sid-headshot.jpg",
     "logoImage": "/assets-static/images/sid-avatar.png",
     "techBadges": [
       "TypeScript",

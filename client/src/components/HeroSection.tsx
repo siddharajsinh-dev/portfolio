@@ -9,7 +9,9 @@ import { useScrollToSection } from "@/hooks/useScrollToSection";
 import { useResumeDownload } from "@/hooks/useResumeDownload";
 import { Download, ArrowRight, Github, Linkedin, Mail, Sparkles, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import heroPhoto from "../../assets/images/ImportedPhoto.760428188.70688.jpeg";
+/** Bundled copy of the current headshot: the first paint before /api/content answers
+ *  shows the same photo the live content points at, so nothing swaps. */
+import heroPhoto from "../../assets/images/sid-headshot.jpg";
 import { deriveCareer, resolveCareerTokens, resolveStat } from "@/lib/career";
 import { DEFAULT_FRAMING_POSITION, DEFAULT_FRAMING_ZOOM } from "@/lib/framing";
 
@@ -274,6 +276,10 @@ const TiltPhoto = ({ src, alt, position = DEFAULT_FRAMING_POSITION, zoom = DEFAU
   const my = useMotionValue(0);
   const rx = useSpring(useTransform(my, [-0.5, 0.5], [14, -14]), { stiffness: 280, damping: 22 });
   const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-14, 14]), { stiffness: 280, damping: 22 });
+  // Keep the frame dark until the photo has fully decoded, so a large file never
+  // paints half-finished; reset when the content swaps the src.
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => { setLoaded(false); }, [src]);
 
   return (
     <motion.div
@@ -310,11 +316,16 @@ const TiltPhoto = ({ src, alt, position = DEFAULT_FRAMING_POSITION, zoom = DEFAU
           <img
             src={src} alt={alt}
             className="block select-none"
+            fetchPriority="high"
+            decoding="async"
+            onLoad={() => setLoaded(true)}
             style={{
               width:  "clamp(220px, 28vw, 380px)",
               height: "clamp(220px, 28vw, 380px)",
               objectFit: "cover", objectPosition: position,
               transform: `scale(${zoom})`, transformOrigin: position,
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 300ms ease",
             }}
           />
         </div>
