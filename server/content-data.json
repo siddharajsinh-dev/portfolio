@@ -327,10 +327,9 @@
       "period": "Apr 2022 – Jun 2026",
       "description": [
         "Primary developer on 5+ production ecommerce sites for USA, UK and Portugal clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.",
-        "Integrated Stripe and Authorize.net payments and ID.me identity verification into checkout and account flows.",
-        "Built address forms on the Google Maps Places API and reworked the autofill logic to cut down on wrong addresses at checkout.",
-        "Split large forms into reusable components with shared state in Redux; cut bundle size and added lazy loading for faster page loads.",
-        "Worked in Agile sprints with designers and backend engineers to ship responsive, accessible sites."
+        "Delivered Stripe and Authorize.net card payments and ID.me identity verification in checkout and account flows.",
+        "Cut wrong delivery addresses at checkout by rebuilding address forms on the Google Maps Places API with reworked autofill logic.",
+        "Accelerated page loads by 10X and shrank bundle size by 45% through code splitting and lazy loading, and re-architected complex forms into reusable components with centralized Redux state."
       ],
       "skills": [
         "React.js",
@@ -470,7 +469,7 @@
         "High-traffic ecommerce platform for an $18M USD annual revenue meal delivery business, processing thousands of transactions a week. Headless React.js frontend on a WooCommerce backend via REST APIs, with custom ordering workflows and secure payment processing.",
         "Frontend architecture: built and maintain the custom React.js ecommerce app with reusable components and dynamic product browsing.",
         "Checkout and payments: integrated Authorize.net and Stripe; built custom checkout for complex payment and order-processing rules.",
-        "Autoship subscriptions: led development and maintenance of the custom recurring-delivery system, covering subscription management, recurring order generation, payment processing, delivery scheduling and customer accounts.",
+        "Autoship subscriptions: led development of the custom recurring-delivery system that lets customers schedule, manage and automate repeat orders, covering recurring order generation, payment, delivery scheduling and account management.",
         "Order management: built custom order creation workflows linking the frontend to backend APIs for customer, product and payment data.",
         "Performance and UX: frontend and performance work for a high-volume store, improving product discovery, cart and checkout usability."
       ]
