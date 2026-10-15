@@ -59,7 +59,7 @@ const DEFAULT_CONTENT = {
     "heroImageZoom": 1,
     "resumeHeadline": "Full-Stack Software Engineer",
     "resumeSubheadline": "Ecommerce · React.js · TypeScript · Next.js · Node.js",
-    "resumeSummary": "Full-stack software engineer with {{years}}+ years building ecommerce web applications for USA, UK and European clients, mainly meal delivery and online retail. Primary developer on 5+ production sites, building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Use AI coding tools daily and review their output against production requirements."
+    "resumeSummary": "Full-stack software engineer with {{years}}+ years building ecommerce web applications for USA, UK and European clients, mainly meal delivery and online retail. Primary developer on 5+ production sites, building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Ship production code daily with AI coding tools (Claude Code), reviewing every change against real requirements."
   },
   "about": {
     "paragraphs": [
@@ -151,6 +151,7 @@ const DEFAULT_CONTENT = {
     ],
     "devops": [
       "Jest",
+      "Claude Code",
       "AI-assisted development and testing",
       "Git",
       "GitHub",
@@ -310,9 +311,8 @@ const DEFAULT_CONTENT = {
       "location": "USA (Remote)",
       "period": "Jul 2026 – Present",
       "description": [
-        "Lead engineer for the MightyMeals storefront and API (React.js, Python/FastAPI, WooCommerce): an $18M USD, 27-state meal delivery business rated 4.8/5 on Google from 800+ reviews.",
-        "Own architecture, releases and the payment, subscription and authentication integrations end to end.",
-        "Work directly with the owner and stakeholders to define requirements, scope the work and keep releases on schedule."
+        "Contract lead engineer for full-stack ecommerce work in React.js, TypeScript, Next.js and Node.js, owning architecture and releases.",
+        "Work directly with clients and stakeholders to define requirements, scope the work and keep releases on schedule."
       ],
       "skills": [
         "React.js",
@@ -331,8 +331,8 @@ const DEFAULT_CONTENT = {
       "location": "Ahmedabad, India",
       "period": "Apr 2022 – Jun 2026",
       "description": [
+        "Lead developer on MightyMeals for 4+ years (React.js, FastAPI, WooCommerce): architecture, releases, payments, subscriptions and auth.",
         "Primary developer on 5+ production ecommerce sites for USA, UK and European clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.",
-        "Delivered Stripe and Authorize.net card payments and ID.me identity verification in checkout and account flows.",
         "Cut wrong delivery addresses at checkout by rebuilding address forms on the Google Maps Places API with reworked autofill logic.",
         "Accelerated page loads by 10X and shrank bundle size by 45% through code splitting and lazy loading, and re-architected complex forms into reusable components with centralized Redux state."
       ],
@@ -466,7 +466,8 @@ const DEFAULT_CONTENT = {
         "Python/FastAPI",
         "PostgreSQL",
         "Stripe",
-        "Authorize.net"
+        "Authorize.net",
+        "Claude Code"
       ],
       "demoLink": "https://mightymeals.com",
       "demoLinkText": "Live Demo",
@@ -477,7 +478,9 @@ const DEFAULT_CONTENT = {
         "Ownership: wrote 82% of the storefront's 2,900+ commits over 4.5 years, including 96% of Autoship and 89% of checkout code.",
         "Autoship (Order Planner): built the subscription system for weekly repeat orders charged to saved cards at Monday and Thursday noon ET deadlines, with change, skip, pause and cancel from My Account.",
         "Payments: Authorize.net and Stripe with saved cards, Apple Pay, Google Pay, gift cards and combined coupon and gift card redemption.",
-        "Growth: Mighty Points (1 point per $1), $120/$50 referrals, affiliate tracking, Google sign-in and a 15% ID.me-verified military discount."
+        "Growth: Mighty Points (1 point per $1), $120/$50 referrals, affiliate tracking, Google sign-in and a 15% ID.me-verified military discount.",
+        "AI-assisted delivery: rebuilt 20+ Elementor pages as static React in three days with Claude Code (17 commits, ~18k lines).",
+        "AI prototype: GPT function-calling nutrition assistant (Next.js 16) with a tool loop over the live menu API and USDA FoodData Central."
       ]
     },
     {

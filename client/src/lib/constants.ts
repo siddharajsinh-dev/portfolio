@@ -133,7 +133,7 @@ export const projects: Project[] = [
     category: "Web App",
     description: "$18M USD annual revenue meal delivery business serving 27 states and DC with a 150+ meal menu, rated 4.8/5 on Google from 800+ reviews. Thousands of transactions a week on a headless React.js storefront over WooCommerce via REST APIs.",
     image: "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
-    technologies: ["React.js", "TypeScript", "Redux", "REST APIs", "WooCommerce", "Python/FastAPI", "PostgreSQL", "Stripe", "Authorize.net"],
+    technologies: ["React.js", "TypeScript", "Redux", "REST APIs", "WooCommerce", "Python/FastAPI", "PostgreSQL", "Stripe", "Authorize.net", "Claude Code"],
     demoLink: "https://mightymeals.com/",
     demoLinkText: "Live Demo",
   },
