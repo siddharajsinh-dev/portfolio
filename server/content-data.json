@@ -54,7 +54,7 @@
     "heroImageZoom": 1,
     "resumeHeadline": "Full-Stack Software Engineer",
     "resumeSubheadline": "Ecommerce · React.js · TypeScript · Next.js · Node.js",
-    "resumeSummary": "Full-stack software engineer with {{years}}+ years building ecommerce web applications for USA, UK and Portugal clients, mainly meal delivery and online shopping. Primary developer on 5+ production sites, typically building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Use AI coding tools daily for development and testing, and review their output against real production requirements."
+    "resumeSummary": "Full-stack software engineer with {{years}}+ years building ecommerce web applications for USA, UK and European clients, mainly meal delivery and online retail. Primary developer on 5+ production sites, building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Use AI coding tools daily and review their output against production requirements."
   },
   "about": {
     "paragraphs": [
@@ -305,9 +305,9 @@
       "location": "USA (Remote)",
       "period": "Jul 2026 – Present",
       "description": [
-        "Lead developer on full-stack ecommerce web apps in React.js, TypeScript, Next.js and Node.js, from architecture through release.",
-        "Build backend services and REST APIs, including payment gateway and authentication integrations.",
-        "Work directly with clients and stakeholders to define requirements, scope the work and keep releases on schedule."
+        "Lead engineer for the MightyMeals storefront and API (React.js, Python/FastAPI, WooCommerce): an $18M USD, 27-state meal delivery business rated 4.8/5 on Google from 800+ reviews.",
+        "Own architecture, releases and the payment, subscription and authentication integrations end to end.",
+        "Work directly with the owner and stakeholders to define requirements, scope the work and keep releases on schedule."
       ],
       "skills": [
         "React.js",
@@ -326,7 +326,7 @@
       "location": "Ahmedabad, India",
       "period": "Apr 2022 – Jun 2026",
       "description": [
-        "Primary developer on 5+ production ecommerce sites for USA, UK and Portugal clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.",
+        "Primary developer on 5+ production ecommerce sites for USA, UK and European clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.",
         "Delivered Stripe and Authorize.net card payments and ID.me identity verification in checkout and account flows.",
         "Cut wrong delivery addresses at checkout by rebuilding address forms on the Google Maps Places API with reworked autofill logic.",
         "Accelerated page loads by 10X and shrank bundle size by 45% through code splitting and lazy loading, and re-architected complex forms into reusable components with centralized Redux state."
@@ -350,7 +350,7 @@
       "location": "Ahmedabad, India",
       "period": "Nov 2021 – Mar 2022",
       "description": [
-        "Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends in C# and SQL Server, including QA testing and bug fixing."
+        "Built responsive client websites with HTML5, CSS3, JavaScript and jQuery, and supported ASP.NET MVC backends in C# and SQL Server."
       ],
       "skills": [
         "HTML5",
@@ -450,14 +450,16 @@
       "id": 1,
       "title": "MightyMeals",
       "category": "Web App",
-      "description": "High-traffic ecommerce platform for an $18M USD annual revenue meal delivery business, processing thousands of transactions a week. Headless React.js frontend on a WooCommerce backend via REST APIs, with custom ordering workflows and secure payment processing.",
+      "description": "$18M USD annual revenue meal delivery business serving 27 states and DC with a 150+ meal menu, rated 4.8/5 on Google from 800+ reviews. Thousands of transactions a week on a headless React.js storefront over WooCommerce via REST APIs.",
       "image": "https://eatmightymeals.com/wp-content/uploads/2019/08/DSC6681.jpg",
       "technologies": [
         "React.js",
-        "JavaScript",
+        "TypeScript",
+        "Redux",
         "REST APIs",
         "WooCommerce",
         "Python/FastAPI",
+        "PostgreSQL",
         "Stripe",
         "Authorize.net"
       ],
@@ -466,19 +468,18 @@
       "displayOrder": 1,
       "resumeSubtitle": "Custom Ecommerce & Meal Delivery Platform",
       "resumeBullets": [
-        "High-traffic ecommerce platform for an $18M USD annual revenue meal delivery business, processing thousands of transactions a week. Headless React.js frontend on a WooCommerce backend via REST APIs, with custom ordering workflows and secure payment processing.",
-        "Frontend architecture: built and maintain the custom React.js ecommerce app with reusable components and dynamic product browsing.",
-        "Checkout and payments: integrated Authorize.net and Stripe; built custom checkout for complex payment and order-processing rules.",
-        "Autoship subscriptions: led development of the custom recurring-delivery system that lets customers schedule, manage and automate repeat orders, covering recurring order generation, payment, delivery scheduling and account management.",
-        "Order management: built custom order creation workflows linking the frontend to backend APIs for customer, product and payment data.",
-        "Performance and UX: frontend and performance work for a high-volume store, improving product discovery, cart and checkout usability."
+        "$18M USD annual revenue meal delivery business serving 27 states and DC with a 150+ meal menu, rated 4.8/5 on Google from 800+ reviews. Thousands of transactions a week on a headless React.js storefront over WooCommerce via REST APIs.",
+        "Ownership: wrote 82% of the storefront's 2,900+ commits over 4.5 years, including 96% of Autoship and 89% of checkout code.",
+        "Autoship (Order Planner): built the subscription system for weekly repeat orders charged to saved cards at Monday and Thursday noon ET deadlines, with change, skip, pause and cancel from My Account.",
+        "Payments: Authorize.net and Stripe with saved cards, Apple Pay, Google Pay, gift cards and combined coupon and gift card redemption.",
+        "Growth: Mighty Points (1 point per $1), $120/$50 referrals, affiliate tracking, Google sign-in and a 15% ID.me-verified military discount."
       ]
     },
     {
       "id": 2,
       "title": "By Best",
       "category": "Web App",
-      "description": "Fashion and accessories ecommerce store. Primary developer on the frontend: React.js product catalogue, product pages, filtering and search, and the cart and checkout flow integrated with a Laravel backend through REST APIs.",
+      "description": "Storefront for a Tirana, Albania retailer of Swarovski, Swatch and Villeroy & Boch with five physical stores. React.js catalogue with brand, collection, size and price filters, load-more pagination, wishlist, My Club loyalty points and order tracking on a Laravel REST API.",
       "image": "https://bybest.shop/assets/img/bybest-logo.png",
       "technologies": [
         "React.js",
@@ -490,15 +491,15 @@
       "displayOrder": 2,
       "resumeSubtitle": "Fashion & Accessories Ecommerce Store",
       "resumeBullets": [
-        "Primary developer on the frontend, building the React.js product catalogue, product pages, filtering and search.",
-        "Built the cart and checkout flow and integrated it with the Laravel backend through REST APIs."
+        "Storefront for a Tirana, Albania retailer of Swarovski, Swatch and Villeroy & Boch with five physical stores; primary frontend developer.",
+        "Built the React.js catalogue with brand, collection, size and price filters, load-more pagination, wishlist, loyalty points and order tracking."
       ]
     },
     {
       "id": 3,
       "title": "Fields In Trust",
       "category": "Web App",
-      "description": "UK charity protecting parks, playgrounds and green spaces. Built the ASP.NET MVC website in C# with Entity Framework: content management for the charity's staff, web forms and location-based search of protected fields across the UK.",
+      "description": "Website for a 100-year-old UK charity that legally protects 3,007 parks and green spaces (13,300 hectares; 9.2M people within a ten-minute walk). Built in ASP.NET MVC, C# and Entity Framework: 'parks near me' location search, Field Change Request applications for landowners, donations, membership and content management.",
       "image": "/assets/images/fit.jpg",
       "technologies": [
         "ASP.NET MVC",
@@ -511,7 +512,8 @@
       "displayOrder": 3,
       "resumeSubtitle": "UK Charity Website",
       "resumeBullets": [
-        "Built the ASP.NET MVC website in C# with Entity Framework: content management for the charity's staff, web forms and location-based search of protected fields across the UK."
+        "UK charity, 100 years old, that legally protects 3,007 parks and green spaces: 13,300 hectares and 9.2M people within a 10-minute walk.",
+        "Built in ASP.NET MVC, C# and Entity Framework: 'parks near me' location search, Field Change Request applications for landowners, donations, membership and CMS. Lighthouse desktop: 89 performance, 100 SEO."
       ]
     }
   ],

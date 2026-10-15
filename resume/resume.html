@@ -7,19 +7,19 @@
 <style>
   /* ── Page ─────────────────────────────────────────────────────────
      US Letter, 0.47 in side margins (as the reference). Single column, reading order = DOM
-     order. One font (Carlito, the open metric-compatible Calibri), one
+     order. One font (ResumeSans, Carlito with ligatures removed, the open metric-compatible Calibri), one
      accent colour (navy), body text black, meta text grey. */
-  @font-face { font-family: "Carlito"; src: url("../client/assets/fonts/Carlito-Regular.ttf");    font-weight: 400; font-style: normal; }
-  @font-face { font-family: "Carlito"; src: url("../client/assets/fonts/Carlito-Bold.ttf");       font-weight: 700; font-style: normal; }
-  @font-face { font-family: "Carlito"; src: url("../client/assets/fonts/Carlito-Italic.ttf");     font-weight: 400; font-style: italic; }
-  @font-face { font-family: "Carlito"; src: url("../client/assets/fonts/Carlito-BoldItalic.ttf"); font-weight: 700; font-style: italic; }
+  @font-face { font-family: "ResumeSans"; src: url("../client/assets/fonts/ResumeSans-Regular.ttf");    font-weight: 400; font-style: normal; }
+  @font-face { font-family: "ResumeSans"; src: url("../client/assets/fonts/ResumeSans-Bold.ttf");       font-weight: 700; font-style: normal; }
+  @font-face { font-family: "ResumeSans"; src: url("../client/assets/fonts/ResumeSans-Italic.ttf");     font-weight: 400; font-style: italic; }
+  @font-face { font-family: "ResumeSans"; src: url("../client/assets/fonts/ResumeSans-BoldItalic.ttf"); font-weight: 700; font-style: italic; }
 
   @page { size: letter; margin: 0.35in 0.47in 0.5in; }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: "Carlito", Calibri, Arial, sans-serif;
+    font-family: "ResumeSans", Calibri, Arial, sans-serif;
     font-size: 9.5pt;
     line-height: 1.15;
     color: #000;
@@ -94,7 +94,7 @@
 
   <section>
     <h2>Summary</h2>
-    <p>Full-stack software engineer with 4+ years building ecommerce web applications for USA, UK and Portugal clients, mainly meal delivery and online shopping. Primary developer on 5+ production sites, typically building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Use AI coding tools daily for development and testing, and review their output against real production requirements.</p>
+    <p>Full-stack software engineer with 4+ years building ecommerce web applications for USA, UK and European clients, mainly meal delivery and online retail. Primary developer on 5+ production sites, building about 90% of each: storefront, cart, checkout, payments, subscriptions and order processing. React.js, TypeScript and Next.js on the frontend; Node.js/Express.js, Python/FastAPI and ASP.NET Core on the backend. Use AI coding tools daily and review their output against production requirements.</p>
   </section>
 
   <section class="skills">
@@ -113,9 +113,9 @@
       <div class="row"><span class="role">Lead Software Engineer (Contract)</span><span class="dates">Jul 2026 – Present</span></div>
       <p class="org">FlatFour Ventures <span class="grey">· USA (Remote)</span></p>
       <ul>
-        <li>Lead developer on full-stack ecommerce web apps in React.js, TypeScript, Next.js and Node.js, from architecture through release.</li>
-        <li>Build backend services and REST APIs, including payment gateway and authentication integrations.</li>
-        <li>Work directly with clients and stakeholders to define requirements, scope the work and keep releases on schedule.</li>
+        <li>Lead engineer for the MightyMeals storefront and API (React.js, Python/FastAPI, WooCommerce): an $18M USD, 27-state meal delivery business rated 4.8/5 on Google from 800+ reviews.</li>
+        <li>Own architecture, releases and the payment, subscription and authentication integrations end to end.</li>
+        <li>Work directly with the owner and stakeholders to define requirements, scope the work and keep releases on schedule.</li>
       </ul>
     </div>
 
@@ -123,7 +123,7 @@
       <div class="row"><span class="role">Web Developer</span><span class="dates">Apr 2022 – Jun 2026</span></div>
       <p class="org">ZealousWeb Technologies Pvt. Ltd. <span class="grey">· Ahmedabad, India</span></p>
       <ul>
-        <li>Primary developer on 5+ production ecommerce sites for USA, UK and Portugal clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.</li>
+        <li>Primary developer on 5+ production ecommerce sites for USA, UK and European clients, building about 90% of each (storefront, cart, checkout, order processing) in React.js, TypeScript, Next.js and Node.js with Python/FastAPI or ASP.NET Core backends.</li>
         <li>Delivered Stripe and Authorize.net card payments and ID.me identity verification in checkout and account flows.</li>
         <li>Cut wrong delivery addresses at checkout by rebuilding address forms on the Google Maps Places API with reworked autofill logic.</li>
         <li>Accelerated page loads by 10X and shrank bundle size by 45% through code splitting and lazy loading, and re-architected complex forms into reusable components with centralized Redux state.</li>
@@ -134,7 +134,7 @@
       <div class="row"><span class="role">Trainee</span><span class="dates">Nov 2021 – Mar 2022</span></div>
       <p class="org">Aark Inosoft <span class="grey">· Ahmedabad, India</span></p>
       <ul>
-        <li>Built responsive, cross-browser client websites with HTML5, CSS3, JavaScript and jQuery, and supported senior developers on ASP.NET Web Forms and ASP.NET MVC backends in C# and SQL Server, including QA testing and bug fixing.</li>
+        <li>Built responsive client websites with HTML5, CSS3, JavaScript and jQuery, and supported ASP.NET MVC backends in C# and SQL Server.</li>
       </ul>
     </div>
   </section>
@@ -144,14 +144,13 @@
 
     <div class="entry">
       <div class="row"><span class="role">MightyMeals — Custom Ecommerce &amp; Meal Delivery Platform</span><span class="dates"><a href="https://mightymeals.com">mightymeals.com</a></span></div>
-      <p class="tech">React.js · JavaScript · REST APIs · WooCommerce · Python/FastAPI · Stripe · Authorize.net</p>
+      <p class="tech">React.js · TypeScript · Redux · REST APIs · WooCommerce · Python/FastAPI · PostgreSQL · Stripe · Authorize.net</p>
       <ul>
-        <li>High-traffic ecommerce platform for an $18M USD annual revenue meal delivery business, processing thousands of transactions a week. Headless React.js frontend on a WooCommerce backend via REST APIs, with custom ordering workflows and secure payment processing.</li>
-        <li><strong>Frontend architecture:</strong> built and maintain the custom React.js ecommerce app with reusable components and dynamic product browsing.</li>
-        <li><strong>Checkout and payments:</strong> integrated Authorize.net and Stripe; built custom checkout for complex payment and order-processing rules.</li>
-        <li><strong>Autoship subscriptions:</strong> led development of the custom recurring-delivery system that lets customers schedule, manage and automate repeat orders, covering recurring order generation, payment, delivery scheduling and account management.</li>
-        <li><strong>Order management:</strong> built custom order creation workflows linking the frontend to backend APIs for customer, product and payment data.</li>
-        <li><strong>Performance and UX:</strong> frontend and performance work for a high-volume store, improving product discovery, cart and checkout usability.</li>
+        <li>$18M USD annual revenue meal delivery business serving 27 states and DC with a 150+ meal menu, rated 4.8/5 on Google from 800+ reviews. Thousands of transactions a week on a headless React.js storefront over WooCommerce via REST APIs.</li>
+        <li><strong>Ownership:</strong> wrote 82% of the storefront&#x27;s 2,900+ commits over 4.5 years, including 96% of Autoship and 89% of checkout code.</li>
+        <li><strong>Autoship (Order Planner):</strong> built the subscription system for weekly repeat orders charged to saved cards at Monday and Thursday noon ET deadlines, with change, skip, pause and cancel from My Account.</li>
+        <li><strong>Payments:</strong> Authorize.net and Stripe with saved cards, Apple Pay, Google Pay, gift cards and combined coupon and gift card redemption.</li>
+        <li><strong>Growth:</strong> Mighty Points (1 point per $1), $120/$50 referrals, affiliate tracking, Google sign-in and a 15% ID.me-verified military discount.</li>
       </ul>
     </div>
 
@@ -159,8 +158,8 @@
       <div class="row"><span class="role">By Best — Fashion &amp; Accessories Ecommerce Store</span><span class="dates"><a href="https://bybest.shop">bybest.shop</a></span></div>
       <p class="tech">React.js · REST APIs · Laravel</p>
       <ul>
-        <li>Primary developer on the frontend, building the React.js product catalogue, product pages, filtering and search.</li>
-        <li>Built the cart and checkout flow and integrated it with the Laravel backend through REST APIs.</li>
+        <li>Storefront for a Tirana, Albania retailer of Swarovski, Swatch and Villeroy &amp; Boch with five physical stores; primary frontend developer.</li>
+        <li>Built the React.js catalogue with brand, collection, size and price filters, load-more pagination, wishlist, loyalty points and order tracking.</li>
       </ul>
     </div>
 
@@ -168,7 +167,8 @@
       <div class="row"><span class="role">Fields In Trust — UK Charity Website</span><span class="dates"><a href="https://fieldsintrust.org">fieldsintrust.org</a></span></div>
       <p class="tech">ASP.NET MVC · C# · Entity Framework · Razor Pages</p>
       <ul>
-        <li>Built the ASP.NET MVC website in C# with Entity Framework: content management for the charity&#x27;s staff, web forms and location-based search of protected fields across the UK.</li>
+        <li>UK charity, 100 years old, that legally protects 3,007 parks and green spaces: 13,300 hectares and 9.2M people within a 10-minute walk.</li>
+        <li>Built in ASP.NET MVC, C# and Entity Framework: &#x27;parks near me&#x27; location search, Field Change Request applications for landowners, donations, membership and CMS. Lighthouse desktop: 89 performance, 100 SEO.</li>
       </ul>
     </div>
   </section>
@@ -176,10 +176,10 @@
   <section class="edu">
     <h2>Education</h2>
     <div class="entry">
-      <div class="row"><span class="role">B.E. Computer Engineering — D.A. Degree Engineering &amp; Technology (CGPA 8.3/10)</span><span class="dates">2020 – 2023</span></div>
+      <div class="row"><span class="role">B.E. Computer Engineering — Gujarat Technological University (CGPA 8.3/10)</span><span class="dates">2020 – 2023</span></div>
     </div>
     <div class="entry">
-      <div class="row"><span class="role">Diploma in Computer Engineering — D.A. Diploma Engineering &amp; Technology (CGPA 7.3/10)</span><span class="dates">2016 – 2019</span></div>
+      <div class="row"><span class="role">Diploma in Computer Engineering — Gujarat Technological University (CGPA 7.3/10)</span><span class="dates">2016 – 2019</span></div>
     </div>
   </section>
 

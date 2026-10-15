@@ -1,5 +1,10 @@
-Carlito (Regular, Bold, Italic, BoldItalic)
-Copyright (c) 2010-2013 by tyPoland Lukasz Dziedzic with Reserved Font Name "Carlito".
-Licensed under the SIL Open Font License, Version 1.1: https://openfontlicense.org
+ResumeSans (Regular, Bold, Italic, BoldItalic)
+A modified build of Carlito: Copyright (c) 2010-2013 by tyPoland Lukasz Dziedzic
+with Reserved Font Name "Carlito". Licensed under the SIL Open Font License,
+Version 1.1: https://openfontlicense.org
 Source: https://github.com/googlefonts/carlito
+Modification: the liga, dlig and calt OpenType features (ligatures such as fi,
+fl, ti, ft) were removed with fonttools so every letter is embedded as its own
+glyph in the resume PDF and text extraction never drops characters. Renamed
+because the OFL does not allow modified versions to use the Reserved Font Name.
 Metric-compatible with Calibri. Used to embed the resume PDF font.

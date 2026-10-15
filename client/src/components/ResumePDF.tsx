@@ -18,7 +18,7 @@ import {
    file look the same; this one is driven by the live admin content.
    ══════════════════════════════════════════════════════════════ */
 
-/** Carlito (SIL OFL, metric-compatible with Calibri) ships in client/assets/fonts
+/** ResumeSans (Carlito with ligatures removed; SIL OFL, metric-compatible with Calibri) ships in client/assets/fonts
  *  and is served at /assets-static in dev and on Netlify. A render check running
  *  in Node can point RESUME_FONT_DIR at the folder on disk instead. */
 const FONT_DIR =
@@ -27,12 +27,12 @@ const FONT_DIR =
     : "/assets-static/fonts";
 
 Font.register({
-  family: "Carlito",
+  family: "ResumeSans",
   fonts: [
-    { src: `${FONT_DIR}/Carlito-Regular.ttf` },
-    { src: `${FONT_DIR}/Carlito-Bold.ttf`, fontWeight: 700 },
-    { src: `${FONT_DIR}/Carlito-Italic.ttf`, fontStyle: "italic" },
-    { src: `${FONT_DIR}/Carlito-BoldItalic.ttf`, fontWeight: 700, fontStyle: "italic" },
+    { src: `${FONT_DIR}/ResumeSans-Regular.ttf` },
+    { src: `${FONT_DIR}/ResumeSans-Bold.ttf`, fontWeight: 700 },
+    { src: `${FONT_DIR}/ResumeSans-Italic.ttf`, fontStyle: "italic" },
+    { src: `${FONT_DIR}/ResumeSans-BoldItalic.ttf`, fontWeight: 700, fontStyle: "italic" },
   ],
 });
 
@@ -50,7 +50,7 @@ const MARGIN_BOTTOM = 36;
 
 const s = StyleSheet.create({
   page: {
-    fontFamily: "Carlito",
+    fontFamily: "ResumeSans",
     fontSize: 9.5,
     lineHeight: 1.15,
     color: INK,
